@@ -1,0 +1,44 @@
+MÓDULO: Digitalización
+TAREA: Definición de la diferencia entre dato e información y ciclo de vida del dato musical
+ALUMNO: Manuel Solís
+PROYECTO: Contemporánica
+---------------------------------------------------------
+
+1. DIFERENCIA ENTRE DATO E INFORMACIÓN (Aplicado a Contemporánica)
+
+En el contexto del desarrollo de software y las bases de datos, es fundamental distinguir entre 'dato' e 'información', ya que el objetivo de Contemporánica es transformar lo primero en lo segundo.
+
+- DATO: Un dato es una representación simbólica (numérica, alfabética, etc.) de un atributo o variable. Por sí solo, carece de significado semántico o de un contexto que lo haga útil. 
+  Ejemplos en el proyecto: "2023", "Violonchelo", "1", "Pendiente", "Juan Pérez".
+
+- INFORMACIÓN: La información es un conjunto de datos procesados, organizados y estructurados dentro de un contexto específico, de manera que proporcionan significado y utilidad al usuario.
+  Ejemplo en el proyecto: Cuando el buscador de Contemporánica relaciona los datos anteriores, obtenemos la información: "La obra compuesta en 2023 para Violonchelo por el compositor Juan Pérez (ID: 1) se encuentra actualmente en estado Pendiente de validación".
+
+
+2. CICLO DE VIDA DEL DATO MUSICAL EN CONTEMPORÁNICA
+
+El ciclo de vida del dato define las etapas por las que pasa la información desde su creación hasta su archivo o destrucción. En nuestra plataforma, este ciclo está íntimamente ligado al "Flujo de Validación".
+
+ETAPA 1: Generación y Captura (Alta de Repertorio)
+- ¿Quién lo genera?: Principalmente el perfil "Grupo de Música / Intérprete". (También puede generarlo directamente el Compositor o realizarse mediante una Carga Masiva desde Excel).
+- Acción: Un grupo rellena el formulario de nueva interpretación (Título, Año, Instrumentación, Compositor asignado).
+- Transformación: Los valores introducidos en el frontend (Google Antigravity) se capturan y se preparan para su envío.
+
+ETAPA 2: Almacenamiento y Estado 'Pendiente'
+- ¿Dónde?: Los datos se guardan en la base de datos relacional (Supabase/PostgreSQL).
+- Estado: La obra nace con un estado interno de "Pendiente". En esta etapa, los datos existen pero están ocultos para el público general (Visitantes), garantizando así que no se difunda información falsa.
+
+ETAPA 3: Procesamiento y Validación (El Núcleo del Sistema)
+- ¿Quién interviene?: El perfil "Compositor".
+- Acción: El sistema procesa el dato y envía una notificación automática al buzón del compositor correspondiente. El compositor revisa los datos cruzados y toma una decisión:
+   a) Aprobar: El estado del dato cambia a "Validado/Público".
+   b) Rechazar: El dato queda invalidado (por ser incorrecto o no pertenecer a dicho autor).
+*Nota: Si el dato lo crea el propio compositor, esta etapa se omite y nace directamente validado.
+
+ETAPA 4: Explotación y Visualización (Consumo de la Información)
+- ¿Quién lo consume?: El perfil "Visitante" o cualquier usuario mediante el "Motor de Búsqueda Avanzado".
+- Acción: Los datos validados se exponen en las fichas detalladas de las obras y en los perfiles públicos. Aquí es donde los datos crudos se convierten en información de gran valor para investigadores, programadores de festivales o músicos.
+
+ETAPA 5: Mantenimiento y Borrado (Backoffice)
+- ¿Quién lo gestiona?: El perfil "Administrador".
+- Acción: Los datos pueden ser modificados para corregir errores, enriquecidos (CRUD de Instrumentos), o eliminados permanentemente si se detectan duplicados, registros falsos o spam, cerrando así el ciclo de vida del dato.
