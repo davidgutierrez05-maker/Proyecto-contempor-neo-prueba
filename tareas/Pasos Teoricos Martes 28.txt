@@ -1,0 +1,40 @@
+PASOS TEÓRICOS PARA LAS TAREAS DE HOY (MARTES 28 DE ABRIL)
+PROYECTO: Contemporánica
+ALUMNO: Manuel Solís
+
+Aunque no tengas acceso físico/remoto ahora mismo al Proxmox, estas son las acciones que debes realizar y documentar para cumplir con los R.A. 1 y R.A. 2 de hoy:
+
+-------------------------------------------------------------------------------
+TAREA 1: CHEQUEO DE RECURSOS LÓGICOS (HARDWARE - R.A. 1)
+-------------------------------------------------------------------------------
+1. Identificación de la VM: 
+   - Localizar en el inventario de Proxmox la Máquina Virtual dedicada a Contemporánica (ID y Nombre).
+2. Inventario de Recursos Asignados (Pestaña 'Hardware'):
+   - Memoria (RAM): Anotar cuántos GiB se han reservado.
+   - Procesador (vCPU): Anotar el número de 'Sockets' y 'Cores'.
+   - Almacenamiento: Identificar el tamaño del disco virtual (ej. 32GB) y el 'Storage Pool' donde reside (local-lvm, ceph, etc.).
+3. Evaluación de Prestaciones:
+   - Determinar si los recursos son suficientes para el stack (Node.js + Nginx). 
+   - Recomendación base: 2 Cores y 4GB de RAM es un estándar equilibrado para este proyecto.
+4. Sistema Operativo:
+   - Confirmar la distribución Linux instalada (Ubuntu Server 22.04 LTS es la recomendada por estabilidad).
+
+-------------------------------------------------------------------------------
+TAREA 2: IDENTIFICACIÓN DE RED Y GESTIÓN (REDES - R.A. 2)
+-------------------------------------------------------------------------------
+1. Configuración del Puente Virtual (Bridge):
+   - Verificar que la VM está conectada a 'vmbr0' (el puente por defecto que da salida a la red física).
+2. Direccionamiento IP:
+   - Entrar en la consola de la VM y ejecutar 'ip a' o 'nmcli'.
+   - Identificar la IP actual (ej. 192.168.1.XX).
+   - Definir si se usará DHCP (dinámica) o se fijará una IP Estática (lo ideal para un servidor).
+3. Parámetros de Red Base:
+   - Puerta de enlace (Gateway): Normalmente la IP del router (.1).
+   - DNS: Anotar si se usan los de Google (8.8.8.8) o los de la red local.
+4. Red de Gestión:
+   - Documentar que el acceso administrativo al hipervisor se realiza por el puerto 8006 (HTTPS) y a la VM por el puerto 22 (SSH).
+
+-------------------------------------------------------------------------------
+NOTAS PARA EL INFORME:
+Estos datos te servirán para redactar los archivos '28-4-26 tarea 3.md' y '28-4-26 tarea 4.md' una vez recuperes el acceso.
+-------------------------------------------------------------------------------

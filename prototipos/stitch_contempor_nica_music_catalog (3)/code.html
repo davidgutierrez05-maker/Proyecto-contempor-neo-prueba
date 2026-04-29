@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contemporánica Admin - Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#3c475a",
+                        "error": "#ffb4ab",
+                        "tertiary-container": "#8b96ac",
+                        "surface-dim": "#051424",
+                        "tertiary-fixed-dim": "#bcc7de",
+                        "surface-tint": "#ffb3b1",
+                        "surface-container-highest": "#273647",
+                        "tertiary": "#bcc7de",
+                        "on-secondary-fixed": "#131b2e",
+                        "secondary-container": "#3f465c",
+                        "on-secondary": "#283044",
+                        "background": "#051424",
+                        "primary": "#ffb3b1",
+                        "on-error-container": "#ffdad6",
+                        "primary-fixed-dim": "#ffb3b1",
+                        "primary-container": "#e57373",
+                        "inverse-primary": "#a03e40",
+                        "surface-container": "#122131",
+                        "tertiary-fixed": "#d8e3fb",
+                        "inverse-on-surface": "#233143",
+                        "outline-variant": "#564241",
+                        "surface-bright": "#2c3a4c",
+                        "on-tertiary-container": "#242f41",
+                        "on-surface": "#d4e4fa",
+                        "on-primary": "#620f17",
+                        "surface": "#051424",
+                        "on-error": "#690005",
+                        "secondary-fixed": "#dae2fd",
+                        "on-secondary-container": "#adb4ce",
+                        "secondary-fixed-dim": "#bec6e0",
+                        "secondary": "#bec6e0",
+                        "on-primary-fixed": "#410007",
+                        "surface-container-high": "#1c2b3c",
+                        "surface-container-lowest": "#010f1f",
+                        "on-primary-fixed-variant": "#80272b",
+                        "on-background": "#d4e4fa",
+                        "surface-container-low": "#0d1c2d",
+                        "on-tertiary-fixed": "#111c2d",
+                        "outline": "#a48b8a",
+                        "primary-fixed": "#ffdad8",
+                        "on-surface-variant": "#dcc0bf",
+                        "inverse-surface": "#d4e4fa",
+                        "on-tertiary": "#263143",
+                        "on-secondary-fixed-variant": "#3f465c",
+                        "on-primary-container": "#5e0c15",
+                        "surface-variant": "#273647",
+                        "error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "12px",
+                        "xl": "24px",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "container-max": "1440px",
+                        "base": "8px",
+                        "xs": "4px",
+                        "md": "24px",
+                        "sm": "12px",
+                        "xl": "80px",
+                        "lg": "48px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Outfit"],
+                        "body-md": ["Outfit"],
+                        "body-lg": ["Outfit"],
+                        "display-xl": ["Outfit"],
+                        "headline-md": ["Outfit"],
+                        "label-sm": ["Outfit"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-xl": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #051424;
+            color: #d4e4fa;
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
+        }
+        .glass-panel {
+            background: rgba(18, 33, 49, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .salmon-glow {
+            box-shadow: 0 0 20px rgba(229, 115, 115, 0.2);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="antialiased">
+<!-- SideNavBar (Authority: JSON & Context) -->
+<aside class="fixed left-0 top-0 h-full w-64 border-r border-white/10 bg-[#0B1222]/70 backdrop-blur-2xl z-50 flex flex-col p-6 gap-2 shadow-[10px_0_30px_rgba(0,0,0,0.3)]">
+<div class="mb-8 px-4">
+<h2 class="text-rose-400 font-black font-headline-md tracking-tight">Curator Portal</h2>
+<p class="text-slate-400 font-label-sm uppercase tracking-widest opacity-60">System Management</p>
+</div>
+<nav class="flex flex-col gap-2 flex-grow">
+<!-- Active State: Analytics -->
+<a class="flex items-center gap-3 px-4 py-3 bg-rose-400/10 text-rose-400 rounded-lg border-l-4 border-rose-400 duration-300 ease-in-out font-['Outfit'] text-sm font-medium" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+<span>Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-white/5 rounded-lg duration-300 ease-in-out font-['Outfit'] text-sm font-medium transition-all hover:text-white" href="#">
+<span class="material-symbols-outlined">group</span>
+<span>User Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-white/5 rounded-lg duration-300 ease-in-out font-['Outfit'] text-sm font-medium transition-all hover:text-white" href="#">
+<span class="material-symbols-outlined">piano</span>
+<span>Instrument Database</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-white/5 rounded-lg duration-300 ease-in-out font-['Outfit'] text-sm font-medium transition-all hover:text-white" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<button class="mt-auto w-full py-4 px-6 bg-gradient-to-r from-primary-container to-rose-400 text-on-primary font-bold rounded-xl scale-95 active:scale-90 transition-transform shadow-lg shadow-rose-900/20">
+            Add New Record
+        </button>
+</aside>
+<!-- TopAppBar (Authority: JSON & Context) -->
+<header class="fixed top-0 right-0 left-64 h-16 z-40 bg-[#0B1222]/80 backdrop-blur-lg border-b border-white/10 flex justify-between items-center px-8 shadow-2xl shadow-black/50">
+<div class="flex items-center gap-8">
+<h1 class="text-xl font-bold text-rose-400 uppercase tracking-widest font-['Outfit']">Musicology Admin</h1>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-rose-400 transition-colors">search</span>
+<input class="bg-[#0B1222] border-white/10 focus:border-rose-400 text-sm rounded-full pl-10 pr-4 py-1.5 w-64 font-['Outfit'] outline-none ring-0 transition-all focus:w-80" placeholder="Search system..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-slate-400 hover:bg-white/5 hover:text-rose-300 transition-colors p-2 rounded-full relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-rose-500 rounded-full border-2 border-[#0B1222]"></span>
+</button>
+<button class="text-slate-400 hover:bg-white/5 hover:text-rose-300 transition-colors p-2 rounded-full">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="flex items-center gap-3 pl-4 border-l border-white/10">
+<div class="text-right hidden xl:block">
+<p class="font-bold text-xs text-on-surface">Admin User</p>
+<p class="text-[10px] text-slate-500 uppercase tracking-tighter">System Curator</p>
+</div>
+<img alt="Administrator Profile" class="w-10 h-10 rounded-full border-2 border-rose-400/30 object-cover" data-alt="Close-up portrait of a professional male administrator in a dark studio with soft cinematic lighting, professional attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfNcKvpEckWxmnxWapBwEAq8muLMBTfGfQ2sO7OYhZxPzjC-mRUuqxtyrfhTDtQ8O73Vzf2KNfWrz0ahhHO1YMlNX_nTw_svGtM-dDORE1knDaGfWileIvptnjtXA-olLgWXOgzrvI_nUk6_XB58nab4avtqAulBe0SO5Vi-MeVa6NADcW-EDqi2a1zJU5J6q_wJhOmeVKoO6wzTH3qqLBhGUa_-Morur2etHj6VrLoI1m9lvWycom_vnX4aPkynEkeFWkH1_mvPQ"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 mt-16 p-10 max-w-[1440px] mx-auto min-h-screen">
+<!-- Hero Metrics -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-xl">
+<div class="glass-panel p-6 rounded-xl salmon-glow">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-rose-400/10 rounded-lg">
+<span class="material-symbols-outlined text-rose-400">group</span>
+</div>
+<span class="text-emerald-400 text-xs font-bold">+12%</span>
+</div>
+<h3 class="text-slate-400 font-label-sm uppercase tracking-widest mb-1">Total Users</h3>
+<p class="font-display-xl text-3xl font-semibold text-on-surface">14,208</p>
+</div>
+<div class="glass-panel p-6 rounded-xl">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-rose-400/10 rounded-lg">
+<span class="material-symbols-outlined text-rose-400">equalizer</span>
+</div>
+<span class="text-rose-400 text-xs font-bold">+5.2%</span>
+</div>
+<h3 class="text-slate-400 font-label-sm uppercase tracking-widest mb-1">Active Ensembles</h3>
+<p class="font-display-xl text-3xl font-semibold text-on-surface">842</p>
+</div>
+<div class="glass-panel p-6 rounded-xl">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-rose-400/10 rounded-lg">
+<span class="material-symbols-outlined text-rose-400">verified</span>
+</div>
+<span class="text-emerald-400 text-xs font-bold">+28%</span>
+</div>
+<h3 class="text-slate-400 font-label-sm uppercase tracking-widest mb-1">Validated Works</h3>
+<p class="font-display-xl text-3xl font-semibold text-on-surface">3,120</p>
+</div>
+<div class="glass-panel p-6 rounded-xl">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-rose-400/10 rounded-lg">
+<span class="material-symbols-outlined text-rose-400">payments</span>
+</div>
+<span class="text-slate-400 text-xs font-bold">Stable</span>
+</div>
+<h3 class="text-slate-400 font-label-sm uppercase tracking-widest mb-1">Monthly Revenue</h3>
+<p class="font-display-xl text-3xl font-semibold text-on-surface">$42.8k</p>
+</div>
+</section>
+<!-- User Growth Chart & Instruments Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-xl">
+<!-- Growth Chart -->
+<div class="lg:col-span-2 glass-panel p-8 rounded-xl relative overflow-hidden">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h2 class="font-headline-md text-on-surface">User Growth Dynamics</h2>
+<p class="text-slate-400 font-body-md text-sm opacity-70">New registrations across compositions and performers</p>
+</div>
+<div class="flex gap-2">
+<button class="px-3 py-1 text-xs font-bold rounded-lg bg-rose-400 text-on-primary">Monthly</button>
+<button class="px-3 py-1 text-xs font-bold rounded-lg bg-white/5 text-slate-400 hover:text-white transition-colors">Quarterly</button>
+</div>
+</div>
+<!-- Mock Chart Visualization -->
+<div class="h-64 flex items-end justify-between gap-2 px-2 border-b border-white/5 relative">
+<div class="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-20">
+<div class="border-t border-white/20 w-full"></div>
+<div class="border-t border-white/20 w-full"></div>
+<div class="border-t border-white/20 w-full"></div>
+</div>
+<!-- Chart Bars/Lines with Salmon Gradients -->
+<div class="w-full h-full relative mt-4">
+<svg class="w-full h-full fill-none stroke-rose-400 stroke-2 drop-shadow-[0_0_8px_rgba(229,115,115,0.4)]" viewbox="0 0 800 200">
+<path d="M0,150 Q100,120 200,140 T400,80 T600,110 T800,40" stroke-linecap="round" stroke-width="4"></path>
+<path d="M0,150 Q100,120 200,140 T400,80 T600,110 T800,40 V200 H0 Z" fill="url(#chart-gradient)" opacity="0.1"></path>
+<defs>
+<lineargradient id="chart-gradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#e57373"></stop>
+<stop offset="100%" stop-color="#e57373" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+</svg>
+<div class="absolute inset-0 flex justify-between items-end pb-2 px-4 text-[10px] text-slate-500 uppercase tracking-tighter">
+<span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Instrument CRUD -->
+<div class="glass-panel p-8 rounded-xl flex flex-col">
+<div class="flex justify-between items-start mb-6">
+<h2 class="font-headline-md text-on-surface">Instruments</h2>
+<button class="p-2 bg-rose-400/10 text-rose-400 rounded-full hover:bg-rose-400/20 transition-all">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<div class="space-y-3 overflow-y-auto max-h-[300px] pr-2 custom-scrollbar">
+<div class="flex justify-between items-center p-3 rounded-lg bg-white/5 border border-white/5 group hover:border-rose-400/30 transition-all">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-rose-400/70">piano</span>
+<span class="font-medium text-sm">Piano</span>
+</div>
+<div class="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1 text-slate-500 hover:text-white"><span class="material-symbols-outlined text-sm">edit</span></button>
+<button class="p-1 text-slate-500 hover:text-error"><span class="material-symbols-outlined text-sm">delete</span></button>
+</div>
+</div>
+<div class="flex justify-between items-center p-3 rounded-lg bg-white/5 border border-white/5 group hover:border-rose-400/30 transition-all">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-rose-400/70">straighten</span>
+<span class="font-medium text-sm">Violín</span>
+</div>
+<div class="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1 text-slate-500 hover:text-white"><span class="material-symbols-outlined text-sm">edit</span></button>
+<button class="p-1 text-slate-500 hover:text-error"><span class="material-symbols-outlined text-sm">delete</span></button>
+</div>
+</div>
+<div class="flex justify-between items-center p-3 rounded-lg bg-white/5 border border-white/5 group hover:border-rose-400/30 transition-all">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-rose-400/70">music_note</span>
+<span class="font-medium text-sm">Violonchelo</span>
+</div>
+<div class="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1 text-slate-500 hover:text-white"><span class="material-symbols-outlined text-sm">edit</span></button>
+<button class="p-1 text-slate-500 hover:text-error"><span class="material-symbols-outlined text-sm">delete</span></button>
+</div>
+</div>
+<div class="flex justify-between items-center p-3 rounded-lg bg-white/5 border border-white/5 group hover:border-rose-400/30 transition-all">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-rose-400/70">air</span>
+<span class="font-medium text-sm">Clarinete</span>
+</div>
+<div class="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1 text-slate-500 hover:text-white"><span class="material-symbols-outlined text-sm">edit</span></button>
+<button class="p-1 text-slate-500 hover:text-error"><span class="material-symbols-outlined text-sm">delete</span></button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Latest Registered Users -->
+<section class="glass-panel p-8 rounded-xl overflow-hidden">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-headline-md text-on-surface">Recently Registered Entities</h2>
+<button class="text-rose-400 text-sm font-bold flex items-center gap-2 hover:gap-3 transition-all">
+                    View Complete Directory <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-white/10">
+<th class="py-4 font-label-sm text-slate-400 uppercase tracking-widest">User</th>
+<th class="py-4 font-label-sm text-slate-400 uppercase tracking-widest">Role</th>
+<th class="py-4 font-label-sm text-slate-400 uppercase tracking-widest">Registration Date</th>
+<th class="py-4 font-label-sm text-slate-400 uppercase tracking-widest">Status</th>
+<th class="py-4 text-right"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-white/5">
+<tr class="group hover:bg-white/5 transition-colors">
+<td class="py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center font-bold text-rose-400 border border-white/10">JD</div>
+<div>
+<p class="font-bold text-on-surface">Julianne DeSilva</p>
+<p class="text-xs text-slate-500">j.desilva@conservatory.edu</p>
+</div>
+</div>
+</td>
+<td class="py-4"><span class="px-3 py-1 bg-surface-container text-on-surface-variant text-xs rounded-full font-medium">Compositor</span></td>
+<td class="py-4 text-sm text-slate-400">Oct 12, 2023</td>
+<td class="py-4">
+<span class="flex items-center gap-2 text-emerald-400 text-xs font-bold">
+<span class="w-1.5 h-1.5 bg-emerald-400 rounded-full"></span> Active
+                                </span>
+</td>
+<td class="py-4 text-right">
+<button class="text-slate-500 hover:text-rose-400 transition-colors p-2">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="group hover:bg-white/5 transition-colors">
+<td class="py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center font-bold text-rose-400 border border-white/10">LE</div>
+<div>
+<p class="font-bold text-on-surface">Lumina Ensemble</p>
+<p class="text-xs text-slate-500">contact@lumina-orch.org</p>
+</div>
+</div>
+</td>
+<td class="py-4"><span class="px-3 py-1 bg-surface-container text-on-surface-variant text-xs rounded-full font-medium">Ensemble</span></td>
+<td class="py-4 text-sm text-slate-400">Oct 11, 2023</td>
+<td class="py-4">
+<span class="flex items-center gap-2 text-primary-container text-xs font-bold">
+<span class="w-1.5 h-1.5 bg-primary-container rounded-full"></span> Pending
+                                </span>
+</td>
+<td class="py-4 text-right">
+<button class="text-slate-500 hover:text-rose-400 transition-colors p-2">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="group hover:bg-white/5 transition-colors">
+<td class="py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center font-bold text-rose-400 border border-white/10">MR</div>
+<div>
+<p class="font-bold text-on-surface">Marcus Raine</p>
+<p class="text-xs text-slate-500">m.raine@independent.com</p>
+</div>
+</div>
+</td>
+<td class="py-4"><span class="px-3 py-1 bg-surface-container text-on-surface-variant text-xs rounded-full font-medium">Compositor</span></td>
+<td class="py-4 text-sm text-slate-400">Oct 09, 2023</td>
+<td class="py-4">
+<span class="flex items-center gap-2 text-emerald-400 text-xs font-bold">
+<span class="w-1.5 h-1.5 bg-emerald-400 rounded-full"></span> Active
+                                </span>
+</td>
+<td class="py-4 text-right">
+<button class="text-slate-500 hover:text-rose-400 transition-colors p-2">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</main>
+<!-- Background Decorative Elements -->
+<div class="fixed top-0 right-0 -z-10 w-[500px] h-[500px] bg-rose-400/5 blur-[120px] rounded-full pointer-events-none"></div>
+<div class="fixed bottom-0 left-0 -z-10 w-[600px] h-[600px] bg-primary-container/5 blur-[150px] rounded-full pointer-events-none"></div>
+</body></html>

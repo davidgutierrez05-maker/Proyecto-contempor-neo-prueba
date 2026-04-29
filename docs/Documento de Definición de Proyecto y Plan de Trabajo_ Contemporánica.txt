@@ -1,0 +1,115 @@
+﻿Documento de Definición de Proyecto y Plan de Trabajo: Contemporánica
+
+Contemporánica es una plataforma web y catálogo interactivo diseñado para conectar a compositores y grupos de música contemporánea. El objetivo es crear una red social de nicho donde el repertorio musical se construya de forma colaborativa pero controlada.
+1.1 Funcionalidades Clave
+* Gestión de Repertorio Bidireccional: Los grupos de música pueden registrar y subir una obra que han interpretado, asignándole a un compositor de la base de datos.
+* Flujo de Validación: Para garantizar la veracidad del catálogo, la obra subida por un grupo permanecerá en estado "Pendiente" hasta que el compositor asignado la valide desde su panel de control. Sólo entonces será pública en el perfil del compositor.
+* Motor de Búsqueda Avanzado: Búsquedas complejas cruzadas por instrumentos (ej. "Clarinete + Electrónica + Flauta travesera"), año de composición, región geográfica y compositor.
+* Gestión de Instrumentos (CRUD): Tabla maestra administrativa para dar de alta, modificar o eliminar instrumentos disponibles en la plataforma.
+* Carga Masiva de Datos: Sistema de importación automatizada para migrar el catálogo inicial desde hojas de cálculo (Excel/CSV) de Ensemble Sonoro al nuevo sistema.
+1.2 Perfiles de usuario
+1.2.1. Perfil: Visitante (Usuario Anónimo / No Logueado)
+Es cualquier persona de internet interesada en la música contemporánea (estudiantes, programadores de festivales, curiosos). Su objetivo es consumir información sin fricciones.
+* Nivel de Acceso: Solo lectura pública.
+* Acciones Permitidas:
+   * Uso del Buscador Avanzado: Puede filtrar el catálogo por instrumentos (ej. obras para clarinete y electrónica), año, compositor y región.
+   * Visualización de Fichas: Puede entrar a la ficha detallada de una obra validada para ver su instrumentación e información.
+   * Perfiles Públicos: Puede ver el perfil público de los Compositores (biografía y catálogo oficial validado) y de los Grupos (repertorio que han interpretado).
+* Restricciones: No puede ver obras en estado "Pendiente", no tiene acceso a ningún panel de control, ni puede añadir ningún dato. Para realizar cualquier acción activa, el sistema le lanzará un aviso invitándole a registrarse.
+
+
+1.2.2. Perfil: Grupo de Música / Intérprete
+Ensembles, orquestas o solistas que desean dejar un registro oficial de las obras contemporáneas que han tocado o estrenado.
+* Nivel de Acceso: Lectura pública + Escritura limitada a su propio contenido.
+* Acciones Permitidas:
+   * Gestión de su Perfil: Editar su nombre, región, biografía, enlaces a redes sociales y foto de perfil.
+   * Alta de Repertorio (Interpretaciones): Pueden subir una obra que han tocado mediante un formulario. Deberán rellenar el título, año, instrumentación y asignarla a un compositor existente en la base de datos.
+   * Seguimiento de Estado: Tienen un panel privado donde ven una tabla con las obras que han subido y su estado actual: Pendiente de validación, Aprobada o Rechazada.
+* Restricciones: No pueden editar la obra una vez que el compositor la ha validado (solo pueden solicitar una corrección). Tampoco pueden validar obras en nombre de nadie.
+
+
+1.2.3. Perfil: Compositor
+El creador de la música. Su objetivo es mantener su catálogo verificado, ordenado y libre de falsificaciones o errores.
+* Nivel de Acceso: Lectura pública + Escritura propia + Privilegios de Validación.
+* Acciones Permitidas:
+   * Gestión de su Perfil: Editar su información pública.
+   * Buzón de Validaciones (El núcleo del sistema): Reciben notificaciones cuando un "Grupo" registra una obra en su nombre. Tienen una vista especial donde pueden revisar los detalles de esa obra y decidir: Aprobar (la obra pasa al catálogo público) o Rechazar (si los datos son incorrectos o no es suya).
+   * Alta Directa de Obras: Un compositor no tiene que esperar a que un grupo suba su música. Puede añadir su propio catálogo directamente. Las obras creadas por el propio compositor nacen con el estado "Validado/Público" automáticamente.
+* Restricciones: Solo tienen permisos de validación sobre los registros que les apuntan a ellos. No pueden alterar el catálogo de otro compositor.
+
+
+1.2.4. Perfil: Administrador (Backoffice)
+El equipo de Esemble Sonoro SL u otras personas designadas para mantener la calidad y el orden de la plataforma.
+* Nivel de Acceso: Control total (Superusuario).
+* Acciones Permitidas (Panel de Administración):
+   * Gestión de Usuarios (Moderación): Ver la lista completa de usuarios. Pueden vetar (banear) cuentas que hagan spam, restablecer contraseñas o cambiar el rol de un usuario (ej. ascender a alguien a Administrador).
+   * Gestión del Catálogo: Pueden editar cualquier obra, forzar la validación de una obra que haya quedado atascada o borrar registros duplicados, falsos o inapropiados.
+   * CRUD de Instrumentos: Tienen acceso exclusivo a la tabla maestra de instrumentos para dar de alta nuevos (ej. "Theremin", "Ondas Martenot"), modificar nombres o eliminar aquellos que no se usen, alimentando así los selectores del buscador.
+   * Carga Masiva: Acceso al módulo desarrollado por David para importar catálogos enteros desde ficheros Excel si la plataforma lo requiere en el futuro.
+* Vistas de Interfaz: Un Dashboard de moderación oculto para el resto de perfiles, con tablas de datos y herramientas de resolución de incidencias.
+
+
+1.3 Stack Tecnológico (Presupuesto 0€)
+* Diseño UI/UX: Google Stitch, utilizado para generar de forma rápida prototipos de interfaces de usuario.
+* Desarrollo y Código: Google Antigravity, un entorno de desarrollo (IDE) basado en agentes de inteligencia artificial que permite gestionar herramientas desde su "Agent Manager" y acelerar la creación de aplicaciones full-stack.
+* Backend y Base de Datos: Supabase (PostgreSQL), ideal para gestionar las relaciones complejas del buscador y ofrecer un nivel gratuito robusto.
+* Infraestructura y Despliegue: Servidor local Proxmox para virtualización, Docker para la contenerización del software y Zrok para exponer el servicio de forma segura a internet mediante túneles inversos.
+* Gestión del Proyecto: GitHub, GitHub Projects y Github Actions.
+
+
+2. Metodología de Trabajo: Framework Ágil
+El proyecto se desarrollará bajo un marco de trabajo ágil basado en Sprints semanales (iteraciones de trabajo con entregables claros). La gestión de tareas se visualizará en un tablero Kanban (Backlog, To Do, In Progress, Review, Done) en GitHub Projects.
+2.1 Daily Stand-ups (Reuniones Diarias - 15 min)
+Participantes: David Gutiérrez Salinas, Manuel Solís Guijo y Bernat Costa. Cuándo: Todos los días a primera hora (presencial o telemática). Objetivo: Sincronización rápida y desbloqueo de problemas. Cada alumno deberá responder a tres preguntas:
+1. ¿Qué completé ayer que aporta valor al Sprint?
+2. ¿Qué voy a hacer hoy?
+3. ¿Tengo algún impedimento o bloqueo que no me permita avanzar?
+2.2 Sprint Reviews (Reuniones Semanales con el Cliente)
+Participantes: Alumnos, Tutor y representante de Esemble Sonoro SL. 
+Cuándo: Cada viernes, al finalizar el Sprint.
+ Objetivo: Los alumnos realizarán una demostración del software funcional construido durante esa semana (Showcase). Esemble Sonoro aportará feedback real, validará si se cumplen sus expectativas y se adaptarán las prioridades para la semana siguiente.
+
+
+________________
+3. Plan de Trabajo Semanal (27 Abril - 29 Mayo)
+Carga horaria: 156 horas por alumno (6.5 horas diarias).
+Sprint 1: Concepción, Entorno y Contexto Laboral (27 Abr - 1 May)
+Objetivo: Diseñar la arquitectura técnica, preparar los servidores y comprender el entorno legal del proyecto.
+* David Gutiérrez:
+   * Contexto Laboral: Analizar el convenio colectivo de Esemble Sonoro, identificar los tipos de contratos aplicables y analizar un recibo de salario (R.A. 3).
+   * Hardware y Virtualización: Analizar el hardware del servidor Proxmox, documentar su arquitectura física y levantar la máquina virtual base Linux (R.A. 1 y R.A. 2).
+* Manuel Solís:
+   * Diseño UI con Google Stitch: Crear los wireframes de la plataforma (pantalla de búsqueda, perfil de compositor y validación de obras) usando prompts descriptivos.
+   * Arquitectura de Datos: Diseñar el diagrama relacional en Supabase (Obras, Grupos, Compositores, Instrumentos) y documentar el ciclo de vida del dato (R.A. 5).
+* Conjunto: Configurar los agentes y entornos de trabajo en Google Antigravity. Redactar informe sobre cómo el uso de un servidor local reaprovechado (Proxmox) promueve la economía circular frente a servidores dedicados comerciales (R.A. 4).
+Sprint 2: Lógica Backend y Migración de Datos (4 May - 8 May)
+Objetivo: Automatizar la carga del catálogo inicial y desarrollar la funcionalidad base del frontend.
+* David Gutiérrez:
+   * Script de Migración: Utilizar las capacidades de automatización de Google Antigravity para programar un script en Python/Node que limpie y exporte los datos de los Excel antiguos hacia la nueva base de datos de Supabase (R.A. 6 y R.A. 7).
+* Manuel Solís:
+   * Desarrollo del Frontend: Trasladar los diseños de Stitch a código funcional usando Google Antigravity para andamiar la aplicación full-stack.
+   * Gestión de Instrumentos: Programar las pantallas administrativas para dar de alta y listar instrumentos musicales.
+Sprint 3: Buscador Avanzado y Lógica de Negocio (11 May - 15 May)
+Objetivo: Implementar el corazón de Contemporánica: búsquedas cruzadas y flujos de aprobación.
+* David Gutiérrez:
+   * Flujo de Validación: Programar la lógica donde un Grupo sube una obra, el estado pasa a "Pendiente", y el Compositor recibe una notificación para validarla.
+   * Direccionamiento IP: Asignar IP estáticas a la máquina virtual y documentar el mapa lógico de la red local (R.A. 2).
+* Manuel Solís:
+   * Motor de Búsqueda: Diseñar las consultas SQL complejas para filtrar repertorio por múltiples instrumentos, región y año de composición simultáneamente.
+   * Despliegue de Servicios: Instalar el software base en el servidor Linux dando respuesta a los requisitos funcionales requeridos por Antigravity (R.A. 8).
+Sprint 4: Contenerización, Redes y Aseguramiento (18 May - 22 May)
+Objetivo: Aislar la aplicación, exponerla al cliente de forma segura y establecer políticas de respaldo.
+* David Gutiérrez:
+   * Dockerización: Crear el Dockerfile y el docker-compose.yml para empaquetar el frontend y backend.
+   * Exposición Segura: Levantar un contenedor con Zrok en Proxmox para generar un túnel inverso que permita a Esemble Sonoro probar la aplicación desde cualquier lugar, monitorizando la conexión (R.A. 2).
+* Manuel Solís:
+   * Copias de Seguridad (Backup): Configurar y ejecutar rutinas de volcado de la base de datos (aseguramiento de la información). Realizar una prueba documentada de borrado y restauración con éxito (R.A. 6).
+   * Seguridad y Nube: Elaborar un informe sobre la protección de los datos subidos a la nube (Supabase) bajo la normativa actual (R.A. 5).
+Sprint 5: Refinamiento, Documentación y Entrega Final (25 May - 29 May)
+Objetivo: Resolver errores finales, elaborar manuales de usuario y migrar el catálogo definitivo.
+* David Gutiérrez:
+   * Manuales de Usuario: Generar guías visuales (PDF/Web) explicando a los músicos y compositores cómo darse de alta, buscar obras y validar repertorio (R.A. 8).
+   * Migración Final: Ejecutar el volcado de datos definitivo desde los Excel aprobados por Esemble Sonoro hacia producción (R.A. 7).
+* Manuel Solís:
+   * Documentación de Explotación: Redactar la documentación técnica para el centro sobre cómo reiniciar la máquina en Proxmox, cómo arrancar los contenedores Docker y cómo gestionar Zrok (R.A. 7).
+* Conjunto: Resolución de incidencias (Bugs) detectadas durante el último Sprint Review y pulido final de la interfaz.

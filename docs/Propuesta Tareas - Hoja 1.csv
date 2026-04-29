@@ -1,0 +1,102 @@
+Sprint,Día,Fecha,Alumno,Módulo,R.A. (Evaluación),Tarea Detallada,Horas
+1,1,lun 27 abr,David G.,FOL,R.A. 3,Lectura de convenio colectivo e identificación de derechos y obligaciones laborales.,3.25
+1,1,lun 27 abr,David G.,FOL,R.A. 3,Analisi de las tareas y configuración del entorno en github,3.25
+1,1,lun 27 abr,Manuel S.,Digitalización,R.A. 5,Definición de la diferencia entre dato e información y ciclo de vida del dato musical.,3.25
+1,1,lun 27 abr,Manuel S.,Base de Datos,R.A. 5,Diseño inicial del diagrama Entidad-Relación incluyendo la arquitectura de Roles (RBAC).,3.25
+1,2,Mar 28 Abr,David G.,Hardware,R.A. 1,Auditoría física de Proxmox: identificar bloques funcionales (CPU/RAM/Almacenamiento).,3.25
+1,2,Mar 28 Abr,David G.,Redes,R.A. 2,Identificación de estándares de red física y mapeo de la topología local del centro/empresa.,3.25
+1,2,Mar 28 Abr,Manuel S.,Hardware,R.A. 1,Chequeo de recursos lógicos del servidor y evaluación de prestaciones base.,3.25
+1,2,Mar 28 Abr,Manuel S.,Redes,R.A. 2,Identificación del direccionamiento IP actual y configuración de la red de gestión del servidor.,3.25
+1,3,mié 29 abr,David G.,Digitalización,R.A. 5,Investigación sobre ciberseguridad básica y protección del dato en aplicaciones web.,3.25
+1,3,mié 29 abr,David G.,Sostenibilidad,R.A. 4,Informe contrastando beneficios de la economía circular (hardware Proxmox reutilizado) vs modelo clásico.,3.25
+1,3,mié 29 abr,Manuel S.,Diseño (UI),R.A. 8,Generación de prototipos con Google Stitch: Pantalla Inicio (Pública) y Buscador.,3.25
+1,3,mié 29 abr,Manuel S.,Diseño (UI),R.A. 8,"Generación de prototipos con Google Stitch: Dashboards privados para Grupo, Compositor y Admin.",3.25
+1,4,jue 30 abr,David G.,Base de Datos,R.A. 6,"Creación de proyecto en Supabase, tablas vacías y configuración inicial.",3.25
+1,4,jue 30 abr,David G.,Diseño (UI),R.A. 8,Revisión UI: Generación de interfaces secundarias y adaptación de colores corporativos.,3.25
+1,4,jue 30 abr,Manuel S.,Sistemas,R.A. 8,Configuración de Google Antigravity y conexión con repositorio GitHub.,3.25
+1,4,jue 30 abr,Manuel S.,Sostenibilidad,R.A. 4,"Informe sobre principios de ecodiseño aplicados a la interfaz UI (modo oscuro, carga ligera).",3.25
+1,Fest,vie 1 may,Ambos,N/A,N/A,FESTIVO: Día del Trabajador.,0
+2,5,lun 4 may,David G.,Migración,R.A. 6,Análisis de los Excel origen de Esemble Sonoro y herramientas de extracción.,3.25
+2,5,lun 4 may,David G.,Migración,R.A. 7,Programación de script inicial en Python/Node para limpieza de datos (Agentes Antigravity).,3.25
+2,5,lun 4 may,Manuel S.,Desarrollo,R.A. 8,Traslado del código HTML/Tailwind desde Google Stitch a Google Antigravity.,3.25
+2,5,lun 4 may,Manuel S.,Migración,R.A. 7,Apoyo en script de limpieza: estructuración de JSON y formatos de fecha/texto unificados.,3.25
+2,6,Mar 5 May,David G.,Base de Datos,R.A. 6,Importación de un lote de prueba (10 compositores) a Supabase y verificación.,3.25
+2,6,Mar 5 May,David G.,Frontend,R.A. 8,Programación de interfaz visual y formularios para el CRUD de Instrumentos.,3.25
+2,6,Mar 5 May,Manuel S.,Seguridad,R.A. 7,Configuración de campo user_roles y políticas RLS (Row Level Security) en Supabase.,3.25
+2,6,Mar 5 May,Manuel S.,Seguridad,R.A. 7,Pruebas de acceso RLS: Simulación de peticiones no autorizadas (401/403) desde consola SQL.,3.25
+2,7,mié 6 may,David G.,Sistemas,R.A. 2,Levantamiento de VM Linux en Proxmox y configuración de adaptador de red.,3.25
+2,7,mié 6 may,David G.,Base de Datos,R.A. 6,Resolución de errores de importación masiva interpretando ficheros de log y errores SQL.,3.25
+2,7,mié 6 may,Manuel S.,Frontend,R.A. 8,Desarrollo del sistema de Autenticación (Login/Registro) con Supabase Auth.,3.25
+2,7,mié 6 may,Manuel S.,Frontend,R.A. 8,Implementación de protección de rutas privadas (Guards) ocultando acciones a usuarios anónimos.,3.25
+2,8,jue 7 may,David G.,Digitalización,R.A. 5,Estudio y resumen de características que definen el Cloud Computing.,3.25
+2,8,jue 7 may,David G.,Frontend,R.A. 8,Conexión del formulario de Instrumentos con la API de Supabase para alta real de datos.,3.25
+2,8,jue 7 may,Manuel S.,Redes,R.A. 2,Uso de comprobadores para verificar la conectividad de la VM con el exterior.,3.25
+2,8,jue 7 may,Manuel S.,Sistemas,R.A. 8,Instalación base de dependencias (Node/Nginx) en VM Linux mediante línea de comandos.,3.25
+2,9,vie 8 may,David G.,Sostenibilidad,R.A. 4,Análisis del ciclo de vida del producto software y procesos de producción limpios.,2.5
+2,9,vie 8 may,David G.,FOL,R.A. 3,Estudio de modelos de contratación vigentes locales para desarrolladores web junior.,2.5
+2,9,vie 8 may,Manuel S.,FOL,R.A. 3,Análisis del papel de la Seguridad Social y retenciones en la nómina.,2.5
+2,9,vie 8 may,Manuel S.,Hardware,R.A. 1,Ejecución de utilidades de chequeo en Proxmox durante carga de trabajo.,2.5
+2,9,vie 8 may,Ambos,Proyecto,N/A,"Sprint Review: Demo a Esemble Sonoro del sistema de Login, protección de rutas y RLS.",1.5
+3,10,lun 11 may,David G.,Base de Datos,R.A. 6,"Desarrollo de consultas SQL complejas para cruzar instrumentos, año y región.",3.25
+3,10,lun 11 may,David G.,Frontend,R.A. 8,Integración de los filtros de búsqueda y las consultas SQL en la interfaz (Acceso Público).,3.25
+3,10,lun 11 may,Manuel S.,Lógica,R.A. 8,"Programación flujo ""Grupo Sube Obra"": Asignación de estado 'Pendiente'.",3.25
+3,10,lun 11 may,Manuel S.,Base de Datos,R.A. 6,Ajustes en las tablas para soportar estados de validación y relacionar autores correctamente.,3.25
+3,11,Mar 12 May,David G.,Lógica,R.A. 8,"Programación flujo ""Compositor Valida Obra"": Cambio de estado a 'Público'.",3.25
+3,11,Mar 12 May,David G.,Base de Datos,R.A. 6,Test de integridad referencial: simular borrado de compositor y efecto cascada en obras.,3.25
+3,11,Mar 12 May,Manuel S.,Frontend,R.A. 8,Maquetación de tarjetas de resultados de búsqueda y paginación.,3.25
+3,11,Mar 12 May,Manuel S.,Redes,R.A. 2,Configuración del direccionamiento IP estático definitivo en la máquina de Proxmox.,3.25
+3,12,mié 13 may,David G.,Lógica (Admin),R.A. 8,Creación de vista Backoffice /admin/usuarios exclusiva para rol Administrador.,3.25
+3,12,mié 13 may,David G.,Lógica (Admin),R.A. 6,Programación de acciones de moderación: Cambiar rol de usuario y Banear cuentas de spam.,3.25
+3,12,mié 13 may,Manuel S.,Sistemas,R.A. 8,Realización de instalaciones desatendidas de paquetes de actualización en Linux.,3.25
+3,12,mié 13 may,Manuel S.,Frontend,R.A. 8,Implementación de notificaciones visuales (Toasts/Alerts) al subir o validar obras.,3.25
+3,13,jue 14 may,David G.,Lógica (Admin),R.A. 8,Creación de vista /admin/obras y traslado del CRUD Instrumentos a esta zona.,3.25
+3,13,jue 14 may,David G.,FOL,R.A. 3,Análisis de vicisitudes relevantes que se pueden presentar en la relación laboral y recursos legales.,3.25
+3,13,jue 14 may,Manuel S.,Gestión,R.A. 7,Procedimientos de extracción para generar informe CSV/Excel con repertorio validado.,3.25
+3,13,jue 14 may,Manuel S.,FOL,R.A. 3,Análisis de prestaciones derivadas de la extinción de la relación laboral o desempleo.,3.25
+3,14,vie 15 may,David G.,Hardware,R.A. 1,Clasificación de dispositivos y mecanismos de comunicación en servidor local.,2.5
+3,14,vie 15 may,David G.,Pruebas,R.A. 8,Ejecución de pruebas unitarias sobre los permisos del Panel de Administración.,2.5
+3,14,vie 15 may,Manuel S.,Digitalización,R.A. 5,Informe sobre el impacto de la RGPD en los datos de registro de músicos.,2.5
+3,14,vie 15 may,Manuel S.,Pruebas,R.A. 8,Pruebas de usabilidad sobre el flujo de validación del Compositor y registro de fallos.,2.5
+3,14,vie 15 may,Ambos,Proyecto,N/A,Sprint Review: Demostración del Buscador y del Panel de Administración completo (Gestión Roles).,1.5
+4,15,lun 18 may,David G.,Sistemas,R.A. 8,Creación de Dockerfile para empaquetar el frontend en entorno Node/Nginx.,3.25
+4,15,lun 18 may,David G.,Redes,R.A. 2,Integración de dispositivos (contenedores) en red local virtualizada con Docker Bridge.,3.25
+4,15,lun 18 may,Manuel S.,Sistemas,R.A. 8,Asistencia en la orquestación y creación del archivo docker-compose.yml general.,3.25
+4,15,lun 18 may,Manuel S.,Base de Datos,R.A. 6,Programación de tareas automáticas (cron) para volcados de seguridad en Supabase.,3.25
+4,16,Mar 19 May,David G.,Base de Datos,R.A. 6,Identificación de herramientas por línea de comandos para exportar datos SQL.,3.25
+4,16,Mar 19 May,David G.,Base de Datos,R.A. 6,Realización práctica de volcado de seguridad (exportación total del estado de BD).,3.25
+4,16,Mar 19 May,Manuel S.,Redes,R.A. 2,Despliegue del cliente Zrok mediante Docker para iniciar el túnel reverso.,3.25
+4,16,Mar 19 May,Manuel S.,Redes,R.A. 2,Aseguramiento del túnel Zrok y generación de URL pública estática para Esemble Sonoro.,3.25
+4,17,mié 20 may,David G.,Redes,R.A. 2,Configuración de monitorización de servicios (Ping/Uptime Kuma) para Zrok.,3.25
+4,17,mié 20 may,David G.,Sistemas,R.A. 8,Verificación del arranque automático de contenedores Docker en reinicios del sistema.,3.25
+4,17,mié 20 may,Manuel S.,Base de Datos,R.A. 6,Simulacro de incidente crítico: Borrado intencional de tablas principales.,3.25
+4,17,mié 20 may,Manuel S.,Base de Datos,R.A. 6,Ejecución del protocolo de restauración de copia de seguridad con éxito.,3.25
+4,18,jue 21 may,David G.,Digitalización,R.A. 5,Investigación sobre almacenamiento descentralizado vs Cloud Computing.,3.25
+4,18,jue 21 may,David G.,Gestión,R.A. 7,Redacción técnica del documento de explotación (Cómo arrancar Proxmox y Docker).,3.25
+4,18,jue 21 may,Manuel S.,Gestión,R.A. 8,Asistencia técnica por red a David documentando incidencias de despliegue.,3.25
+4,18,jue 21 may,Manuel S.,Sostenibilidad,R.A. 4,Análisis de eficiencia energética del uso de contenedores Docker frente a VMs pesadas completas.,3.25
+4,19,vie 22 may,David G.,Hardware,R.A. 1,Simulación e identificación de averías y cuellos de botella en SO Linux.,2.5
+4,19,vie 22 may,David G.,Sistemas,R.A. 8,Evaluación de rendimiento de la carga del frontend sirviéndose desde Zrok.,2.5
+4,19,vie 22 may,Manuel S.,Hardware,R.A. 1,Análisis del mecanismo de conexión entre red LAN externa y Docker virtual interno.,2.5
+4,19,vie 22 may,Manuel S.,Sistemas,R.A. 8,Refinamiento de variables de entorno (ENV) para asegurar la conexión Docker-Supabase.,2.5
+4,19,vie 22 may,Ambos,Proyecto,N/A,"Sprint Review: Demostración de URL pública (Zrok), estabilidad Docker y simulacro de Backups.",1.5
+5,20,lun 25 may,David G.,Migración,R.A. 7,Volcado final en producción del catálogo limpio y aprobado por la empresa.,3.25
+5,20,lun 25 may,David G.,Frontend,R.A. 8,Resolución de incidencias visuales reportadas en el Sprint 4 (Ajustes CSS/Tailwind).,3.25
+5,20,lun 25 may,Manuel S.,Migración,R.A. 7,Verificación de integridad de los datos finales importados (IDs cruzados).,3.25
+5,20,lun 25 may,Manuel S.,Frontend,R.A. 8,Revisión de diseño Responsive (Móviles/Tablets) de los paneles de administración y buscador.,3.25
+5,21,Mar 26 May,David G.,Documentación,R.A. 8,Elaboración de guías visuales en PDF (Manual: Alta de Obras y Validación).,3.25
+5,21,Mar 26 May,David G.,Documentación,R.A. 8,Elaboración de guías visuales en PDF (Manual: Navegación Pública y Búsquedas).,3.25
+5,21,Mar 26 May,Manuel S.,Gestión,R.A. 7,Elaboración del Manual de Administrador (Gestión Roles y Moderación).,3.25
+5,21,Mar 26 May,Manuel S.,Sistemas,R.A. 8,Elaboración de hoja de rescate: comandos rápidos para reiniciar servidor y Zrok si se cae la red.,3.25
+5,22,mié 27 may,David G.,Base de Datos,R.A. 6,Auditoría final de la base de datos y cierre estricto de roles/permisos RLS.,3.25
+5,22,mié 27 may,David G.,Redes,R.A. 2,Pruebas de estrés de latencia sobre la red a través del túnel Zrok documentando tiempos.,3.25
+5,22,mié 27 may,Manuel S.,Base de Datos,R.A. 6,Optimización final de índices en tablas SQL para acelerar el buscador.,3.25
+5,22,mié 27 may,Manuel S.,Digitalización,R.A. 5,"Verificación de políticas de cookies, aviso legal y RGPD visibles en la plataforma web.",3.25
+5,23,jue 28 may,David G.,Sostenibilidad,R.A. 4,Revisión del documento final de ecodiseño aplicado a todo el ciclo del proyecto.,3.25
+5,23,jue 28 may,David G.,FOL,R.A. 3,Análisis de nuevos entornos de organización: El teletrabajo en el desarrollo de software.,3.25
+5,23,jue 28 may,Manuel S.,FOL,R.A. 3,Investigación sobre convenios colectivos estatales vs autonómicos.,3.25
+5,23,jue 28 may,Manuel S.,Hardware,R.A. 1,Monitorización final de recursos (RAM/CPU) de la máquina con 100% de servicios en marcha.,3.25
+5,24,vie 29 may,David G.,Sistemas,R.A. 8,"Limpieza de logs, contenedores huérfanos y ramas no usadas en GitHub.",2.5
+5,24,vie 29 may,David G.,Entrega,R.A. 8,Empaquetado de todo el código fuente y artefactos documentales en un fichero de entrega.,2.5
+5,24,vie 29 may,Manuel S.,Redes,R.A. 2,Protocolo de encendido y apagado ordenado del servidor físico documentado.,2.5
+5,24,vie 29 may,Manuel S.,Entrega,R.A. 8,"Traspaso formal de credenciales maestras (Supabase, Zrok, Proxmox, GitHub) a Esemble Sonoro.",2.5
+5,24,vie 29 may,Ambos,Proyecto,N/A,Sprint Review: DEMO FINAL Y ENTREGA LLAVES EN MANO A ESEMBLE SONORO SL. FIN PRÁCTICAS.,1.5
