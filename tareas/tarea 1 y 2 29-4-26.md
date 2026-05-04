@@ -9,28 +9,28 @@ En esta fase del proyecto hemos utilizado **Google Stitch** para generar los pro
 ## 1. Pantalla de Inicio (Público)
 Es la puerta de entrada a la plataforma. Incluye un buscador avanzado para filtrar el catálogo por instrumentación, año y compositor, además de un reproductor de audio persistente.
 
-![Home Page - Contemporánica](diseno/home.png)
+![Home Page - Contemporánica](../diseno/home.png)
 
 ---
 
 ## 2. Dashboard del Compositor (Validación)
 Esta es la interfaz que verá el compositor para gestionar su catálogo. El elemento central es el **Buzón de Validaciones**, donde puede aprobar o rechazar las obras que los grupos han subido en su nombre.
 
-![Dashboard Compositor](diseno/dashboard.png)
+![Dashboard Compositor](../diseno/dashboard.png)
 
 ---
 
 ## 3. Dashboard del Grupo / Ensemble (Registro)
 Interfaz simplificada para los intérpretes. El foco principal es el botón de **"Registrar Interpretación"** y el seguimiento de sus envíos mediante estados (Pendiente, Aceptada, Rechazada).
 
-![Dashboard Ensemble](diseno/ensemble.png)
+![Dashboard Ensemble](../diseno/ensemble.png)
 
 ---
 
 ## 4. Panel de Administración (Control)
 Panel exclusivo para Ensemble Sonoro SL. Permite ver las métricas de crecimiento de la plataforma, gestionar usuarios y administrar la base de datos maestra de instrumentos (CRUD).
 
-![Panel Admin](diseno/admin.png)
+![Panel Admin](../diseno/admin.png)
 
 ---
 *Nota: Estos diseños sirven como base para el desarrollo del Frontend en el Sprint 2.*
