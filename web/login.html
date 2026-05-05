@@ -8,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script src="js/auth.js"></script>
     <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
@@ -113,7 +114,7 @@
                         <input type="password" class="w-full input-field rounded-xl py-3 pl-10 pr-4 text-white focus:outline-none placeholder:text-slate-500" placeholder="••••••••" required>
                     </div>
                 </div>
-                <button type="button" class="w-full bg-salmon hover:bg-rose-400 text-white font-medium py-3 rounded-xl transition-all duration-300 active:scale-95 flex justify-center items-center gap-2 mt-4">
+                <button type="button" onclick="loginSimulado('manuel@test.com', 'admin')" class="w-full bg-salmon hover:bg-rose-400 text-white font-medium py-3 rounded-xl transition-all duration-300 active:scale-95 flex justify-center items-center gap-2 mt-4">
                     Sign In <span class="material-symbols-outlined text-[20px]">login</span>
                 </button>
             </form>
