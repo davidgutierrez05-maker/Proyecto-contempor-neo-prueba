@@ -1,0 +1,42 @@
+[
+    {
+        "titulo": "Obertura Contemporánea",
+        "compositor": "Manuel Solis",
+        "anio": 2023,
+        "instrumentos": [
+            "Violin",
+            "Clarinete"
+        ],
+        "estado": "pending"
+    },
+    {
+        "titulo": "Suite Para Cello",
+        "compositor": "David Gutierrez",
+        "anio": 2022,
+        "instrumentos": [
+            "Cello"
+        ],
+        "estado": "pending"
+    },
+    {
+        "titulo": "Reflejos Sonoros",
+        "compositor": "Juan Perez",
+        "anio": 2021,
+        "instrumentos": [
+            "Flauta",
+            "Piano",
+            "Violonchelo"
+        ],
+        "estado": "pending"
+    },
+    {
+        "titulo": "Ecos Del Bosque",
+        "compositor": "Elena Garcia",
+        "anio": 2024,
+        "instrumentos": [
+            "Oboe",
+            "Fagot"
+        ],
+        "estado": "pending"
+    }
+]
