@@ -1,60 +1,117 @@
-// auth.js - Gestión de sesiones y protección de rutas
+import supabase from './supabase.js';
 
 /**
- * Verifica si el usuario está autenticado.
- * Si no lo está y la página es privada, redirige al login.
+ * Verifica si el usuario está autenticado y tiene los permisos necesarios.
  */
-function checkAuth() {
-    const user = JSON.parse(localStorage.getItem('contemporanica_user'));
-    const isLoginPage = window.location.pathname.includes('login.html');
-    const isPublicPage = window.location.pathname.includes('index.html') || window.location.pathname === '/' || window.location.pathname.endsWith('web/');
-
-    if (!user && !isLoginPage && !isPublicPage) {
-        // Si no hay usuario y no estamos en login o index, mandamos al login
-        console.log("Acceso denegado. Redirigiendo...");
+async function checkAuth() {
+    const { data: { session }, error } = await supabase.auth.getSession();
+    const path = window.location.pathname;
+    
+    const isLoginPage = path.includes('login.html');
+    const isPublicPage = path.includes('index.html') || path === '/' || path.endsWith('web/');
+    
+    if (!session && !isLoginPage && !isPublicPage) {
         window.location.href = 'login.html';
+        return;
     }
 
-    if (user) {
-        console.log("Usuario detectado:", user.email);
-        actualizarInterfaz(user);
+    if (session) {
+        // Obtener el perfil con el rol
+        const { data: profile } = await supabase
+            .from('profiles')
+            .select('role')
+            .eq('id', session.user.id)
+            .single();
+
+        if (path.includes('admin') && (!profile || profile.role !== 'admin')) {
+            window.location.href = 'index.html';
+            return;
+        }
+        
+        actualizarInterfaz(session.user, profile?.role || 'user');
     }
 }
 
 /**
- * Actualiza elementos de la UI según el estado del usuario
+ * Función principal de Login real con Supabase
  */
-function actualizarInterfaz(user) {
+async function intentarLogin() {
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+    const errorDiv = document.getElementById('login-error');
+
+    const { data, error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password,
+    });
+
+    if (error) {
+        errorDiv.textContent = error.message;
+        errorDiv.classList.remove('hidden');
+        console.error("Error de login:", error.message);
+    } else {
+        errorDiv.classList.add('hidden');
+        window.location.href = 'index.html';
+    }
+}
+
+function actualizarInterfaz(user, role) {
     const loginBtn = document.querySelector('a[href="login.html"]');
-    if (loginBtn && user) {
-        // Cambiamos el botón de Login por uno de Logout o Perfil
+    if (loginBtn) {
         loginBtn.outerHTML = `
             <div class="flex items-center gap-4">
-                <span class="text-xs text-slate-400 hidden md:block">${user.email}</span>
-                <button onclick="logout()" class="px-6 py-2 rounded-full bg-white/5 border border-white/10 text-white hover:bg-salmon hover:border-salmon transition-all duration-300">
+                <div class="flex flex-col items-end hidden md:flex">
+                    <span class="text-[10px] font-bold text-salmon uppercase tracking-widest">${role}</span>
+                    <span class="text-xs text-slate-400">${user.email}</span>
+                </div>
+                <button id="logout-btn" class="px-6 py-2 rounded-full bg-white/5 border border-white/10 text-white hover:bg-salmon hover:border-salmon transition-all duration-300">
                     Logout
                 </button>
             </div>
         `;
+        document.getElementById('logout-btn').addEventListener('click', logout);
     }
 }
 
-/**
- * Simulación de Login (Para probar hoy sin Supabase)
- */
-function loginSimulado(email, role) {
-    const userData = { email, role, loginDate: new Date() };
-    localStorage.setItem('contemporanica_user', JSON.stringify(userData));
+async function logout() {
+    await supabase.auth.signOut();
     window.location.href = 'index.html';
 }
 
 /**
- * Cerrar sesión
+ * Función para registrar nuevos usuarios
  */
-function logout() {
-    localStorage.removeItem('contemporanica_user');
-    window.location.href = 'login.html';
+async function intentarRegistro() {
+    const email = document.querySelector('#form-register input[type="email"]').value;
+    const password = document.querySelector('#form-register input[type="password"]').value;
+    const role = document.querySelector('#form-register input[name="role"]:checked').value;
+    const firstName = document.querySelector('#form-register input[placeholder="John"]').value;
+    const lastName = document.querySelector('#form-register input[placeholder="Doe"]').value;
+    const errorDiv = document.getElementById('login-error'); // Usamos el mismo div de error
+
+    const { data, error } = await supabase.auth.signUp({
+        email: email,
+        password: password,
+        options: {
+            data: {
+                full_name: `${firstName} ${lastName}`,
+                initial_role: role // El trigger de SQL lo convertirá en el perfil
+            }
+        }
+    });
+
+    if (error) {
+        errorDiv.textContent = error.message;
+        errorDiv.classList.remove('hidden');
+    } else {
+        alert("Account created! Please check your email for verification (if enabled) or try logging in.");
+        window.location.reload();
+    }
 }
 
-// Ejecutar el check al cargar el script
+// Exponer funciones al scope global
+window.intentarLogin = intentarLogin;
+window.intentarRegistro = intentarRegistro;
+window.logout = logout;
+
 document.addEventListener('DOMContentLoaded', checkAuth);

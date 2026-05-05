@@ -8,7 +8,8 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    <script src="js/auth.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="module" src="js/auth.js"></script>
     <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
@@ -101,7 +102,7 @@
                     <label class="block text-xs font-semibold text-tertiary-container uppercase tracking-wider mb-2">Email Address</label>
                     <div class="relative">
                         <span class="material-symbols-outlined absolute left-3 top-3 text-slate-400">mail</span>
-                        <input type="email" class="w-full input-field rounded-xl py-3 pl-10 pr-4 text-white focus:outline-none placeholder:text-slate-500" placeholder="you@example.com" required>
+                        <input type="email" id="login-email" class="w-full input-field rounded-xl py-3 pl-10 pr-4 text-white focus:outline-none placeholder:text-slate-500" placeholder="you@example.com" required>
                     </div>
                 </div>
                 <div>
@@ -111,10 +112,13 @@
                     </div>
                     <div class="relative">
                         <span class="material-symbols-outlined absolute left-3 top-3 text-slate-400">lock</span>
-                        <input type="password" class="w-full input-field rounded-xl py-3 pl-10 pr-4 text-white focus:outline-none placeholder:text-slate-500" placeholder="••••••••" required>
+                        <input type="password" id="login-password" class="w-full input-field rounded-xl py-3 pl-10 pr-4 text-white focus:outline-none placeholder:text-slate-500" placeholder="••••••••" required>
                     </div>
                 </div>
-                <button type="button" onclick="loginSimulado('manuel@test.com', 'admin')" class="w-full bg-salmon hover:bg-rose-400 text-white font-medium py-3 rounded-xl transition-all duration-300 active:scale-95 flex justify-center items-center gap-2 mt-4">
+                <div id="login-error" class="text-rose-400 text-xs hidden text-center font-medium bg-rose-400/10 py-2 rounded-lg">
+                    Invalid email or password.
+                </div>
+                <button type="button" onclick="intentarLogin()" class="w-full bg-salmon hover:bg-rose-400 text-white font-medium py-3 rounded-xl transition-all duration-300 active:scale-95 flex justify-center items-center gap-2 mt-4">
                     Sign In <span class="material-symbols-outlined text-[20px]">login</span>
                 </button>
             </form>
@@ -159,7 +163,7 @@
                     </div>
                 </div>
                 
-                <button type="button" class="w-full bg-salmon hover:bg-rose-400 text-white font-medium py-3 rounded-xl transition-all duration-300 active:scale-95 flex justify-center items-center gap-2 mt-4">
+                <button type="button" onclick="intentarRegistro()" class="w-full bg-salmon hover:bg-rose-400 text-white font-medium py-3 rounded-xl transition-all duration-300 active:scale-95 flex justify-center items-center gap-2 mt-4">
                     Create Account <span class="material-symbols-outlined text-[20px]">person_add</span>
                 </button>
             </form>
