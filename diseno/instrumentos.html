@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD de Instrumentos - ASIR</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body { font-family: sans-serif; margin: 20px; background-color: #f4f4f4; }
+        .container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        input, button { padding: 10px; margin: 5px 0; width: 100%; box-sizing: border-box; }
+        button { background-color: #4CAF50; color: white; border: none; cursor: pointer; font-weight: bold; }
+        button:hover { background-color: #45a049; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #3498db; color: white; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Gestión de Instrumentos (CRUD)</h2>
+    <form id="inst-form">
+        <input type="text" id="nombre" placeholder="Nombre (ej. Violín)" required>
+        <input type="text" id="familia" placeholder="Familia (ej. Cuerda)" required>
+        <button type="submit">Guardar</button>
+    </form>
+
+    <table id="tabla-instrumentos">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Familia</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="lista-instrumentos"></tbody>
+    </table>
+</div>
+
+<script>
+    // CONFIGURACIÓN: Datos actualizados de tu Supabase
+const SUB_URL = 'https://xidiihjezdppbgiexbph.supabase.co';
+const SUB_KEY = 'sb_publishable_U73JrtadWLF2DsT3ZDjv6w_SnKggOJ-';
+    const _supabase = supabase.createClient(SUB_URL, SUB_KEY);
+
+    const form = document.getElementById('inst-form');
+    const tabla = document.getElementById('lista-instrumentos');
+
+    // 1. FUNCIÓN PARA LEER DATOS (SELECT)
+    async function obtenerInstrumentos() {
+        const { data, error } = await _supabase.from('instruments').select('*');
+        if (error) {
+            console.error('Error al obtener:', error);
+            alert('Error: ' + error.message);
+        } else {
+            tabla.innerHTML = '';
+            data.forEach(ins => {
+                tabla.innerHTML += `
+                    <tr>
+                        <td>${ins.name}</td>
+                        <td>${ins.family}</td>
+                        <td><button onclick="eliminarInstrumento(${ins.id})" style="background-color:red; width:auto;">Eliminar</button></td>
+                    </tr>`;
+            });
+        }
+    }
+
+    // 2. FUNCIÓN PARA INSERTAR DATOS (INSERT)
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const name = document.getElementById('nombre').value;
+        const family = document.getElementById('familia').value;
+
+        const { error } = await _supabase.from('instruments').insert([{ name, family }]);
+        
+        if (error) {
+            alert('Error al guardar: ' + error.message);
+            console.log(error);
+        } else {
+            form.reset();
+            obtenerInstrumentos();
+        }
+    });
+
+    // 3. FUNCIÓN PARA ELIMINAR (DELETE)
+    async function eliminarInstrumento(id) {
+        const { error } = await _supabase.from('instruments').delete().eq('id', id);
+        if (error) alert('Error al eliminar');
+        else obtenerInstrumentos();
+    }
+
+    // Cargar la lista al abrir la página
+    obtenerInstrumentos();
+</script>
+
+</body>
+</html>
