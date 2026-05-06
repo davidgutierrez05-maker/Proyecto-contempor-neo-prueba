@@ -96,6 +96,11 @@
                 <button id="tab-register" class="text-slate-400 hover:text-white transition-all pb-1 border-b-2 border-transparent" onclick="switchTab('register')">Create Account</button>
             </div>
 
+            <!-- Error Message (Global) -->
+            <div id="login-error" class="text-rose-400 text-xs hidden text-center font-medium bg-rose-400/10 py-2 rounded-lg mb-6">
+                Error message.
+            </div>
+
             <!-- Login Form -->
             <form id="form-login" class="space-y-5">
                 <div>
@@ -114,9 +119,6 @@
                         <span class="material-symbols-outlined absolute left-3 top-3 text-slate-400">lock</span>
                         <input type="password" id="login-password" class="w-full input-field rounded-xl py-3 pl-10 pr-4 text-white focus:outline-none placeholder:text-slate-500" placeholder="••••••••" required>
                     </div>
-                </div>
-                <div id="login-error" class="text-rose-400 text-xs hidden text-center font-medium bg-rose-400/10 py-2 rounded-lg">
-                    Invalid email or password.
                 </div>
                 <button type="button" onclick="intentarLogin()" class="w-full bg-salmon hover:bg-rose-400 text-white font-medium py-3 rounded-xl transition-all duration-300 active:scale-95 flex justify-center items-center gap-2 mt-4">
                     Sign In <span class="material-symbols-outlined text-[20px]">login</span>

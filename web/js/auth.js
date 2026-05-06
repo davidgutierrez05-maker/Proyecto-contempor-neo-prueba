@@ -48,7 +48,7 @@ async function intentarLogin() {
     if (error) {
         errorDiv.textContent = error.message;
         errorDiv.classList.remove('hidden');
-        console.error("Error de login:", error.message);
+        console.error("Error de login:", error);
     } else {
         errorDiv.classList.add('hidden');
         window.location.href = 'index.html';
@@ -101,6 +101,7 @@ async function intentarRegistro() {
     });
 
     if (error) {
+        console.error("Error de registro:", error);
         errorDiv.textContent = error.message;
         errorDiv.classList.remove('hidden');
     } else {
