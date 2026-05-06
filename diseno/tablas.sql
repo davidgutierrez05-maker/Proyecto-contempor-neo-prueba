@@ -38,3 +38,22 @@ CREATE TABLE work_instruments (
 
 -- NOTA: Se ha habilitado Row Level Security (RLS) en todas las tablas.
 -- Un usuario es o 'composer' o 'musician', nunca ambos.
+
+-- 5. Sincronización Automática de Perfiles (Tarea Miércoles)
+-- Esta función copia los datos de auth.users a public.profiles automáticamente.
+CREATE OR REPLACE FUNCTION public.handle_new_user()
+RETURNS trigger AS $$
+BEGIN
+  INSERT INTO public.profiles (id, name, role)
+  VALUES (
+    new.id, 
+    new.raw_user_meta_data->>'full_name', 
+    new.raw_user_meta_data->>'initial_role'
+  );
+  RETURN new;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+CREATE OR REPLACE TRIGGER on_auth_user_created
+  AFTER INSERT ON auth.users
+  FOR EACH ROW EXECUTE FUNCTION public.handle_new_user();
