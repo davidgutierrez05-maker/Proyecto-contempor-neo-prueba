@@ -112,87 +112,65 @@
 <nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-8 h-20 max-w-[1440px] mx-auto bg-slate-950/80 backdrop-blur-xl border-b border-white/10 shadow-2xl shadow-black/40">
 <div class="text-2xl font-bold tracking-tighter text-white">Contemporánea</div>
 <div class="hidden md:flex items-center space-x-8 font-sans font-medium tracking-tight text-white">
-<a class="text-rose-400 border-b-2 border-rose-400 pb-1 transition-all duration-300" href="#">Composers</a>
+<a class="text-rose-400 border-b-2 border-rose-400 pb-1 transition-all duration-300" href="#">Compositores</a>
 <a class="text-slate-400 hover:text-white transition-all duration-300" href="#">Ensembles</a>
-<a class="text-slate-400 hover:text-white transition-all duration-300" href="#">Search</a>
+<a class="text-slate-400 hover:text-white transition-all duration-300" href="#">Buscador</a>
 </div>
 <div class="flex items-center gap-4">
 <button class="text-slate-400 hover:text-white transition-all duration-300 active:scale-95">
 <span class="material-symbols-outlined">search</span>
 </button>
 <button class="px-6 py-2 rounded-full border border-white/10 text-white font-sans font-medium hover:bg-white/5 transition-all duration-300 active:scale-95">
-                Login
+                Acceso
             </button>
 </div>
 </nav>
 <main class="max-w-[1440px] mx-auto pt-40 px-8">
 <header class="flex flex-col items-center text-center mb-xl">
 <h1 class="font-display-xl text-display-xl text-white mb-6 max-w-4xl leading-tight">
-                Contemporánea: The Living Archive of Modern Music
+                Contemporánea: El archivo vivo de la música actual
             </h1>
 <p class="font-body-lg text-body-lg text-tertiary-container max-w-2xl">
-                A comprehensive catalog of contemporary sound creation, designed for researchers, performers, and vanguard lovers.
+                Un catálogo exhaustivo de la creación sonora contemporánea, diseñado para investigadores, intérpretes y amantes de la vanguardia.
             </p>
 </header>
 <section class="glass-panel rounded-3xl p-8 mb-xl relative overflow-hidden group">
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 items-end relative z-10">
-<div class="space-y-2 col-span-1 md:col-span-2">
-<label class="font-label-sm text-label-sm text-tertiary-container uppercase">Instrumentation (Search & Add Tags)</label>
-<div class="bg-surface-container-low border border-white/10 rounded-xl p-2 min-h-[50px] flex flex-wrap gap-2 items-center">
-    <!-- Simulación de etiquetas ya seleccionadas -->
-    <div class="bg-salmon/20 text-salmon border border-salmon/30 px-3 py-1 rounded-full text-xs flex items-center gap-2">
-        Flauta Travesera <span class="material-symbols-outlined text-[14px] cursor-pointer hover:text-white">close</span>
-    </div>
-    <div class="bg-salmon/20 text-salmon border border-salmon/30 px-3 py-1 rounded-full text-xs flex items-center gap-2">
-        Piano <span class="material-symbols-outlined text-[14px] cursor-pointer hover:text-white">close</span>
-    </div>
-    <!-- Input para buscar nuevos -->
-    <input class="bg-transparent border-none focus:ring-0 text-on-surface text-xs min-w-[120px] placeholder:text-surface-variant" placeholder="Type to add instruments..." type="text"/>
-</div>
-<p class="text-[10px] text-slate-500 italic">E.g., search for "Flute", "Violin", "Electronics"...</p>
-</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 items-end relative z-10">
 <div class="space-y-2">
-<label class="font-label-sm text-label-sm text-tertiary-container uppercase">Year (From - To)</label>
-<div class="flex gap-2">
-<input class="w-full bg-surface-container-low border border-white/10 rounded-xl px-2 py-3 text-on-surface focus:outline-none focus:border-salmon transition-colors font-body-md" placeholder="From" type="number" value="2019"/>
-<input class="w-full bg-surface-container-low border border-white/10 rounded-xl px-2 py-3 text-on-surface focus:outline-none focus:border-salmon transition-colors font-body-md" placeholder="To" type="number" value="2023"/>
-</div>
-</div>
-<div class="space-y-2">
-<label class="font-label-sm text-label-sm text-tertiary-container uppercase">Country</label>
+<label class="font-label-sm text-label-sm text-tertiary-container uppercase">Instrumentación</label>
 <div class="relative">
 <select class="w-full bg-surface-container-low border border-white/10 rounded-xl px-4 py-3 text-on-surface appearance-none focus:outline-none focus:border-salmon transition-colors font-body-md">
-<option>All Countries</option>
-<option>Spain</option>
-<option>France</option>
-<option>Germany</option>
-<option>USA</option>
+<option>Multi-selección</option>
+<option>Orquesta Sinfónica</option>
+<option>Cámara</option>
+<option>Solo Instrumento</option>
+<option>Electrónica</option>
 </select>
-<span class="material-symbols-outlined absolute right-3 top-3.5 text-tertiary-container pointer-events-none">public</span>
+<span class="material-symbols-outlined absolute right-3 top-3.5 text-tertiary-container pointer-events-none">expand_more</span>
 </div>
 </div>
 <div class="space-y-2">
-<label class="font-label-sm text-label-sm text-tertiary-container uppercase">Gender</label>
+<label class="font-label-sm text-label-sm text-tertiary-container uppercase">Año de composición</label>
 <div class="relative">
 <select class="w-full bg-surface-container-low border border-white/10 rounded-xl px-4 py-3 text-on-surface appearance-none focus:outline-none focus:border-salmon transition-colors font-body-md">
-<option>All Genders</option>
-<option>Female</option>
-<option>Male</option>
-<option>Other</option>
+<option>Cualquier año</option>
+<option>2020 - 2024</option>
+<option>2010 - 2019</option>
+<option>2000 - 2009</option>
 </select>
-<span class="material-symbols-outlined absolute right-3 top-3.5 text-tertiary-container pointer-events-none">wc</span>
+<span class="material-symbols-outlined absolute right-3 top-3.5 text-tertiary-container pointer-events-none">calendar_today</span>
 </div>
 </div>
 <div class="space-y-2">
-<label class="font-label-sm text-label-sm text-tertiary-container uppercase">Composer</label>
+<label class="font-label-sm text-label-sm text-tertiary-container uppercase">Compositor</label>
 <div class="relative">
-<input class="w-full bg-surface-container-low border border-white/10 rounded-xl px-4 py-3 text-on-surface focus:outline-none focus:border-salmon transition-colors font-body-md placeholder:text-surface-variant" placeholder="Search composer..." type="text"/>
+<input class="w-full bg-surface-container-low border border-white/10 rounded-xl px-4 py-3 text-on-surface focus:outline-none focus:border-salmon transition-colors font-body-md placeholder:text-surface-variant" placeholder="Buscar compositor..." type="text"/>
 <span class="material-symbols-outlined absolute right-3 top-3.5 text-tertiary-container">person</span>
 </div>
 </div>
 <button class="bg-salmon text-white h-[50px] rounded-xl font-headline-md text-body-md flex items-center justify-center gap-2 hover:brightness-110 active:scale-[0.98] transition-all duration-300">
 <span class="material-symbols-outlined">search</span>
-                    Explore Archive
+                    Explorar Archivo
                 </button>
 </div>
 <div class="absolute -top-24 -right-24 w-64 h-64 bg-salmon/10 blur-[100px] rounded-full"></div>
@@ -200,18 +178,18 @@
 <section class="space-y-md">
 <div class="flex justify-between items-end border-b border-white/5 pb-4">
 <div>
-<h2 class="font-headline-lg text-headline-lg text-white">Recent Works</h2>
-<p class="text-tertiary-container font-body-md">New additions to the digital catalog</p>
+<h2 class="font-headline-lg text-headline-lg text-white">Obras Recientes</h2>
+<p class="text-tertiary-container font-body-md">Nuevas incorporaciones al catálogo digital</p>
 </div>
-<a class="text-salmon font-label-sm hover:underline tracking-widest flex items-center gap-1" href="#">VIEW ALL <span class="material-symbols-outlined text-[14px]">arrow_forward</span></a>
+<a class="text-salmon font-label-sm hover:underline tracking-widest flex items-center gap-1" href="#">VER TODO <span class="material-symbols-outlined text-[14px]">arrow_forward</span></a>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
 <div class="glass-panel p-4 rounded-2xl group cursor-pointer hover:bg-white/5 transition-all duration-500">
 <div class="relative mb-4 overflow-hidden rounded-xl aspect-[4/3]">
-<img alt="Contemporary score" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Close-up of a complex contemporary music score with intricate notation on textured paper, moody atmospheric lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzJMXqvewHEl7m9F_T7zT1CVlRRzRd_33xvnUshsXyX5JYfx1VxIuMAwvbrF-RDS05gXuk4ruqwbv3baQWe50UOfBGIySLWCDiXQm9HkLlVDBkYFxgkaSsBmUydt_Eu87V7UdfzHSBjuQ-3aKOZxd4WEMTd9geS0dKzM7j0jQ7LRedT6ql2rMln8kTOJPKHFt7hbQhEHvep17f305ZcFlzb5iTS_T8MNnI5nztngeq58LTlI8WxqL_xE4JkwLjfuHMg_agakYGFCg"/>
+<img alt="Partitura contemporánea" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Close-up of a complex contemporary music score with intricate notation on textured paper, moody atmospheric lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzJMXqvewHEl7m9F_T7zT1CVlRRzRd_33xvnUshsXyX5JYfx1VxIuMAwvbrF-RDS05gXuk4ruqwbv3baQWe50UOfBGIySLWCDiXQm9HkLlVDBkYFxgkaSsBmUydt_Eu87V7UdfzHSBjuQ-3aKOZxd4WEMTd9geS0dKzM7j0jQ7LRedT6ql2rMln8kTOJPKHFt7hbQhEHvep17f305ZcFlzb5iTS_T8MNnI5nztngeq58LTlI8WxqL_xE4JkwLjfuHMg_agakYGFCg"/>
 <div class="absolute top-3 left-3 bg-slate-950/80 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1 border border-white/10">
 <span class="material-symbols-outlined text-rose-400 text-[14px]" style="font-variation-settings: 'FILL' 1;">verified</span>
-<span class="font-label-sm text-[10px] text-white">VALIDATED</span>
+<span class="font-label-sm text-[10px] text-white">VALIDADO</span>
 </div>
 </div>
 <div class="space-y-1">
@@ -222,10 +200,10 @@
 </div>
 <div class="glass-panel p-4 rounded-2xl group cursor-pointer hover:bg-white/5 transition-all duration-500">
 <div class="relative mb-4 overflow-hidden rounded-xl aspect-[4/3]">
-<img alt="Experimental concert" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A cellist playing in a dark auditorium with a single dramatic spotlight, smoke rising subtly in the beam of light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuABNGIhGNfv44uOcrf5sVDR0hWzg4q_BMZheVvLJcbXem0-MfLpPbAWbUxE7aqKQLkztb72bEBiqU-917aW7FlnA4J-XHyXbwSh-7-S_yCN_wwUpK6NAcc-kYX5ienpgXNnAcUKsY9LnOyNRaSnCKeLDD0eDkha5UVDwL9Jd_6uQXyRe2G92aQbUIJiTSl9Yk0AQRBhHShTTfwGrKq4Atn7yM22Ux8bp0ccq2l7ggFZYfdCV5j-wipX94jj0aPQIxhZQAPraXbkMY0"/>
+<img alt="Concierto experimental" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A cellist playing in a dark auditorium with a single dramatic spotlight, smoke rising subtly in the beam of light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuABNGIhGNfv44uOcrf5sVDR0hWzg4q_BMZheVvLJcbXem0-MfLpPbAWbUxE7aqKQLkztb72bEBiqU-917aW7FlnA4J-XHyXbwSh-7-S_yCN_wwUpK6NAcc-kYX5ienpgXNnAcUKsY9LnOyNRaSnCKeLDD0eDkha5UVDwL9Jd_6uQXyRe2G92aQbUIJiTSl9Yk0AQRBhHShTTfwGrKq4Atn7yM22Ux8bp0ccq2l7ggFZYfdCV5j-wipX94jj0aPQIxhZQAPraXbkMY0"/>
 <div class="absolute top-3 left-3 bg-slate-950/80 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1 border border-white/10">
 <span class="material-symbols-outlined text-rose-400 text-[14px]" style="font-variation-settings: 'FILL' 1;">verified</span>
-<span class="font-label-sm text-[10px] text-white">VALIDATED</span>
+<span class="font-label-sm text-[10px] text-white">VALIDADO</span>
 </div>
 </div>
 <div class="space-y-1">
@@ -236,10 +214,10 @@
 </div>
 <div class="glass-panel p-4 rounded-2xl group cursor-pointer hover:bg-white/5 transition-all duration-500">
 <div class="relative mb-4 overflow-hidden rounded-xl aspect-[4/3]">
-<img alt="Modular synthesizer" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Abstract aesthetic shot of modular synthesizer cables in primary colors against a dark background, high-tech electronic music gear" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBYQx78HMAHhAwvsJC_Z3XFkz4Lw4OQgwm0xROivmklKPgG9BtJP6bDek1_N1kfKZCGUiz9j4WBv6au9amiam1f8MFlp8x3KFUbm2u6MyfseWiCyxXckNOQwo8EGzEdPrQPtyB33lC-4GipgG7cP0eFBkAshJR9sIqMf1awCPPLRF0g177UfrGsM8fEICJ3C3oRObvjDBb-P83AnhNX91FzRcnw4mJetxLBlVH3PWMMfZKhK9AhxsESr0l88I6P0XWjl9VkFmlfhk"/>
+<img alt="Sintetizador modular" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Abstract aesthetic shot of modular synthesizer cables in primary colors against a dark background, high-tech electronic music gear" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBYQx78HMAHhAwvsJC_Z3XFkz4Lw4OQgwm0xROivmklKPgG9BtJP6bDek1_N1kfKZCGUiz9j4WBv6au9amiam1f8MFlp8x3KFUbm2u6MyfseWiCyxXckNOQwo8EGzEdPrQPtyB33lC-4GipgG7cP0eFBkAshJR9sIqMf1awCPPLRF0g177UfrGsM8fEICJ3C3oRObvjDBb-P83AnhNX91FzRcnw4mJetxLBlVH3PWMMfZKhK9AhxsESr0l88I6P0XWjl9VkFmlfhk"/>
 <div class="absolute top-3 left-3 bg-slate-950/80 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1 border border-white/10">
 <span class="material-symbols-outlined text-rose-400 text-[14px]" style="font-variation-settings: 'FILL' 1;">verified</span>
-<span class="font-label-sm text-[10px] text-white">VALIDATED</span>
+<span class="font-label-sm text-[10px] text-white">VALIDADO</span>
 </div>
 </div>
 <div class="space-y-1">
@@ -253,10 +231,10 @@
 <section class="mt-xl grid grid-cols-1 md:grid-cols-2 gap-gutter">
 <div class="glass-panel p-10 rounded-3xl relative overflow-hidden flex flex-col justify-between min-h-[300px]">
 <div class="relative z-10">
-<span class="font-label-sm text-salmon tracking-[0.2em]">CURATED</span>
-<h2 class="font-headline-lg text-headline-lg text-white mt-4 max-w-xs">The New School of Madrid</h2>
+<span class="font-label-sm text-salmon tracking-[0.2em]">COMISARIADO</span>
+<h2 class="font-headline-lg text-headline-lg text-white mt-4 max-w-xs">La Nueva Escuela de Madrid</h2>
 </div>
-<button class="relative z-10 w-fit px-8 py-3 bg-white/5 border border-white/10 rounded-full font-label-sm hover:bg-white/10 transition-colors">EXPLORE COLLECTION</button>
+<button class="relative z-10 w-fit px-8 py-3 bg-white/5 border border-white/10 rounded-full font-label-sm hover:bg-white/10 transition-colors">EXPLORAR COLECCIÓN</button>
 <div class="absolute right-0 bottom-0 w-1/2 h-full opacity-30 grayscale hover:grayscale-0 transition-all duration-700">
 <img alt="Madrid Architecture" class="w-full h-full object-cover" data-alt="Architectural detail of a modern cultural center in Madrid, sharp geometric shadows and minimalist concrete surfaces" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCL3L4K1Ig5r-JNYqv7iKMTOhhWI_WB0Ou2kkfI2vZdfj_DCm0_DXpgs6PXsgN3t6bhk9nrFeGX3sJbKZRWejO6TLCvIrKDe5sYeKYm7D6G69WXJT_ewbuP77d-kDhZvnoSiAR9zDohxjBn3cGAQSlsk1BCXYc-Wnl7en8HqLqJ_09xvn3y8zLOEaaPlpBzy2TLrZYGojyxr-gVMVesDrWYBM1IT0_2Gzh0GjmffX6dTItpsFrF89p4W96oSrnFcjJrvrvAwXSOfy8"/>
 </div>
@@ -264,9 +242,9 @@
 <div class="glass-panel p-10 rounded-3xl relative overflow-hidden flex flex-col justify-between min-h-[300px]">
 <div class="relative z-10">
 <span class="font-label-sm text-salmon tracking-[0.2em]">PODCAST</span>
-<h2 class="font-headline-lg text-headline-lg text-white mt-4 max-w-xs">Conversations with Sound</h2>
+<h2 class="font-headline-lg text-headline-lg text-white mt-4 max-w-xs">Conversaciones con el Sonido</h2>
 </div>
-<button class="relative z-10 w-fit px-8 py-3 bg-white/5 border border-white/10 rounded-full font-label-sm hover:bg-white/10 transition-colors">LISTEN NOW</button>
+<button class="relative z-10 w-fit px-8 py-3 bg-white/5 border border-white/10 rounded-full font-label-sm hover:bg-white/10 transition-colors">ESCUCHAR AHORA</button>
 <div class="absolute right-0 bottom-0 w-1/2 h-full flex items-center justify-center opacity-20">
 <span class="material-symbols-outlined text-[160px] text-salmon">mic</span>
 </div>
