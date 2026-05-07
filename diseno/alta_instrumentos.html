@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>ASIR - Conexión Supabase</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #1e1e2e; color: white; display: flex; justify-content: center; padding-top: 50px; }
+        .card { background: #2a2a3d; padding: 30px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); width: 350px; }
+        h2 { color: #3ecf8e; text-align: center; margin-top: 0; }
+        label { display: block; margin-bottom: 5px; font-size: 0.9em; color: #a0a0a0; }
+        input { width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #444; border-radius: 6px; background: #1e1e2e; color: white; box-sizing: border-box; }
+        button { width: 100%; background: #3ecf8e; color: #1e1e2e; border: none; padding: 12px; border-radius: 6px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        button:hover { background: #2eb875; transform: translateY(-2px); }
+        #mensaje { text-align: center; margin-top: 15px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2>Registro SQL</h2>
+        <form id="formAlta">
+            <label>Nombre del Instrumento</label>
+            <input type="text" id="nombre" placeholder="Ej: Batería" required>
+            
+            <label>Familia</label>
+            <input type="text" id="familia" placeholder="Ej: Percusión">
+            
+            <button type="submit">Ejecutar INSERT</button>
+        </form>
+        <div id="mensaje"></div>
+    </div>
+
+    <script>
+        // CONFIGURACIÓN TÉCNICA (Tus datos reales)
+        const URL_SB = "https://xidiihjezddpbgiexbph.supabase.co";
+        const KEY_SB = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhpZGlpaGplemRkcGJnaWV4YnBoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0NDAwMTEsImV4cCI6MjA5MzAxNjAxMX0.xo6L1RhOg5pCh3aU9R1-vyNtzcLhIKzzmaEHRGp6EDA";
+
+        // Inicializar el cliente Supabase
+        const supabaseClient = supabase.createClient(URL_SB, KEY_SB);
+
+        // Referencias al DOM
+        const form = document.getElementById('formAlta');
+        const msg = document.getElementById('mensaje');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            msg.innerText = "Conectando...";
+            msg.style.color = "orange";
+
+            // Capturar datos
+            const nameValue = document.getElementById('nombre').value;
+            const familyValue = document.getElementById('familia').value;
+
+            // Petición a la base de datos
+            const { error } = await supabaseClient
+                .from('instruments') // Tu tabla de la imagen
+                .insert([{ name: nameValue, family: familyValue }]);
+
+            if (error) {
+                msg.innerText = "ERROR: " + error.message;
+                msg.style.color = "#ff6b6b";
+            } else {
+                msg.innerText = "¡Dato guardado en la nube!";
+                msg.style.color = "#3ecf8e";
+                form.reset(); // Limpia el formulario
+            }
+        });
+    </script>
+</body>
+</html>
