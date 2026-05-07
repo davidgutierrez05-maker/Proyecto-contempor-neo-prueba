@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Composer Dashboard - Contemporánica</title>
+    
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="module" src="js/auth.js"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+              "surface-container-low": "#0d1c2d",
+              "surface-container-lowest": "#010f1f",
+              "on-surface": "#d4e4fa",
+              "salmon": "#E57373",
+              "tertiary-container": "#8b96ac"
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-panel {
+            background: rgba(39, 54, 71, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .sidebar-item-active {
+            background: rgba(229, 115, 115, 0.1);
+            color: #E57373;
+            border-left: 4px solid #E57373;
+        }
+    </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface font-sans flex h-screen overflow-hidden">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-slate-950/50 border-r border-white/10 flex flex-col z-20">
+        <div class="p-8">
+            <h1 class="text-xl font-bold text-white tracking-tighter flex items-center gap-2">
+                <span class="material-symbols-outlined text-salmon">auto_awesome</span>
+                Composer Studio
+            </h1>
+            <p class="text-[10px] text-slate-500 uppercase tracking-widest mt-1">Creative Hub</p>
+        </div>
+
+        <nav class="flex-1 px-4 space-y-2">
+            <a href="#" class="sidebar-item-active flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all">
+                <span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+            <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+                <span class="material-symbols-outlined">mark_email_unread</span>
+                Validation Inbox
+                <span class="ml-auto bg-salmon text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">8</span>
+            </a>
+            <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+                <span class="material-symbols-outlined">library_music</span>
+                Music Library
+            </a>
+            <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+                <span class="material-symbols-outlined">monitoring</span>
+                Analytics
+            </a>
+            <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+                <span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+        </nav>
+
+        <div class="p-4 border-t border-white/5">
+            <button onclick="logout()" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-salmon/10 text-salmon hover:bg-salmon hover:text-white transition-all text-sm font-medium">
+                <span class="material-symbols-outlined">logout</span>
+                Logout
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col overflow-hidden">
+        <!-- Top Bar -->
+        <header class="h-20 border-b border-white/5 flex items-center justify-between px-8 bg-slate-950/20 backdrop-blur-md">
+            <a href="index.html" class="text-xl font-bold text-white hover:text-salmon transition-colors">CONTEMPORÁNEA</a>
+            
+            <div class="flex items-center gap-4 flex-1 max-w-xl mx-8">
+                <div class="relative w-full">
+                    <span class="material-symbols-outlined absolute left-3 top-2.5 text-slate-500">search</span>
+                    <input type="text" placeholder="Search compositions or ensembles..." class="w-full bg-white/5 border border-white/10 rounded-full py-2 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-salmon transition-all">
+                </div>
+            </div>
+
+            <div class="flex items-center gap-6">
+                <button class="text-slate-400 hover:text-white transition-colors">
+                    <span class="material-symbols-outlined">notifications</span>
+                </button>
+                <button class="text-slate-400 hover:text-white transition-colors">
+                    <span class="material-symbols-outlined">history</span>
+                </button>
+                <div class="w-10 h-10 rounded-full bg-slate-800 border border-white/10 overflow-hidden cursor-pointer">
+                    <img src="https://i.pravatar.cc/100?u=composer" alt="Profile" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Body -->
+        <div class="flex-1 overflow-y-auto p-8 space-y-8">
+            
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-panel p-8 rounded-3xl relative overflow-hidden group">
+                    <p class="text-xs text-slate-500 uppercase tracking-widest font-bold mb-1">Obras Validadas</p>
+                    <div class="flex items-end gap-2">
+                        <p class="text-4xl font-bold text-white">124</p>
+                        <span class="text-emerald-400 text-xs font-bold mb-1">+12%</span>
+                    </div>
+                    <div class="mt-4 h-1 w-full bg-white/5 rounded-full overflow-hidden">
+                        <div class="h-full bg-salmon w-2/3"></div>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-8 rounded-3xl relative overflow-hidden group border-salmon/20">
+                    <p class="text-xs text-slate-500 uppercase tracking-widest font-bold mb-1">Nuevas Solicitudes</p>
+                    <div class="flex items-end gap-2">
+                        <p class="text-4xl font-bold text-white">08</p>
+                        <span class="text-slate-500 text-xs font-medium mb-1">Pendientes</span>
+                    </div>
+                    <div class="mt-4 h-1 w-full bg-white/5 rounded-full overflow-hidden">
+                        <div class="h-full bg-salmon w-1/4"></div>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-8 rounded-3xl relative overflow-hidden group">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <p class="text-xs text-slate-500 uppercase tracking-widest font-bold mb-1">Estado del Catálogo</p>
+                            <h3 class="text-lg font-bold text-white">Actividad Reciente</h3>
+                            <p class="text-xs text-slate-400">4 ensambles han revisado tus partituras hoy.</p>
+                        </div>
+                        <span class="material-symbols-outlined text-4xl text-white/10">music_note</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Validation Inbox Section -->
+            <div class="space-y-6">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h2 class="text-2xl font-bold text-white">Buzón de Validaciones</h2>
+                        <p class="text-sm text-slate-500">Revisa las interpretaciones de tus obras por ensambles externos.</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-white/10 transition-all">Filtrar</button>
+                        <button class="px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-white/10 transition-all">Recientes</button>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <!-- Inbox Item 1 -->
+                    <div class="glass-panel p-6 rounded-3xl flex items-center gap-6 group hover:border-salmon/30 transition-all">
+                        <div class="w-16 h-16 rounded-2xl bg-slate-800 overflow-hidden">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzJMXqvewHEl7m9F_T7zT1CVlRRzRd_33xvnUshsXyX5JYfx1VxIuMAwvbrF-RDS05gXuk4ruqwbv3baQWe50UOfBGIySLWCDiXQm9HkLlVDBkYFxgkaSsBmUydt_Eu87V7UdfzHSBjuQ-3aKOZxd4WEMTd9geS0dKzM7j0jQ7LRedT6ql2rMln8kTOJPKHFt7hbQhEHvep17f305ZcFlzb5iTS_T8MNnI5nztngeq58LTlI8WxqL_xE4JkwLjfuHMg_agakYGFCg" class="w-full h-full object-cover opacity-60">
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-white group-hover:text-salmon transition-colors">Atmósferas Fractales No. 4</h4>
+                            <p class="text-xs text-slate-400 flex items-center gap-1 mt-1">
+                                <span class="material-symbols-outlined text-[14px]">groups</span>
+                                Filarmónica de Berlín - Sección Vientos
+                            </p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest">Recibido</p>
+                            <p class="text-sm font-medium text-white">Hace 2 horas</p>
+                        </div>
+                        <div class="flex gap-2">
+                            <button class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-slate-400 hover:bg-rose-500/20 hover:text-rose-400 transition-all">
+                                <span class="material-symbols-outlined">close</span>
+                            </button>
+                            <button class="w-10 h-10 rounded-full bg-salmon/20 text-salmon flex items-center justify-center hover:bg-salmon hover:text-white transition-all">
+                                <span class="material-symbols-outlined">check</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Inbox Item 2 -->
+                    <div class="glass-panel p-6 rounded-3xl flex items-center gap-6 group hover:border-salmon/30 transition-all">
+                        <div class="w-16 h-16 rounded-2xl bg-slate-800 overflow-hidden">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuABNGIhGNfv44uOcrf5sVDR0hWzg4q_BMZheVvLJcbXem0-MfLpPbAWbUxE7aqKQLkztb72bEBiqU-917aW7FlnA4J-XHyXbwSh-7-S_yCN_wwUpK6NAcc-kYX5ienpgXNnAcUKsY9LnOyNRaSnCKeLDD0eDkha5UVDwL9Jd_6uQXyRe2G92aQbUIJiTSl9Yk0AQRBhHShTTfwGrKq4Atn7yM22Ux8bp0ccq2l7ggFZYfdCV5j-wipX94jj0aPQIxhZQAPraXbkMY0" class="w-full h-full object-cover opacity-60">
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-white group-hover:text-salmon transition-colors">Silencio Sincrónico</h4>
+                            <p class="text-xs text-slate-400 flex items-center gap-1 mt-1">
+                                <span class="material-symbols-outlined text-[14px]">groups</span>
+                                Ensamble de Música Nueva de Madrid
+                            </p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest">Recibido</p>
+                            <p class="text-sm font-medium text-white">Ayer</p>
+                        </div>
+                        <div class="flex gap-2">
+                            <button class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-slate-400 hover:bg-rose-500/20 hover:text-rose-400 transition-all">
+                                <span class="material-symbols-outlined">close</span>
+                            </button>
+                            <button class="w-10 h-10 rounded-full bg-salmon/20 text-salmon flex items-center justify-center hover:bg-salmon hover:text-white transition-all">
+                                <span class="material-symbols-outlined">check</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Inbox Item 3 -->
+                    <div class="glass-panel p-6 rounded-3xl flex items-center gap-6 group hover:border-salmon/30 transition-all">
+                        <div class="w-16 h-16 rounded-2xl bg-slate-800 overflow-hidden">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBYQx78HMAHhAwvsJC_Z3XFkz4Lw4OQgwm0xROivmklKPgG9BtJP6bDek1_N1kfKZCGUiz9j4WBv6au9amiam1f8MFlp8x3KFUbm2u6MyfseWiCyxXckNOQwo8EGzEdPrQPtyB33lC-4GipgG7cP0eFBkAshJR9sIqMf1awCPPLRF0g177UfrGsM8fEICJ3C3oRObvjDBb-P83AnhNX91FzRcnw4mJetxLBlVH3PWMMfZKhK9AhxsESr0l88I6P0XWjl9VkFmlfhk" class="w-full h-full object-cover opacity-60">
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-white group-hover:text-salmon transition-colors">Ecos del Vacío (Revisión)</h4>
+                            <p class="text-xs text-slate-400 flex items-center gap-1 mt-1">
+                                <span class="material-symbols-outlined text-[14px]">groups</span>
+                                London Contemporary Soloists
+                            </p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest">Recibido</p>
+                            <p class="text-sm font-medium text-white">Hace 3 días</p>
+                        </div>
+                        <div class="flex gap-2">
+                            <button class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-slate-400 hover:bg-rose-500/20 hover:text-rose-400 transition-all">
+                                <span class="material-symbols-outlined">close</span>
+                            </button>
+                            <button class="w-10 h-10 rounded-full bg-salmon/20 text-salmon flex items-center justify-center hover:bg-salmon hover:text-white transition-all">
+                                <span class="material-symbols-outlined">check</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Player Bar -->
+        <footer class="h-24 bg-slate-950 border-t border-white/10 flex items-center px-8 gap-8">
+            <div class="flex items-center gap-4 w-72">
+                <div class="w-12 h-12 bg-slate-800 rounded-lg overflow-hidden">
+                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzJMXqvewHEl7m9F_T7zT1CVlRRzRd_33xvnUshsXyX5JYfx1VxIuMAwvbrF-RDS05gXuk4ruqwbv3baQWe50UOfBGIySLWCDiXQm9HkLlVDBkYFxgkaSsBmUydt_Eu87V7UdfzHSBjuQ-3aKOZxd4WEMTd9geS0dKzM7j0jQ7LRedT6ql2rMln8kTOJPKHFt7hbQhEHvep17f305ZcFlzb5iTS_T8MNnI5nztngeq58LTlI8WxqL_xE4JkwLjfuHMg_agakYGFCg" class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <h5 class="text-sm font-bold text-white">Atmósferas Fractales No. 4</h5>
+                    <p class="text-[10px] text-slate-500 uppercase font-bold">Berliner Philharmoniker</p>
+                </div>
+            </div>
+
+            <div class="flex-1 flex flex-col items-center gap-2">
+                <div class="flex items-center gap-6">
+                    <button class="text-slate-400 hover:text-white"><span class="material-symbols-outlined">shuffle</span></button>
+                    <button class="text-slate-400 hover:text-white"><span class="material-symbols-outlined">skip_previous</span></button>
+                    <button class="w-10 h-10 rounded-full bg-salmon text-white flex items-center justify-center hover:scale-105 transition-all"><span class="material-symbols-outlined">play_arrow</span></button>
+                    <button class="text-slate-400 hover:text-white"><span class="material-symbols-outlined">skip_next</span></button>
+                    <button class="text-slate-400 hover:text-white"><span class="material-symbols-outlined">repeat</span></button>
+                </div>
+                <div class="w-full max-w-lg flex items-center gap-3">
+                    <span class="text-[10px] text-slate-500 font-bold">1:24</span>
+                    <div class="flex-1 h-1 bg-white/5 rounded-full overflow-hidden relative">
+                        <div class="h-full bg-salmon w-1/3"></div>
+                    </div>
+                    <span class="text-[10px] text-slate-500 font-bold">4:58</span>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4 w-72 justify-end">
+                <button class="text-slate-400 hover:text-white"><span class="material-symbols-outlined">playlist_play</span></button>
+                <button class="text-slate-400 hover:text-white"><span class="material-symbols-outlined">devices</span></button>
+                <div class="flex items-center gap-2 w-32">
+                    <span class="material-symbols-outlined text-slate-400 text-[20px]">volume_up</span>
+                    <div class="flex-1 h-1 bg-white/5 rounded-full overflow-hidden">
+                        <div class="h-full bg-slate-400 w-2/3"></div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script type="module">
+        import supabase from './js/supabase.js';
+        
+        window.logout = async () => {
+            await supabase.auth.signOut();
+            window.location.href = 'index.html';
+        };
+    </script>
+</body>
+</html>
