@@ -38,17 +38,22 @@ async function checkAuth() {
             return;
         }
 
-        const role = profile.role;
-        console.log("👤 User role:", role);
+        // Normalizamos el rol para evitar fallos por mayúsculas o espacios
+        const role = profile.role ? profile.role.toLowerCase().trim() : 'user';
+        console.log("👤 User role (normalized):", role);
 
         // Protección de rutas por rol
-        if (path.includes('admin.html') && role !== 'admin') {
+        const isCurrentAdmin = path.includes('admin.html');
+        const isCurrentComposer = path.includes('composer.html');
+        const isCurrentMusician = path.includes('musician.html');
+
+        if (isCurrentAdmin && role !== 'admin') {
             console.warn("🚫 Access denied for admin page. Redirecting...");
             window.location.href = 'index.html';
-        } else if (path.includes('composer.html') && role !== 'composer') {
+        } else if (isCurrentComposer && role !== 'composer') {
             console.warn("🚫 Access denied for composer page. Redirecting...");
             window.location.href = 'index.html';
-        } else if (path.includes('musician.html') && role !== 'musician') {
+        } else if (isCurrentMusician && role !== 'musician') {
             console.warn("🚫 Access denied for musician page. Redirecting...");
             window.location.href = 'index.html';
         }
@@ -87,7 +92,7 @@ async function intentarLogin() {
             .eq('id', data.user.id)
             .single();
         
-        const role = profile?.role || 'user';
+        const role = profile?.role ? profile.role.toLowerCase().trim() : 'user';
         console.log("🎯 Redirecting to dashboard for role:", role);
         
         if (role === 'admin') window.location.href = 'admin.html';
@@ -100,10 +105,13 @@ async function intentarLogin() {
 function actualizarInterfaz(user, role) {
     const loginBtn = document.querySelector('a[href="login.html"]');
     if (loginBtn) {
+        // Normalizamos rol para la lógica de la URL
+        const normRole = role.toLowerCase().trim();
         let dashboardUrl = 'index.html';
-        if (role === 'admin') dashboardUrl = 'admin.html';
-        else if (role === 'composer') dashboardUrl = 'composer.html';
-        else if (role === 'musician') dashboardUrl = 'musician.html';
+        
+        if (normRole === 'admin') dashboardUrl = 'admin.html';
+        else if (normRole === 'composer') dashboardUrl = 'composer.html';
+        else if (normRole === 'musician') dashboardUrl = 'musician.html';
 
         loginBtn.outerHTML = `
             <div class="flex items-center gap-4">
