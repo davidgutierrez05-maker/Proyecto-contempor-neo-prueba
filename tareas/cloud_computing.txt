@@ -1,0 +1,33 @@
+ANÁLISIS TÉCNICO DEL MODELO CLOUD COMPUTING
+El Cloud Computing se define como un modelo tecnológico que permite el acceso ubicuo, 
+bajo demanda y a través de la red a un catálogo compartido de recursos de computación 
+configurables, tales como redes, servidores, capacidad de procesamiento y almacenamiento. 
+La principal ventaja de este paradigma es que estos recursos pueden ser aprovisionados y 
+liberados rápidamente con un esfuerzo de gestión mínimo y sin necesidad de una interacción 
+directa y constante con el proveedor del servicio. Este modelo no es simplemente una evolución 
+de la virtualización, sino un cambio en la gestión operativa que se apoya en cinco pilares 
+fundamentales definidos por el estándar NIST: el autoservicio bajo demanda, que otorga al 
+administrador de sistemas el poder de gestionar la infraestructura de forma autónoma; 
+el acceso amplio a la red, que garantiza que los servicios sean accesibles de forma 
+estandarizada desde cualquier ubicación geográfica; la agrupación de recursos o "pooling", 
+donde el hardware físico se optimiza mediante multitenencia para servir a múltiples usuarios 
+de forma aislada; la rápida elasticidad, que permite al sistema escalar sus capacidades de 
+cómputo hacia arriba o hacia abajo en tiempo real según la demanda; y el servicio medido, que 
+implementa sistemas de monitorización para asegurar una transparencia total y un modelo de 
+facturación basado en el consumo real.
+En cuanto a la arquitectura operativa, el ecosistema Cloud se estructura principalmente en 
+tres niveles de servicio que delimitan la responsabilidad entre el proveedor y el cliente. 
+En el primer nivel encontramos la Infraestructura como Servicio (IaaS), donde se entrega al 
+técnico el control sobre el hardware virtualizado, recayendo en este la responsabilidad de 
+gestionar el sistema operativo, el middleware y todas las aplicaciones. Un escalón por encima 
+se sitúa la Plataforma como Servicio (PaaS), diseñada para optimizar el ciclo de vida del 
+desarrollo de software, donde el administrador se despreocupa de la gestión del sistema 
+operativo y los parches de seguridad, centrando sus esfuerzos exclusivamente en el despliegue 
+del código y la integridad de los datos. En el nivel superior se ubica el Software como 
+Servicio (SaaS), un modelo donde el usuario consume aplicaciones finales ya configuradas, 
+delegando toda la infraestructura, el mantenimiento y la seguridad técnica en el proveedor. 
+Estos modelos pueden desplegarse bajo diferentes estrategias: la nube pública, donde la 
+infraestructura es propiedad del proveedor y se comparte globalmente; la nube privada, diseñada 
+para uso exclusivo de una organización garantizando mayor control y seguridad; o la nube híbrida, 
+que orquestra ambas soluciones para permitir una portabilidad de datos y cargas de trabajo fluida 
+según las necesidades del negocio.
