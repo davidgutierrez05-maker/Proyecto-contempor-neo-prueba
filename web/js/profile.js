@@ -1,0 +1,150 @@
+import supabase from './supabase.js';
+
+async function loadProfile() {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) {
+        window.location.href = 'login.html';
+        return;
+    }
+
+    // Cargamos los datos más recientes
+    const { data: profile, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', session.user.id)
+        .single();
+
+    if (error || !profile) {
+        console.error("Error loading profile:", error);
+        return;
+    }
+
+    console.log("📊 CURRENT PROFILE STATE:");
+    console.table(profile);
+
+    // Rellenar Nombre y Rol en el Header del perfil
+    const firstName = profile.first_name || '---';
+    const lastName = profile.last_name || '---';
+    document.getElementById('profile-full-name').textContent = `${firstName} ${lastName}`;
+    document.getElementById('profile-role-badge').textContent = profile.role || 'User';
+    document.getElementById('profile-initials').textContent = (firstName[0] !== '-' ? firstName[0] : '?') + (lastName[0] !== '-' ? lastName[0] : '?');
+
+    // Rellenar todos los campos del formulario
+    const textFields = [
+        'first_name', 'last_name', 'username', 'bio', 'nationality', 'gender', 'country_of_birth', 'place_of_birth', 'website',
+        'main_aesthetic', 'education', 'awards', 'copyright_society',
+        'soundcloud_url', 'spotify_url', 'youtube_url', 'public_contact_email',
+        'residence_country'
+    ];
+
+    textFields.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && profile[id] !== undefined && profile[id] !== null) {
+            el.value = profile[id];
+        }
+    });
+
+    // Casos especiales: Fecha y Toggles
+    if (profile.dob) {
+        const dobEl = document.getElementById('dob');
+        if (dobEl) dobEl.value = profile.dob;
+    }
+
+    const comms = document.getElementById('accepting_commissions');
+    if (comms) comms.checked = !!profile.accepting_commissions;
+
+    const collab = document.getElementById('open_to_collaboration');
+    if (collab) collab.checked = !!profile.open_to_collaboration;
+
+    calculateProgress(profile);
+}
+
+function calculateProgress(data) {
+    const fieldsToTrack = [
+        'bio', 'nationality', 'gender', 'country_of_birth', 'place_of_birth', 'website',
+        'main_aesthetic', 'education', 'awards', 'copyright_society',
+        'soundcloud_url', 'spotify_url', 'youtube_url'
+    ];
+
+    let completed = 0;
+    fieldsToTrack.forEach(field => {
+        const val = data[field];
+        if (val && typeof val === 'string' && val.trim() !== '') {
+            completed++;
+        }
+    });
+
+    const progress = Math.round((completed / fieldsToTrack.length) * 100);
+    
+    const progressBar = document.getElementById('progress-bar');
+    const progressText = document.getElementById('progress-text');
+
+    if (progressBar && progressText) {
+        progressBar.style.width = `${progress}%`;
+        progressText.textContent = `${progress}% Complete`;
+    }
+
+    return progress;
+}
+
+async function saveProfile() {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) return;
+    
+    const getVal = (id) => {
+        const el = document.getElementById(id);
+        if (!el) return null;
+        return el.value.trim() === "" ? null : el.value.trim();
+    };
+
+    const updates = {
+        first_name: getVal('first_name'),
+        last_name: getVal('last_name'),
+        username: getVal('username'),
+        bio: getVal('bio'),
+        nationality: getVal('nationality'),
+        gender: getVal('gender'),
+        country_of_birth: getVal('country_of_birth'),
+        place_of_birth: getVal('place_of_birth'),
+        website: getVal('website'),
+        main_aesthetic: getVal('main_aesthetic'),
+        education: getVal('education'),
+        awards: getVal('awards'),
+        copyright_society: getVal('copyright_society'),
+        soundcloud_url: getVal('soundcloud_url'),
+        spotify_url: getVal('spotify_url'),
+        youtube_url: getVal('youtube_url'),
+        public_contact_email: getVal('public_contact_email'),
+        accepting_commissions: document.getElementById('accepting_commissions').checked,
+        open_to_collaboration: document.getElementById('open_to_collaboration').checked,
+        updated_at: new Date()
+    };
+
+    const progress = calculateProgress(updates);
+    updates.is_complete = (progress >= 80);
+
+    const { data, error } = await supabase
+        .from('profiles')
+        .update(updates)
+        .eq('id', session.user.id)
+        .select();
+
+    if (error) {
+        alert("Error: " + error.message);
+    } else if (data && data.length > 0) {
+        const toast = document.getElementById('save-success');
+        if (toast) {
+            toast.classList.remove('translate-y-32', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+        }
+        
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 1500);
+    } else {
+        alert("Warning: No data saved. Please check your Supabase RLS policies.");
+    }
+}
+
+window.saveProfile = saveProfile;
+document.addEventListener('DOMContentLoaded', loadProfile);
