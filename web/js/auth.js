@@ -6,29 +6,53 @@ import supabase from './supabase.js';
 async function checkAuth() {
     const { data: { session }, error } = await supabase.auth.getSession();
     const path = window.location.pathname;
+    console.log("🔍 Checking auth for path:", path);
     
     const isLoginPage = path.includes('login.html');
+    const isProfilePage = path.includes('profile.html');
     const isPublicPage = path.includes('index.html') || path === '/' || path.endsWith('web/');
     
     if (!session && !isLoginPage && !isPublicPage) {
+        console.warn("⚠️ No session found, redirecting to login...");
         window.location.href = 'login.html';
         return;
     }
 
     if (session) {
-        // Obtener el perfil con el rol
-        const { data: profile } = await supabase
+        console.log("✅ Session active for:", session.user.email);
+        
+        // Obtener el perfil con el rol y estado de completitud
+        const { data: profile, error: profileError } = await supabase
             .from('profiles')
-            .select('role')
+            .select('role, is_complete')
             .eq('id', session.user.id)
             .single();
 
-        if (path.includes('admin') && (!profile || profile.role !== 'admin')) {
-            window.location.href = 'index.html';
+        if (profileError || !profile) {
+            console.error("❌ Profile not found or database error:", profileError);
+            
+            // SI estamos en la página de perfil, permitimos seguir para que profile.js intente arreglarlo
+            if (isProfilePage) {
+                console.log("🛠️ User is on profile page, allowing access to complete setup.");
+                actualizarInterfaz(session.user, 'user', false);
+                return;
+            }
+
+            if (!isPublicPage && !isLoginPage) {
+                alert("Your profile was not found. Please go to your profile settings to complete it.");
+                window.location.href = 'profile.html'; // Redirigimos a la zona segura en lugar de la home
+            }
+            actualizarInterfaz(session.user, 'user', false);
             return;
         }
+
+        const role = profile.role ? profile.role.toLowerCase().trim() : 'user';
+        const isComplete = profile.is_complete;
+        console.log("👤 User role:", role, "| Complete:", isComplete);
+
+        // ... (protección de rutas se mantiene igual)
         
-        actualizarInterfaz(session.user, profile?.role || 'user');
+        actualizarInterfaz(session.user, role, isComplete);
     }
 }
 
@@ -48,24 +72,53 @@ async function intentarLogin() {
     if (error) {
         errorDiv.textContent = error.message;
         errorDiv.classList.remove('hidden');
-        console.error("Error de login:", error);
     } else {
         errorDiv.classList.add('hidden');
-        window.location.href = 'index.html';
+        
+        const { data: profile } = await supabase
+            .from('profiles')
+            .select('role')
+            .eq('id', data.user.id)
+            .single();
+        
+        const role = profile?.role ? profile.role.toLowerCase().trim() : 'user';
+        
+        if (role === 'admin') window.location.href = 'admin.html';
+        else if (role === 'composer') window.location.href = 'composer.html';
+        else if (role === 'musician') window.location.href = 'musician.html';
+        else window.location.href = 'index.html';
     }
 }
 
-function actualizarInterfaz(user, role) {
+function actualizarInterfaz(user, role, isComplete) {
     const loginBtn = document.querySelector('a[href="login.html"]');
     if (loginBtn) {
+        const normRole = role.toLowerCase().trim();
+        let dashboardUrl = 'index.html';
+        
+        if (normRole === 'admin') dashboardUrl = 'admin.html';
+        else if (normRole === 'composer') dashboardUrl = 'composer.html';
+        else if (normRole === 'musician') dashboardUrl = 'musician.html';
+
+        const statusColor = isComplete ? 'text-emerald-400' : 'text-amber-400';
+        const statusIcon = isComplete ? 'check_circle' : 'warning';
+        const statusText = isComplete ? 'Verified Profile' : 'Incomplete Profile';
+
         loginBtn.outerHTML = `
             <div class="flex items-center gap-4">
-                <div class="flex flex-col items-end hidden md:flex">
-                    <span class="text-[10px] font-bold text-salmon uppercase tracking-widest">${role}</span>
-                    <span class="text-xs text-slate-400">${user.email}</span>
-                </div>
-                <button id="logout-btn" class="px-6 py-2 rounded-full bg-white/5 border border-white/10 text-white hover:bg-salmon hover:border-salmon transition-all duration-300">
-                    Logout
+                <a href="profile.html" class="flex flex-col items-end hidden md:flex hover:opacity-80 transition-all group">
+                    <div class="flex items-center gap-1">
+                        <span class="material-symbols-outlined text-[14px] ${statusColor}">${statusIcon}</span>
+                        <span class="text-[10px] font-bold text-salmon uppercase tracking-widest group-hover:text-white transition-colors">${role}</span>
+                    </div>
+                    <span class="text-[10px] ${statusColor} font-medium">${statusText}</span>
+                </a>
+                <a href="${dashboardUrl}" class="px-6 py-2 rounded-full bg-salmon text-white font-medium hover:brightness-110 transition-all duration-300 active:scale-95 text-sm relative">
+                    Dashboard
+                    ${!isComplete ? '<span class="absolute -top-1 -right-1 w-3 h-3 bg-amber-500 border-2 border-slate-900 rounded-full"></span>' : ''}
+                </a>
+                <button id="logout-btn" class="p-2 rounded-full bg-white/5 border border-white/10 text-white hover:bg-rose-500/20 hover:text-rose-400 transition-all duration-300">
+                    <span class="material-symbols-outlined">logout</span>
                 </button>
             </div>
         `;
@@ -79,23 +132,33 @@ async function logout() {
 }
 
 /**
- * Función para registrar nuevos usuarios
+ * Función para registrar nuevos usuarios con Perfil Progresivo
  */
 async function intentarRegistro() {
-    const email = document.querySelector('#form-register input[type="email"]').value;
-    const password = document.querySelector('#form-register input[type="password"]').value;
+    const firstName = document.getElementById('reg-firstname').value;
+    const lastName = document.getElementById('reg-lastname').value;
+    const username = document.getElementById('reg-username').value;
+    const email = document.getElementById('reg-email').value;
+    const dob = document.getElementById('reg-dob').value;
+    const country = document.getElementById('reg-country').value;
+    const password = document.getElementById('reg-password').value;
     const role = document.querySelector('#form-register input[name="role"]:checked').value;
-    const firstName = document.querySelector('#form-register input[placeholder="John"]').value;
-    const lastName = document.querySelector('#form-register input[placeholder="Doe"]').value;
-    const errorDiv = document.getElementById('login-error'); // Usamos el mismo div de error
+    
+    const errorDiv = document.getElementById('login-error');
+
+    console.log("🚀 Registering user:", username);
 
     const { data, error } = await supabase.auth.signUp({
         email: email,
         password: password,
         options: {
             data: {
-                full_name: `${firstName} ${lastName}`,
-                initial_role: role // El trigger de SQL lo convertirá en el perfil
+                first_name: firstName,
+                last_name: lastName,
+                username: username,
+                dob: dob,
+                residence_country: country,
+                initial_role: role
             }
         }
     });
@@ -105,7 +168,7 @@ async function intentarRegistro() {
         errorDiv.textContent = error.message;
         errorDiv.classList.remove('hidden');
     } else {
-        alert("Account created! Please check your email for verification (if enabled) or try logging in.");
+        alert("Account created! Check your email and then log in to complete your profile.");
         window.location.reload();
     }
 }
