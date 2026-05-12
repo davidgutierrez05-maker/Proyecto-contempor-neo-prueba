@@ -1,41 +1,45 @@
 <!DOCTYPE html>
 <html class="dark" lang="en">
+
 <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Ensemble Dashboard - Contemporánica</title>
-    
+
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script type="module" src="js/auth.js"></script>
     <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-              "surface-container-low": "#0d1c2d",
-              "surface-container-lowest": "#010f1f",
-              "on-surface": "#d4e4fa",
-              "salmon": "#E57373",
-              "tertiary-container": "#8b96ac"
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#0d1c2d",
+                        "surface-container-lowest": "#010f1f",
+                        "on-surface": "#d4e4fa",
+                        "salmon": "#E57373",
+                        "tertiary-container": "#8b96ac"
+                    }
+                }
             }
-          }
         }
-      }
     </script>
     <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
             vertical-align: middle;
         }
+
         .glass-panel {
             background: rgba(39, 54, 71, 0.4);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
+
         .sidebar-item-active {
             background: rgba(229, 115, 115, 0.1);
             color: #E57373;
@@ -43,12 +47,14 @@
         }
     </style>
 </head>
+
 <body class="bg-surface-container-lowest text-on-surface font-sans flex h-screen overflow-hidden">
 
     <!-- Sidebar -->
     <aside class="w-64 bg-slate-950/50 border-r border-white/10 flex flex-col z-20">
         <div class="p-8">
-            <a href="index.html" class="text-xl font-bold text-white tracking-tighter flex items-center gap-2 hover:text-salmon transition-colors">
+            <a href="index.html"
+                class="text-xl font-bold text-white tracking-tighter flex items-center gap-2 hover:text-salmon transition-colors">
                 <span class="material-symbols-outlined text-salmon">orchestra</span>
                 Ensemble Portal
             </a>
@@ -56,26 +62,31 @@
         </div>
 
         <nav class="flex-1 px-4 space-y-2">
-            <a href="#" class="sidebar-item-active flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all">
+            <a href="#"
+                class="sidebar-item-active flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all">
                 <span class="material-symbols-outlined">dashboard</span>
                 Dashboard
             </a>
-            <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+            <a href="#"
+                class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-all">
                 <span class="material-symbols-outlined">upload_file</span>
                 My Submissions
             </a>
-            <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+            <a href="#"
+                class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-all">
                 <span class="material-symbols-outlined">library_music</span>
                 Music Archive
             </a>
-            <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+            <a href="#"
+                class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-all">
                 <span class="material-symbols-outlined">person</span>
                 Profile
             </a>
         </nav>
 
         <div class="p-4 border-t border-white/5">
-            <button onclick="logout()" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-salmon/10 text-salmon hover:bg-salmon hover:text-white transition-all text-sm font-medium">
+            <button onclick="logout()"
+                class="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-salmon/10 text-salmon hover:bg-salmon hover:text-white transition-all text-sm font-medium">
                 <span class="material-symbols-outlined">logout</span>
                 Logout
             </button>
@@ -85,17 +96,21 @@
     <!-- Main Content -->
     <main class="flex-1 flex flex-col overflow-hidden">
         <!-- Top Bar -->
-        <header class="h-20 border-b border-white/5 flex items-center justify-between px-8 bg-slate-950/20 backdrop-blur-md">
+        <header
+            class="h-20 border-b border-white/5 flex items-center justify-between px-8 bg-slate-950/20 backdrop-blur-md">
             <div class="flex items-center gap-4 flex-1 max-w-xl">
                 <div class="relative w-full">
                     <span class="material-symbols-outlined absolute left-3 top-2.5 text-slate-500">search</span>
-                    <input type="text" placeholder="Buscar obras o compositores..." class="w-full bg-white/5 border border-white/10 rounded-full py-2 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-salmon transition-all">
+                    <input type="text" placeholder="Buscar obras o compositores..."
+                        class="w-full bg-white/5 border border-white/10 rounded-full py-2 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-salmon transition-all">
                 </div>
             </div>
 
             <div class="flex items-center gap-6">
-                <button class="text-slate-400 hover:text-white transition-colors"><span class="material-symbols-outlined">notifications</span></button>
-                <button class="text-slate-400 hover:text-white transition-colors"><span class="material-symbols-outlined">settings</span></button>
+                <button class="text-slate-400 hover:text-white transition-colors"><span
+                        class="material-symbols-outlined">notifications</span></button>
+                <button class="text-slate-400 hover:text-white transition-colors"><span
+                        class="material-symbols-outlined">settings</span></button>
                 <div class="w-10 h-10 rounded-full bg-slate-800 border border-white/10 overflow-hidden cursor-pointer">
                     <img src="https://i.pravatar.cc/100?u=ensemble" alt="Profile" class="w-full h-full object-cover">
                 </div>
@@ -104,13 +119,15 @@
 
         <!-- Dashboard Body -->
         <div class="flex-1 overflow-y-auto p-12 space-y-12">
-            
+
             <div class="flex justify-between items-start">
                 <div>
                     <h2 class="text-5xl font-bold text-white">Bienvenido, <span class="text-salmon">Nova</span></h2>
-                    <p class="text-slate-400 mt-4 max-w-xl text-lg">Gestiona el catálogo de interpretaciones de tu ensamble y realiza nuevos envíos para la temporada 2024.</p>
+                    <p class="text-slate-400 mt-4 max-w-xl text-lg">Gestiona el catálogo de interpretaciones de tu
+                        ensamble y realiza nuevos envíos para la temporada 2024.</p>
                 </div>
-                <button class="bg-salmon hover:bg-rose-400 text-white px-8 py-4 rounded-2xl font-bold transition-all shadow-xl shadow-salmon/20 flex items-center gap-3 group active:scale-95">
+                <button
+                    class="bg-salmon hover:bg-rose-400 text-white px-8 py-4 rounded-2xl font-bold transition-all shadow-xl shadow-salmon/20 flex items-center gap-3 group active:scale-95">
                     <span class="material-symbols-outlined group-hover:rotate-90 transition-transform">add_circle</span>
                     REGISTRAR INTERPRETACIÓN
                 </button>
@@ -141,10 +158,12 @@
                 </div>
 
                 <div class="glass-panel rounded-3xl relative overflow-hidden group bg-slate-900/40 border-white/5">
-                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuABNGIhGNfv44uOcrf5sVDR0hWzg4q_BMZheVvLJcbXem0-MfLpPbAWbUxE7aqKQLkztb72bEBiqU-917aW7FlnA4J-XHyXbwSh-7-S_yCN_wwUpK6NAcc-kYX5ienpgXNnAcUKsY9LnOyNRaSnCKeLDD0eDkha5UVDwL9Jd_6uQXyRe2G92aQbUIJiTSl9Yk0AQRBhHShTTfwGrKq4Atn7yM22Ux8bp0ccq2l7ggFZYfdCV5j-wipX94jj0aPQIxhZQAPraXbkMY0" class="absolute inset-0 w-full h-full object-cover opacity-20">
+                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuABNGIhGNfv44uOcrf5sVDR0hWzg4q_BMZheVvLJcbXem0-MfLpPbAWbUxE7aqKQLkztb72bEBiqU-917aW7FlnA4J-XHyXbwSh-7-S_yCN_wwUpK6NAcc-kYX5ienpgXNnAcUKsY9LnOyNRaSnCKeLDD0eDkha5UVDwL9Jd_6uQXyRe2G92aQbUIJiTSl9Yk0AQRBhHShTTfwGrKq4Atn7yM22Ux8bp0ccq2l7ggFZYfdCV5j-wipX94jj0aPQIxhZQAPraXbkMY0"
+                        class="absolute inset-0 w-full h-full object-cover opacity-20">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950 to-transparent"></div>
                     <div class="relative p-8 h-full flex flex-col justify-end">
-                        <div class="w-10 h-10 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center text-white mb-4">
+                        <div
+                            class="w-10 h-10 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center text-white mb-4">
                             <span class="material-symbols-outlined">calendar_today</span>
                         </div>
                         <h3 class="text-xl font-bold text-white">Próximo Concierto</h3>
@@ -158,11 +177,15 @@
                 <div class="flex justify-between items-center">
                     <h3 class="text-2xl font-bold text-white flex items-center gap-4">
                         Mis Envíos Recientes
-                        <span class="text-xs bg-white/5 px-3 py-1 rounded-full text-slate-500 font-bold uppercase tracking-widest">Historial Completo</span>
+                        <span
+                            class="text-xs bg-white/5 px-3 py-1 rounded-full text-slate-500 font-bold uppercase tracking-widest">Historial
+                            Completo</span>
                     </h3>
                     <div class="flex gap-4">
-                        <button class="px-6 py-2 border border-white/10 rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-white/5 transition-all">Filtrar</button>
-                        <button class="px-6 py-2 border border-white/10 rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-white/5 transition-all">Exportar</button>
+                        <button
+                            class="px-6 py-2 border border-white/10 rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-white/5 transition-all">Filtrar</button>
+                        <button
+                            class="px-6 py-2 border border-white/10 rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-white/5 transition-all">Exportar</button>
                     </div>
                 </div>
 
@@ -170,17 +193,22 @@
                     <table class="w-full text-left">
                         <thead>
                             <tr class="bg-white/2 border-b border-white/5">
-                                <th class="px-8 py-6 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Obra</th>
-                                <th class="px-8 py-6 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Compositor</th>
-                                <th class="px-8 py-6 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Fecha</th>
-                                <th class="px-8 py-6 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Estado</th>
+                                <th class="px-8 py-6 text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+                                    Obra</th>
+                                <th class="px-8 py-6 text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+                                    Compositor</th>
+                                <th class="px-8 py-6 text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+                                    Fecha</th>
+                                <th class="px-8 py-6 text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+                                    Estado</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-white/5">
                             <tr class="hover:bg-white/2 transition-colors group">
                                 <td class="px-8 py-6">
                                     <div class="flex items-center gap-4">
-                                        <div class="p-3 bg-white/5 rounded-xl text-slate-400 group-hover:bg-salmon/20 group-hover:text-salmon transition-all">
+                                        <div
+                                            class="p-3 bg-white/5 rounded-xl text-slate-400 group-hover:bg-salmon/20 group-hover:text-salmon transition-all">
                                             <span class="material-symbols-outlined">description</span>
                                         </div>
                                         <span class="font-bold text-white">Ecos del Vacío</span>
@@ -189,7 +217,8 @@
                                 <td class="px-8 py-6 text-slate-400">Elena Rodríguez</td>
                                 <td class="px-8 py-6 text-slate-500">12 Sep, 2024</td>
                                 <td class="px-8 py-6">
-                                    <span class="px-4 py-1.5 rounded-full bg-emerald-500/10 text-emerald-500 text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 w-fit">
+                                    <span
+                                        class="px-4 py-1.5 rounded-full bg-emerald-500/10 text-emerald-500 text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 w-fit">
                                         <span class="material-symbols-outlined text-[14px]">check_circle</span>
                                         ACEPTADA
                                     </span>
@@ -198,7 +227,8 @@
                             <tr class="hover:bg-white/2 transition-colors group">
                                 <td class="px-8 py-6">
                                     <div class="flex items-center gap-4">
-                                        <div class="p-3 bg-white/5 rounded-xl text-slate-400 group-hover:bg-salmon/20 group-hover:text-salmon transition-all">
+                                        <div
+                                            class="p-3 bg-white/5 rounded-xl text-slate-400 group-hover:bg-salmon/20 group-hover:text-salmon transition-all">
                                             <span class="material-symbols-outlined">description</span>
                                         </div>
                                         <span class="font-bold text-white">Fractales de Cuerda</span>
@@ -207,7 +237,8 @@
                                 <td class="px-8 py-6 text-slate-400">Julian Casablancas</td>
                                 <td class="px-8 py-6 text-slate-500">08 Sep, 2024</td>
                                 <td class="px-8 py-6">
-                                    <span class="px-4 py-1.5 rounded-full bg-amber-500/10 text-amber-500 text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 w-fit">
+                                    <span
+                                        class="px-4 py-1.5 rounded-full bg-amber-500/10 text-amber-500 text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 w-fit">
                                         <span class="material-symbols-outlined text-[14px]">schedule</span>
                                         PENDIENTE
                                     </span>
@@ -216,7 +247,8 @@
                             <tr class="hover:bg-white/2 transition-colors group">
                                 <td class="px-8 py-6">
                                     <div class="flex items-center gap-4">
-                                        <div class="p-3 bg-white/5 rounded-xl text-slate-400 group-hover:bg-salmon/20 group-hover:text-salmon transition-all">
+                                        <div
+                                            class="p-3 bg-white/5 rounded-xl text-slate-400 group-hover:bg-salmon/20 group-hover:text-salmon transition-all">
                                             <span class="material-symbols-outlined">description</span>
                                         </div>
                                         <span class="font-bold text-white">Ritmos de Acero</span>
@@ -225,7 +257,8 @@
                                 <td class="px-8 py-6 text-slate-400">Marco Polo</td>
                                 <td class="px-8 py-6 text-slate-500">28 Ago, 2024</td>
                                 <td class="px-8 py-6">
-                                    <span class="px-4 py-1.5 rounded-full bg-emerald-500/10 text-emerald-500 text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 w-fit">
+                                    <span
+                                        class="px-4 py-1.5 rounded-full bg-emerald-500/10 text-emerald-500 text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 w-fit">
                                         <span class="material-symbols-outlined text-[14px]">check_circle</span>
                                         ACEPTADA
                                     </span>
@@ -241,27 +274,37 @@
         <footer class="h-24 bg-slate-950 border-t border-white/10 flex items-center px-12 gap-12">
             <div class="flex items-center gap-6 w-96">
                 <div class="w-16 h-16 bg-slate-800 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzJMXqvewHEl7m9F_T7zT1CVlRRzRd_33xvnUshsXyX5JYfx1VxIuMAwvbrF-RDS05gXuk4ruqwbv3baQWe50UOfBGIySLWCDiXQm9HkLlVDBkYFxgkaSsBmUydt_Eu87V7UdfzHSBjuQ-3aKOZxd4WEMTd9geS0dKzM7j0jQ7LRedT6ql2rMln8kTOJPKHFt7hbQhEHvep17f305ZcFlzb5iTS_T8MNnI5nztngeq58LTlI8WxqL_xE4JkwLjfuHMg_agakYGFCg" class="w-full h-full object-cover">
+                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzJMXqvewHEl7m9F_T7zT1CVlRRzRd_33xvnUshsXyX5JYfx1VxIuMAwvbrF-RDS05gXuk4ruqwbv3baQWe50UOfBGIySLWCDiXQm9HkLlVDBkYFxgkaSsBmUydt_Eu87V7UdfzHSBjuQ-3aKOZxd4WEMTd9geS0dKzM7j0jQ7LRedT6ql2rMln8kTOJPKHFt7hbQhEHvep17f305ZcFlzb5iTS_T8MNnI5nztngeq58LTlI8WxqL_xE4JkwLjfuHMg_agakYGFCg"
+                        class="w-full h-full object-cover">
                 </div>
                 <div>
                     <h5 class="text-lg font-bold text-white">Ecos del Vacío</h5>
-                    <p class="text-xs text-slate-500 uppercase font-bold tracking-widest">ELENA RODRÍGUEZ • ENSEMBLE NOVA</p>
+                    <p class="text-xs text-slate-500 uppercase font-bold tracking-widest">ELENA RODRÍGUEZ • ENSEMBLE
+                        NOVA</p>
                 </div>
             </div>
 
             <div class="flex-1 flex flex-col items-center gap-3">
                 <div class="flex items-center gap-8">
-                    <button class="text-slate-500 hover:text-white transition-colors"><span class="material-symbols-outlined text-[20px]">shuffle</span></button>
-                    <button class="text-slate-500 hover:text-white transition-colors"><span class="material-symbols-outlined text-[24px]">skip_previous</span></button>
-                    <button class="w-12 h-12 rounded-full bg-salmon text-white flex items-center justify-center hover:scale-110 active:scale-95 transition-all shadow-lg shadow-salmon/40"><span class="material-symbols-outlined text-[28px]">play_arrow</span></button>
-                    <button class="text-slate-500 hover:text-white transition-colors"><span class="material-symbols-outlined text-[24px]">skip_next</span></button>
-                    <button class="text-slate-500 hover:text-white transition-colors"><span class="material-symbols-outlined text-[20px]">repeat</span></button>
+                    <button class="text-slate-500 hover:text-white transition-colors"><span
+                            class="material-symbols-outlined text-[20px]">shuffle</span></button>
+                    <button class="text-slate-500 hover:text-white transition-colors"><span
+                            class="material-symbols-outlined text-[24px]">skip_previous</span></button>
+                    <button
+                        class="w-12 h-12 rounded-full bg-salmon text-white flex items-center justify-center hover:scale-110 active:scale-95 transition-all shadow-lg shadow-salmon/40"><span
+                            class="material-symbols-outlined text-[28px]">play_arrow</span></button>
+                    <button class="text-slate-500 hover:text-white transition-colors"><span
+                            class="material-symbols-outlined text-[24px]">skip_next</span></button>
+                    <button class="text-slate-500 hover:text-white transition-colors"><span
+                            class="material-symbols-outlined text-[20px]">repeat</span></button>
                 </div>
                 <div class="w-full max-w-2xl flex items-center gap-4">
                     <span class="text-[10px] text-slate-500 font-bold tabular-nums">03:24</span>
                     <div class="flex-1 h-1.5 bg-white/5 rounded-full overflow-hidden relative group cursor-pointer">
                         <div class="absolute h-full bg-salmon w-[45%] group-hover:brightness-110"></div>
-                        <div class="absolute left-[45%] top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <div
+                            class="absolute left-[45%] top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                        </div>
                     </div>
                     <span class="text-[10px] text-slate-500 font-bold tabular-nums">05:12</span>
                 </div>
@@ -288,11 +331,12 @@
 
     <script type="module">
         import supabase from './js/supabase.js';
-        
+
         window.logout = async () => {
             await supabase.auth.signOut();
             window.location.href = 'index.html';
         };
     </script>
 </body>
+
 </html>

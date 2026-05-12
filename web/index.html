@@ -1,410 +1,448 @@
 <!DOCTYPE html>
-
-<html class="dark" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Contemporánica Admin - Dashboard</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "on-tertiary-fixed-variant": "#3c475a",
-                        "error": "#ffb4ab",
-                        "tertiary-container": "#8b96ac",
-                        "surface-dim": "#051424",
-                        "tertiary-fixed-dim": "#bcc7de",
-                        "surface-tint": "#ffb3b1",
-                        "surface-container-highest": "#273647",
-                        "tertiary": "#bcc7de",
-                        "on-secondary-fixed": "#131b2e",
-                        "secondary-container": "#3f465c",
-                        "on-secondary": "#283044",
-                        "background": "#051424",
-                        "primary": "#ffb3b1",
-                        "on-error-container": "#ffdad6",
-                        "primary-fixed-dim": "#ffb3b1",
-                        "primary-container": "#e57373",
-                        "inverse-primary": "#a03e40",
-                        "surface-container": "#122131",
-                        "tertiary-fixed": "#d8e3fb",
-                        "inverse-on-surface": "#233143",
-                        "outline-variant": "#564241",
-                        "surface-bright": "#2c3a4c",
-                        "on-tertiary-container": "#242f41",
-                        "on-surface": "#d4e4fa",
-                        "on-primary": "#620f17",
-                        "surface": "#051424",
-                        "on-error": "#690005",
-                        "secondary-fixed": "#dae2fd",
-                        "on-secondary-container": "#adb4ce",
-                        "secondary-fixed-dim": "#bec6e0",
-                        "secondary": "#bec6e0",
-                        "on-primary-fixed": "#410007",
-                        "surface-container-high": "#1c2b3c",
-                        "surface-container-lowest": "#010f1f",
-                        "on-primary-fixed-variant": "#80272b",
-                        "on-background": "#d4e4fa",
-                        "surface-container-low": "#0d1c2d",
-                        "on-tertiary-fixed": "#111c2d",
-                        "outline": "#a48b8a",
-                        "primary-fixed": "#ffdad8",
-                        "on-surface-variant": "#dcc0bf",
-                        "inverse-surface": "#d4e4fa",
-                        "on-tertiary": "#263143",
-                        "on-secondary-fixed-variant": "#3f465c",
-                        "on-primary-container": "#5e0c15",
-                        "surface-variant": "#273647",
-                        "error-container": "#93000a"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "12px",
-                        "xl": "24px",
-                        "full": "9999px"
-                    },
-                    "spacing": {
-                        "gutter": "24px",
-                        "container-max": "1440px",
-                        "base": "8px",
-                        "xs": "4px",
-                        "md": "24px",
-                        "sm": "12px",
-                        "xl": "80px",
-                        "lg": "48px"
-                    },
-                    "fontFamily": {
-                        "headline-lg": ["Outfit"],
-                        "body-md": ["Outfit"],
-                        "body-lg": ["Outfit"],
-                        "display-xl": ["Outfit"],
-                        "headline-md": ["Outfit"],
-                        "label-sm": ["Outfit"]
-                    },
-                    "fontSize": {
-                        "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "500"}],
-                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
-                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
-                        "display-xl": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600"}],
-                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "500"}],
-                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}]
-                    }
-                },
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Contemporánica - Modern Music Archive</title>
+    <meta name="description" content="A comprehensive catalog of contemporary sound creation, designed for researchers, performers, and vanguard lovers.">
+    
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="module" src="js/auth.js"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+              "surface-container-low": "#0d1c2d",
+              "surface-container-lowest": "#010f1f",
+              "on-surface": "#d4e4fa",
+              "salmon": "#E57373",
+              "tertiary-container": "#8b96ac"
             },
+            "fontFamily": {
+              "body-md": ["Outfit"],
+              "headline-md": ["Outfit"],
+              "headline-lg": ["Outfit"],
+              "display-xl": ["Outfit"],
+              "label-sm": ["Outfit"]
+            }
+          }
         }
+      }
     </script>
-<style>
-        body {
-            background-color: #051424;
-            color: #d4e4fa;
-            font-family: 'Outfit', sans-serif;
-            overflow-x: hidden;
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
         }
         .glass-panel {
-            background: rgba(18, 33, 49, 0.7);
+            background: rgba(39, 54, 71, 0.4);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .salmon-glow {
-            box-shadow: 0 0 20px rgba(229, 115, 115, 0.2);
+        .text-salmon { color: #E57373; }
+        .bg-salmon { background-color: #E57373; }
+        .border-salmon { border-color: #E57373; }
+        
+        /* Estilos para el Menú en Cascada */
+        .cascade-wrapper {
+            position: relative;
         }
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        .cascade-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 9999;
+            min-width: 240px;
+            background: #0d1c2d;
+            border: 1px solid rgba(229, 115, 115, 0.4);
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            padding: 8px 0;
+            backdrop-filter: blur(25px);
+        }
+        .cascade-item {
+            padding: 12px 16px;
+            color: #d4e4fa;
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .cascade-item:hover {
+            background: rgba(229, 115, 115, 0.15);
+            color: #E57373;
+        }
+        .cascade-submenu {
+            display: none;
+            position: absolute;
+            top: -8px;
+            left: 100%;
+            margin-left: 2px;
+            min-width: 240px;
+            background: #0d1c2d;
+            border: 1px solid rgba(229, 115, 115, 0.4);
+            border-radius: 12px;
+            padding: 8px 0;
+            box-shadow: 20px 20px 50px rgba(0,0,0,0.8);
+            z-index: 10000;
+        }
+        .cascade-item:hover > .cascade-submenu {
+            display: block;
+        }
+        .tag-enter {
+            animation: fadeIn 0.3s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
         }
     </style>
 </head>
-<body class="antialiased">
-<!-- SideNavBar (Authority: JSON & Context) -->
-<aside class="fixed left-0 top-0 h-full w-64 border-r border-white/10 bg-[#0B1222]/70 backdrop-blur-2xl z-50 flex flex-col p-6 gap-2 shadow-[10px_0_30px_rgba(0,0,0,0.3)]">
-<div class="mb-8 px-4">
-<h2 class="text-rose-400 font-black font-headline-md tracking-tight">Curator Portal</h2>
-<p class="text-slate-400 font-label-sm uppercase tracking-widest opacity-60">System Management</p>
-</div>
-<nav class="flex flex-col gap-2 flex-grow">
-<!-- Active State: Analytics -->
-<a class="flex items-center gap-3 px-4 py-3 bg-rose-400/10 text-rose-400 rounded-lg border-l-4 border-rose-400 duration-300 ease-in-out font-['Outfit'] text-sm font-medium" href="#">
-<span class="material-symbols-outlined">leaderboard</span>
-<span>Analytics</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-white/5 rounded-lg duration-300 ease-in-out font-['Outfit'] text-sm font-medium transition-all hover:text-white" href="#">
-<span class="material-symbols-outlined">group</span>
-<span>User Management</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-white/5 rounded-lg duration-300 ease-in-out font-['Outfit'] text-sm font-medium transition-all hover:text-white" href="#">
-<span class="material-symbols-outlined">piano</span>
-<span>Instrument Database</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-white/5 rounded-lg duration-300 ease-in-out font-['Outfit'] text-sm font-medium transition-all hover:text-white" href="#">
-<span class="material-symbols-outlined">settings</span>
-<span>Settings</span>
-</a>
-</nav>
-<button class="mt-auto w-full py-4 px-6 bg-gradient-to-r from-primary-container to-rose-400 text-on-primary font-bold rounded-xl scale-95 active:scale-90 transition-transform shadow-lg shadow-rose-900/20">
-            Add New Record
+<body class="bg-surface-container-lowest text-on-surface font-body-md selection:bg-salmon selection:text-white">
+
+<nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-8 h-20 bg-slate-950/80 backdrop-blur-xl border-b border-white/10">
+    <div class="flex items-center gap-12">
+        <a href="index.html" class="text-2xl font-bold tracking-tighter text-white">Contemporánica</a>
+        <div class="hidden md:flex items-center gap-8 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
+            <a class="hover:text-salmon transition-colors" href="#">Archive</a>
+            <a class="hover:text-salmon transition-colors" href="#">Composers</a>
+            <a class="hover:text-salmon transition-colors" href="#">Ensembles</a>
+            <a class="hover:text-salmon transition-colors" href="#">About</a>
+        </div>
+    </div>
+    <div class="flex items-center gap-6" id="auth-header">
+        <button class="text-slate-400 hover:text-white transition-all duration-300 active:scale-95">
+            <span class="material-symbols-outlined">search</span>
         </button>
-</aside>
-<!-- TopAppBar (Authority: JSON & Context) -->
-<header class="fixed top-0 right-0 left-64 h-16 z-40 bg-[#0B1222]/80 backdrop-blur-lg border-b border-white/10 flex justify-between items-center px-8 shadow-2xl shadow-black/50">
-<div class="flex items-center gap-8">
-<h1 class="text-xl font-bold text-rose-400 uppercase tracking-widest font-['Outfit']">Musicology Admin</h1>
-<div class="relative group">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-rose-400 transition-colors">search</span>
-<input class="bg-[#0B1222] border-white/10 focus:border-rose-400 text-sm rounded-full pl-10 pr-4 py-1.5 w-64 font-['Outfit'] outline-none ring-0 transition-all focus:w-80" placeholder="Search system..." type="text"/>
-</div>
-</div>
-<div class="flex items-center gap-6">
-<button class="text-slate-400 hover:bg-white/5 hover:text-rose-300 transition-colors p-2 rounded-full relative">
-<span class="material-symbols-outlined">notifications</span>
-<span class="absolute top-2 right-2 w-2 h-2 bg-rose-500 rounded-full border-2 border-[#0B1222]"></span>
-</button>
-<button class="text-slate-400 hover:bg-white/5 hover:text-rose-300 transition-colors p-2 rounded-full">
-<span class="material-symbols-outlined">settings</span>
-</button>
-<div class="flex items-center gap-3 pl-4 border-l border-white/10">
-<div class="text-right hidden xl:block">
-<p class="font-bold text-xs text-on-surface">Admin User</p>
-<p class="text-[10px] text-slate-500 uppercase tracking-tighter">System Curator</p>
-</div>
-<img alt="Administrator Profile" class="w-10 h-10 rounded-full border-2 border-rose-400/30 object-cover" data-alt="Close-up portrait of a professional male administrator in a dark studio with soft cinematic lighting, professional attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfNcKvpEckWxmnxWapBwEAq8muLMBTfGfQ2sO7OYhZxPzjC-mRUuqxtyrfhTDtQ8O73Vzf2KNfWrz0ahhHO1YMlNX_nTw_svGtM-dDORE1knDaGfWileIvptnjtXA-olLgWXOgzrvI_nUk6_XB58nab4avtqAulBe0SO5Vi-MeVa6NADcW-EDqi2a1zJU5J6q_wJhOmeVKoO6wzTH3qqLBhGUa_-Morur2etHj6VrLoI1m9lvWycom_vnX4aPkynEkeFWkH1_mvPQ"/>
-</div>
-</div>
-</header>
-<!-- Main Content Canvas -->
-<main class="ml-64 mt-16 p-10 max-w-[1440px] mx-auto min-h-screen">
-<!-- Hero Metrics -->
-<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-xl">
-<div class="glass-panel p-6 rounded-xl salmon-glow">
-<div class="flex justify-between items-start mb-4">
-<div class="p-2 bg-rose-400/10 rounded-lg">
-<span class="material-symbols-outlined text-rose-400">group</span>
-</div>
-<span class="text-emerald-400 text-xs font-bold">+12%</span>
-</div>
-<h3 class="text-slate-400 font-label-sm uppercase tracking-widest mb-1">Total Users</h3>
-<p class="font-display-xl text-3xl font-semibold text-on-surface">14,208</p>
-</div>
-<div class="glass-panel p-6 rounded-xl">
-<div class="flex justify-between items-start mb-4">
-<div class="p-2 bg-rose-400/10 rounded-lg">
-<span class="material-symbols-outlined text-rose-400">equalizer</span>
-</div>
-<span class="text-rose-400 text-xs font-bold">+5.2%</span>
-</div>
-<h3 class="text-slate-400 font-label-sm uppercase tracking-widest mb-1">Active Ensembles</h3>
-<p class="font-display-xl text-3xl font-semibold text-on-surface">842</p>
-</div>
-<div class="glass-panel p-6 rounded-xl">
-<div class="flex justify-between items-start mb-4">
-<div class="p-2 bg-rose-400/10 rounded-lg">
-<span class="material-symbols-outlined text-rose-400">verified</span>
-</div>
-<span class="text-emerald-400 text-xs font-bold">+28%</span>
-</div>
-<h3 class="text-slate-400 font-label-sm uppercase tracking-widest mb-1">Validated Works</h3>
-<p class="font-display-xl text-3xl font-semibold text-on-surface">3,120</p>
-</div>
-<div class="glass-panel p-6 rounded-xl">
-<div class="flex justify-between items-start mb-4">
-<div class="p-2 bg-rose-400/10 rounded-lg">
-<span class="material-symbols-outlined text-rose-400">payments</span>
-</div>
-<span class="text-slate-400 text-xs font-bold">Stable</span>
-</div>
-<h3 class="text-slate-400 font-label-sm uppercase tracking-widest mb-1">Monthly Revenue</h3>
-<p class="font-display-xl text-3xl font-semibold text-on-surface">$42.8k</p>
-</div>
-</section>
-<!-- User Growth Chart & Instruments Grid -->
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-xl">
-<!-- Growth Chart -->
-<div class="lg:col-span-2 glass-panel p-8 rounded-xl relative overflow-hidden">
-<div class="flex justify-between items-center mb-8">
-<div>
-<h2 class="font-headline-md text-on-surface">User Growth Dynamics</h2>
-<p class="text-slate-400 font-body-md text-sm opacity-70">New registrations across compositions and performers</p>
-</div>
-<div class="flex gap-2">
-<button class="px-3 py-1 text-xs font-bold rounded-lg bg-rose-400 text-on-primary">Monthly</button>
-<button class="px-3 py-1 text-xs font-bold rounded-lg bg-white/5 text-slate-400 hover:text-white transition-colors">Quarterly</button>
-</div>
-</div>
-<!-- Mock Chart Visualization -->
-<div class="h-64 flex items-end justify-between gap-2 px-2 border-b border-white/5 relative">
-<div class="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-20">
-<div class="border-t border-white/20 w-full"></div>
-<div class="border-t border-white/20 w-full"></div>
-<div class="border-t border-white/20 w-full"></div>
-</div>
-<!-- Chart Bars/Lines with Salmon Gradients -->
-<div class="w-full h-full relative mt-4">
-<svg class="w-full h-full fill-none stroke-rose-400 stroke-2 drop-shadow-[0_0_8px_rgba(229,115,115,0.4)]" viewbox="0 0 800 200">
-<path d="M0,150 Q100,120 200,140 T400,80 T600,110 T800,40" stroke-linecap="round" stroke-width="4"></path>
-<path d="M0,150 Q100,120 200,140 T400,80 T600,110 T800,40 V200 H0 Z" fill="url(#chart-gradient)" opacity="0.1"></path>
-<defs>
-<lineargradient id="chart-gradient" x1="0" x2="0" y1="0" y2="1">
-<stop offset="0%" stop-color="#e57373"></stop>
-<stop offset="100%" stop-color="#e57373" stop-opacity="0"></stop>
-</lineargradient>
-</defs>
-</svg>
-<div class="absolute inset-0 flex justify-between items-end pb-2 px-4 text-[10px] text-slate-500 uppercase tracking-tighter">
-<span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span>
-</div>
-</div>
-</div>
-</div>
-<!-- Quick Instrument CRUD -->
-<div class="glass-panel p-8 rounded-xl flex flex-col">
-<div class="flex justify-between items-start mb-6">
-<h2 class="font-headline-md text-on-surface">Instruments</h2>
-<button class="p-2 bg-rose-400/10 text-rose-400 rounded-full hover:bg-rose-400/20 transition-all">
-<span class="material-symbols-outlined">add</span>
-</button>
-</div>
-<div class="space-y-3 overflow-y-auto max-h-[300px] pr-2 custom-scrollbar">
-<div class="flex justify-between items-center p-3 rounded-lg bg-white/5 border border-white/5 group hover:border-rose-400/30 transition-all">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-rose-400/70">piano</span>
-<span class="font-medium text-sm">Piano</span>
-</div>
-<div class="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-<button class="p-1 text-slate-500 hover:text-white"><span class="material-symbols-outlined text-sm">edit</span></button>
-<button class="p-1 text-slate-500 hover:text-error"><span class="material-symbols-outlined text-sm">delete</span></button>
-</div>
-</div>
-<div class="flex justify-between items-center p-3 rounded-lg bg-white/5 border border-white/5 group hover:border-rose-400/30 transition-all">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-rose-400/70">straighten</span>
-<span class="font-medium text-sm">Violín</span>
-</div>
-<div class="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-<button class="p-1 text-slate-500 hover:text-white"><span class="material-symbols-outlined text-sm">edit</span></button>
-<button class="p-1 text-slate-500 hover:text-error"><span class="material-symbols-outlined text-sm">delete</span></button>
-</div>
-</div>
-<div class="flex justify-between items-center p-3 rounded-lg bg-white/5 border border-white/5 group hover:border-rose-400/30 transition-all">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-rose-400/70">music_note</span>
-<span class="font-medium text-sm">Violonchelo</span>
-</div>
-<div class="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-<button class="p-1 text-slate-500 hover:text-white"><span class="material-symbols-outlined text-sm">edit</span></button>
-<button class="p-1 text-slate-500 hover:text-error"><span class="material-symbols-outlined text-sm">delete</span></button>
-</div>
-</div>
-<div class="flex justify-between items-center p-3 rounded-lg bg-white/5 border border-white/5 group hover:border-rose-400/30 transition-all">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-rose-400/70">air</span>
-<span class="font-medium text-sm">Clarinete</span>
-</div>
-<div class="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-<button class="p-1 text-slate-500 hover:text-white"><span class="material-symbols-outlined text-sm">edit</span></button>
-<button class="p-1 text-slate-500 hover:text-error"><span class="material-symbols-outlined text-sm">delete</span></button>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Latest Registered Users -->
-<section class="glass-panel p-8 rounded-xl overflow-hidden">
-<div class="flex justify-between items-center mb-6">
-<h2 class="font-headline-md text-on-surface">Recently Registered Entities</h2>
-<button class="text-rose-400 text-sm font-bold flex items-center gap-2 hover:gap-3 transition-all">
-                    View Complete Directory <span class="material-symbols-outlined text-sm">arrow_forward</span>
-</button>
-</div>
-<div class="overflow-x-auto">
-<table class="w-full text-left border-collapse">
-<thead>
-<tr class="border-b border-white/10">
-<th class="py-4 font-label-sm text-slate-400 uppercase tracking-widest">User</th>
-<th class="py-4 font-label-sm text-slate-400 uppercase tracking-widest">Role</th>
-<th class="py-4 font-label-sm text-slate-400 uppercase tracking-widest">Registration Date</th>
-<th class="py-4 font-label-sm text-slate-400 uppercase tracking-widest">Status</th>
-<th class="py-4 text-right"></th>
-</tr>
-</thead>
-<tbody class="divide-y divide-white/5">
-<tr class="group hover:bg-white/5 transition-colors">
-<td class="py-4">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center font-bold text-rose-400 border border-white/10">JD</div>
-<div>
-<p class="font-bold text-on-surface">Julianne DeSilva</p>
-<p class="text-xs text-slate-500">j.desilva@conservatory.edu</p>
-</div>
-</div>
-</td>
-<td class="py-4"><span class="px-3 py-1 bg-surface-container text-on-surface-variant text-xs rounded-full font-medium">Compositor</span></td>
-<td class="py-4 text-sm text-slate-400">Oct 12, 2023</td>
-<td class="py-4">
-<span class="flex items-center gap-2 text-emerald-400 text-xs font-bold">
-<span class="w-1.5 h-1.5 bg-emerald-400 rounded-full"></span> Active
-                                </span>
-</td>
-<td class="py-4 text-right">
-<button class="text-slate-500 hover:text-rose-400 transition-colors p-2">
-<span class="material-symbols-outlined">more_vert</span>
-</button>
-</td>
-</tr>
-<tr class="group hover:bg-white/5 transition-colors">
-<td class="py-4">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center font-bold text-rose-400 border border-white/10">LE</div>
-<div>
-<p class="font-bold text-on-surface">Lumina Ensemble</p>
-<p class="text-xs text-slate-500">contact@lumina-orch.org</p>
-</div>
-</div>
-</td>
-<td class="py-4"><span class="px-3 py-1 bg-surface-container text-on-surface-variant text-xs rounded-full font-medium">Ensemble</span></td>
-<td class="py-4 text-sm text-slate-400">Oct 11, 2023</td>
-<td class="py-4">
-<span class="flex items-center gap-2 text-primary-container text-xs font-bold">
-<span class="w-1.5 h-1.5 bg-primary-container rounded-full"></span> Pending
-                                </span>
-</td>
-<td class="py-4 text-right">
-<button class="text-slate-500 hover:text-rose-400 transition-colors p-2">
-<span class="material-symbols-outlined">more_vert</span>
-</button>
-</td>
-</tr>
-<tr class="group hover:bg-white/5 transition-colors">
-<td class="py-4">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center font-bold text-rose-400 border border-white/10">MR</div>
-<div>
-<p class="font-bold text-on-surface">Marcus Raine</p>
-<p class="text-xs text-slate-500">m.raine@independent.com</p>
-</div>
-</div>
-</td>
-<td class="py-4"><span class="px-3 py-1 bg-surface-container text-on-surface-variant text-xs rounded-full font-medium">Compositor</span></td>
-<td class="py-4 text-sm text-slate-400">Oct 09, 2023</td>
-<td class="py-4">
-<span class="flex items-center gap-2 text-emerald-400 text-xs font-bold">
-<span class="w-1.5 h-1.5 bg-emerald-400 rounded-full"></span> Active
-                                </span>
-</td>
-<td class="py-4 text-right">
-<button class="text-slate-500 hover:text-rose-400 transition-colors p-2">
-<span class="material-symbols-outlined">more_vert</span>
-</button>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
+        <a href="login.html" class="px-6 py-2 rounded-full border border-white/10 text-white font-sans font-medium hover:bg-white/5 transition-all duration-300 active:scale-95">
+            Login
+        </a>
+    </div>
+</nav>
+
+<main class="max-w-[1440px] mx-auto pt-40 px-8">
+    <header class="flex flex-col items-center text-center mb-20">
+        <h1 class="font-display-xl text-5xl md:text-6xl text-white mb-6 max-w-4xl leading-tight font-semibold">
+            Contemporánica: The Living Archive of Modern Music
+        </h1>
+        <p class="font-body-lg text-lg text-tertiary-container max-w-2xl">
+            A comprehensive catalog of contemporary sound creation, designed for researchers, performers, and vanguard lovers.
+        </p>
+    </header>
+
+    <!-- Search Section -->
+    <section class="glass-panel rounded-3xl p-8 mb-20 relative group">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 items-end relative z-10">
+            
+            <!-- Instrumentation Selector (Cascading) -->
+            <div class="space-y-2 col-span-1 md:col-span-2">
+                <label class="font-label-sm text-xs text-tertiary-container uppercase font-semibold">Instrumentation (Select Hierarchy)</label>
+                <div class="cascade-wrapper">
+                    <button id="instrument-btn" onclick="toggleMainList()" class="w-full bg-surface-container-low border border-white/10 rounded-xl px-4 py-3 text-white flex justify-between items-center focus:border-salmon transition-all">
+                        <span id="selected-instrument-text">Browse Instruments...</span>
+                        <span class="material-symbols-outlined text-slate-500">list</span>
+                    </button>
+                    
+                    <div id="main-list" class="cascade-menu" style="z-index: 9999;">
+                        <!-- Generado dinámicamente -->
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap gap-2 mt-2" id="tags-container">
+                    <!-- Las etiquetas seleccionadas aparecerán aquí -->
+                </div>
+            </div>
+
+            <div class="space-y-2">
+                <label class="font-label-sm text-xs text-tertiary-container uppercase font-semibold">Year (From - To)</label>
+                <div class="flex gap-2">
+                    <input id="year-from" class="w-full bg-surface-container-low border border-white/10 rounded-xl px-2 py-3 text-white focus:outline-none focus:border-salmon transition-colors" placeholder="From" type="number" value="2019" onchange="filterWorks()"/>
+                    <input id="year-to" class="w-full bg-surface-container-low border border-white/10 rounded-xl px-2 py-3 text-white focus:outline-none focus:border-salmon transition-colors" placeholder="To" type="number" value="2023" onchange="filterWorks()"/>
+                </div>
+            </div>
+
+            <div class="space-y-2">
+                <label class="font-label-sm text-xs text-tertiary-container uppercase font-semibold">Country</label>
+                <div class="relative">
+                    <select id="country-select" class="w-full bg-surface-container-low border border-white/10 rounded-xl px-4 py-3 text-white appearance-none focus:outline-none focus:border-salmon transition-colors" onchange="filterWorks()">
+                        <option value="">All Countries</option>
+                        <option value="Spain">Spain</option>
+                        <option value="France">France</option>
+                        <option value="Germany">Germany</option>
+                        <option value="USA">USA</option>
+                    </select>
+                    <span class="material-symbols-outlined absolute right-3 top-3.5 text-tertiary-container pointer-events-none">public</span>
+                </div>
+            </div>
+
+            <div class="space-y-2">
+                <label class="font-label-sm text-xs text-tertiary-container uppercase font-semibold">Gender</label>
+                <div class="relative">
+                    <select id="gender-select" class="w-full bg-surface-container-low border border-white/10 rounded-xl px-4 py-3 text-white appearance-none focus:outline-none focus:border-salmon transition-colors" onchange="filterWorks()">
+                        <option value="">All Genders</option>
+                        <option value="Female">Female</option>
+                        <option value="Male">Male</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <span class="material-symbols-outlined absolute right-3 top-3.5 text-tertiary-container pointer-events-none">wc</span>
+                </div>
+            </div>
+
+            <button onclick="filterWorks()" class="bg-salmon text-white h-[50px] rounded-xl font-medium flex items-center justify-center gap-2 hover:brightness-110 active:scale-[0.98] transition-all duration-300 w-full mt-auto">
+                <span class="material-symbols-outlined">search</span>
+                Explore
+            </button>
+        </div>
+        <div class="absolute -top-24 -right-24 w-64 h-64 bg-salmon/10 blur-[100px] rounded-full pointer-events-none z-0"></div>
+    </section>
+
+    <!-- Results Section -->
+    <section class="space-y-8">
+        <div class="flex justify-between items-end border-b border-white/5 pb-4">
+            <div>
+                <h2 class="font-headline-lg text-3xl font-medium text-white">Recent Works</h2>
+                <p class="text-tertiary-container">New additions to the digital catalog</p>
+            </div>
+            <a class="text-salmon text-xs font-semibold hover:underline tracking-widest flex items-center gap-1" href="#">VIEW ALL <span class="material-symbols-outlined text-[14px]">arrow_forward</span></a>
+        </div>
+        
+        <div id="works-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Los resultados de Supabase aparecerán aquí dinámicamente -->
+        </div>
+        
+        <div id="no-results" class="hidden text-center py-20 bg-white/5 rounded-3xl border border-white/10">
+            <span class="material-symbols-outlined text-6xl text-slate-600 mb-4">music_off</span>
+            <h3 class="text-xl text-white font-medium">No results found for this search</h3>
+            <p class="text-slate-400">Try adjusting your filters or selecting different instruments.</p>
+        </div>
+    </section>
+
 </main>
-<!-- Background Decorative Elements -->
-<div class="fixed top-0 right-0 -z-10 w-[500px] h-[500px] bg-rose-400/5 blur-[120px] rounded-full pointer-events-none"></div>
-<div class="fixed bottom-0 left-0 -z-10 w-[600px] h-[600px] bg-primary-container/5 blur-[150px] rounded-full pointer-events-none"></div>
-</body></html>
+
+<footer class="w-full py-12 px-8 flex flex-col md:flex-row justify-between items-center max-w-[1440px] mx-auto mt-20 border-t border-white/5 bg-slate-950 mb-20">
+    <p class="font-sans text-xs uppercase tracking-widest text-slate-500 text-center md:text-left mb-6 md:mb-0">
+        © 2026 Contemporánica. The living archive of modern music.
+    </p>
+    <div class="flex flex-wrap justify-center gap-8 font-sans text-xs uppercase tracking-widest text-slate-500">
+        <a class="hover:text-rose-400 transition-colors" href="#">Legal Notice</a>
+        <a class="hover:text-rose-400 transition-colors" href="#">Privacy Policy</a>
+        <a class="hover:text-rose-400 transition-colors" href="#">Contact</a>
+        <a class="hover:text-rose-400 transition-colors" href="#">RSS</a>
+    </div>
+</footer>
+
+<script type="module">
+    // --- Cascading Instrument System (Supabase Dynamic) ---
+    import supabase from './js/supabase.js';
+
+    let instrumentData = {};
+
+    async function loadInstrumentsFromSupabase() {
+        console.log("📡 Fetching instruments from Supabase...");
+        try {
+            const { data, error } = await supabase
+                .from('instruments')
+                .select('family, name, variant')
+                .order('family', { ascending: true });
+
+            if (error) throw error;
+
+            const hierarchy = {};
+            data.forEach(item => {
+                if (!item.family) return;
+                if (!hierarchy[item.family]) hierarchy[item.family] = {};
+                if (!item.name) return;
+                if (!hierarchy[item.family][item.name]) hierarchy[item.family][item.name] = [];
+                if (item.variant && !hierarchy[item.family][item.name].includes(item.variant)) {
+                    hierarchy[item.family][item.name].push(item.variant);
+                }
+            });
+
+            instrumentData = hierarchy;
+            renderInstrumentMenu();
+        } catch (error) {
+            console.error("❌ Error loading instruments:", error);
+        }
+    }
+
+    function renderInstrumentMenu() {
+        const mainList = document.getElementById('main-list');
+        if (!mainList) return;
+        
+        let html = '';
+        for (const family in instrumentData) {
+            const hasGroups = Object.keys(instrumentData[family]).length > 0;
+            
+            html += `
+                <div class="cascade-item group/family relative" onclick="event.stopPropagation()">
+                    <div class="flex justify-between items-center w-full">
+                        ${family}
+                        ${hasGroups ? '<span class="material-symbols-outlined text-sm">chevron_right</span>' : ''}
+                    </div>
+                    ${hasGroups ? `
+                    <div class="cascade-submenu">
+                        ${Object.keys(instrumentData[family]).map(group => {
+                            const hasVariants = instrumentData[family][group].length > 0;
+                            return `
+                            <div class="cascade-item group/group relative" onclick="event.stopPropagation()">
+                                <div class="flex justify-between items-center w-full">
+                                    ${group}
+                                    ${hasVariants ? '<span class="material-symbols-outlined text-sm">chevron_right</span>' : ''}
+                                </div>
+                                ${hasVariants ? `
+                                <div class="cascade-submenu">
+                                    ${instrumentData[family][group].map(inst => `
+                                        <div class="cascade-item" onclick="selectInstrument('${inst.replace(/'/g, "\\'")}')">
+                                            ${inst}
+                                        </div>
+                                    `).join('')}
+                                </div>
+                                ` : `
+                                <div class="cascade-item" onclick="selectInstrument('${group.replace(/'/g, "\\'")}')">
+                                    Select ${group}
+                                </div>
+                                `}
+                            </div>
+                            `;
+                        }).join('')}
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+        mainList.innerHTML = html;
+    }
+
+    // Exponer funciones al botón (onclick)
+    window.toggleMainList = function() {
+        const list = document.getElementById('main-list');
+        const isVisible = list.style.display === 'block';
+        list.style.display = isVisible ? 'none' : 'block';
+    }
+
+    window.selectInstrument = function(name) {
+        addTag(name);
+        document.getElementById('main-list').style.display = 'none';
+        filterWorks();
+    }
+
+    // Cerrar menú si se hace clic fuera
+    window.addEventListener('click', function(e) {
+        const wrapper = document.querySelector('.cascade-wrapper');
+        if (wrapper && !wrapper.contains(e.target)) {
+            document.getElementById('main-list').style.display = 'none';
+        }
+    });
+
+    // --- Tags System and Filtering Logic ---
+    
+    function addTag(name) {
+        const container = document.getElementById('tags-container');
+        const existing = Array.from(container.querySelectorAll('.tag-item')).map(el => el.textContent.replace('close', '').trim());
+        if (existing.includes(name)) return;
+
+        const tagHTML = `
+            <div class="tag-item bg-salmon/20 text-salmon border border-salmon/30 px-3 py-1 rounded-full text-[11px] flex items-center gap-2 tag-enter">
+                ${name} <span class="material-symbols-outlined text-[14px] cursor-pointer hover:text-white" onclick="this.parentElement.remove(); filterWorks();">close</span>
+            </div>
+        `;
+        container.insertAdjacentHTML('beforeend', tagHTML);
+    }
+
+    /**
+     * Función de filtrado avanzada: cruza Obras con Perfiles y Etiquetas
+     */
+    async function filterWorks() {
+        console.log("🔍 Filtering works...");
+        
+        const yearFrom = parseInt(document.getElementById('year-from').value) || 0;
+        const yearTo = parseInt(document.getElementById('year-to').value) || 9999;
+        const country = document.getElementById('country-select').value;
+        const gender = document.getElementById('gender-select').value;
+        
+        const tagElements = document.querySelectorAll('.tag-item');
+        const activeTags = Array.from(tagElements).map(el => el.textContent.replace('close', '').trim());
+
+        // 1. Consulta base a Supabase (Joins para traer datos del autor)
+        let query = supabase
+            .from('works')
+            .select(`
+                *,
+                profiles:composer_id (gender, residence_country, first_name, last_name),
+                work_instruments (instruments (variant))
+            `)
+            .eq('status', 'validated')
+            .gte('year', yearFrom)
+            .lte('year', yearTo);
+
+        // 2. Aplicar filtros de perfil si existen
+        if (country) query = query.filter('profiles.residence_country', 'eq', country);
+        if (gender) query = query.filter('profiles.gender', 'eq', gender.toLowerCase());
+
+        const { data: works, error } = await query;
+
+        if (error) {
+            console.error("❌ Error filtering works:", error);
+            return;
+        }
+
+        // 3. Filtrado por etiquetas (en el cliente por simplicidad con JSON anidado)
+        const filteredWorks = works.filter(work => {
+            if (activeTags.length === 0) return true;
+            const workInsts = work.work_instruments.map(wi => wi.instruments.variant);
+            return activeTags.every(tag => workInsts.includes(tag));
+        });
+
+        renderWorks(filteredWorks);
+    }
+
+    function renderWorks(works) {
+        const grid = document.getElementById('works-grid');
+        const noResults = document.getElementById('no-results');
+        
+        if (works.length === 0) {
+            grid.innerHTML = '';
+            noResults.classList.remove('hidden');
+            return;
+        }
+
+        noResults.classList.add('hidden');
+        grid.innerHTML = works.map(work => `
+            <div class="work-card glass-panel p-4 rounded-2xl group cursor-pointer hover:bg-white/5 transition-all duration-500">
+                <div class="relative mb-4 overflow-hidden rounded-xl aspect-[4/3]">
+                    <img alt="${work.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://source.unsplash.com/random/800x600?music,abstract&sig=${work.id}"/>
+                    <div class="absolute top-3 left-3 bg-slate-950/80 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1 border border-white/10">
+                        <span class="material-symbols-outlined text-rose-400 text-[14px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+                        <span class="text-[10px] font-semibold text-white uppercase">${work.status}</span>
+                    </div>
+                </div>
+                <div class="space-y-1">
+                    <h3 class="text-xl font-medium text-white group-hover:text-salmon transition-colors">${work.title}</h3>
+                    <p class="text-slate-300">${work.profiles.first_name} ${work.profiles.last_name}</p>
+                    <p class="text-slate-500 text-xs uppercase tracking-wider pt-2">${work.profiles.residence_country} • ${work.year}</p>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        loadInstrumentsFromSupabase();
+        
+        // Carga inicial de obras (esto ya debería estar funcionando con tus datos)
+        if (typeof filterWorks === 'function') {
+            filterWorks();
+        }
+    });
+</script>
+
+</body>
+</html>
