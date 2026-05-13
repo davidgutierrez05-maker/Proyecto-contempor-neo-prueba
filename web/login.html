@@ -185,6 +185,13 @@
                     </div>
                 </div>
                 
+                <div class="flex items-start gap-3 p-3 bg-white/5 rounded-xl border border-white/5">
+                    <input type="checkbox" id="reg-privacy" class="mt-1 w-4 h-4 rounded text-salmon focus:ring-salmon bg-slate-900 border-white/20">
+                    <label for="reg-privacy" class="text-[10px] text-slate-400 leading-tight">
+                        I have read and agree to the <button type="button" onclick="openPrivacy()" class="text-salmon hover:underline font-bold">Privacy Policy</button> and terms of use.
+                    </label>
+                </div>
+
                 <button type="button" onclick="intentarRegistro()" class="w-full bg-salmon hover:bg-rose-400 text-white font-medium py-3 rounded-xl transition-all duration-300 active:scale-95 flex justify-center items-center gap-2 mt-2">
                     Create Account <span class="material-symbols-outlined text-[20px]">person_add</span>
                 </button>
@@ -227,6 +234,48 @@
                 loginTab.classList.remove('text-white', 'border-salmon');
             }
         }
+
+        function openPrivacy() {
+            document.getElementById('privacy-modal').classList.remove('hidden');
+            document.getElementById('privacy-modal').classList.add('flex');
+        }
+
+        function closePrivacy() {
+            document.getElementById('privacy-modal').classList.add('hidden');
+            document.getElementById('privacy-modal').classList.remove('flex');
+        }
+
+        window.openPrivacy = openPrivacy;
+        window.closePrivacy = closePrivacy;
     </script>
+
+    <!-- PRIVACY MODAL -->
+    <div id="privacy-modal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md z-[100] hidden items-center justify-center p-4">
+        <div class="glass-panel w-full max-w-2xl max-h-[80vh] rounded-3xl p-8 flex flex-col">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-white">Privacy Policy</h2>
+                <button onclick="closePrivacy()" class="text-slate-400 hover:text-white"><span class="material-symbols-outlined">close</span></button>
+            </div>
+            <div class="flex-1 overflow-y-auto pr-4 space-y-4 text-sm text-slate-300">
+                <p class="font-bold text-white">1. Data Collection</p>
+                <p>Contemporánica collects information you provide directly to us when you create an account, such as your name, email address, artistic role, and any professional data you choose to share in your profile.</p>
+                
+                <p class="font-bold text-white">2. Use of Information</p>
+                <p>We use the information we collect to provide, maintain, and improve our services, facilitate professional networking between composers and ensembles, and personalize your experience on our platform.</p>
+                
+                <p class="font-bold text-white">3. Data Sharing</p>
+                <p>Your profile information is public to other registered users of the platform to facilitate professional discovery. We do not sell your personal data to third parties.</p>
+                
+                <p class="font-bold text-white">4. Your Rights</p>
+                <p>You have the right to access, update, or delete your information at any time through your profile settings. We retain your data as long as your account is active.</p>
+                
+                <p class="font-bold text-white">5. Security</p>
+                <p>We implement industry-standard security measures, including authentication via Supabase, to protect your personal information from unauthorized access or disclosure.</p>
+            </div>
+            <div class="pt-6 border-t border-white/10 mt-4">
+                <button onclick="closePrivacy()" class="w-full bg-white/10 text-white py-3 rounded-xl font-bold hover:bg-white/20 transition-all">I Understand</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

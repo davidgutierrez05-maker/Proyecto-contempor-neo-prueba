@@ -145,6 +145,13 @@ async function intentarRegistro() {
     const role = document.querySelector('#form-register input[name="role"]:checked').value;
     
     const errorDiv = document.getElementById('login-error');
+    const privacyChecked = document.getElementById('reg-privacy').checked;
+
+    if (!privacyChecked) {
+        errorDiv.textContent = "You must accept the Privacy Policy to continue.";
+        errorDiv.classList.remove('hidden');
+        return;
+    }
 
     console.log("🚀 Registering user:", username);
 
