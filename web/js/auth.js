@@ -50,7 +50,11 @@ async function checkAuth() {
         const isComplete = profile.is_complete;
         console.log("👤 User role:", role, "| Complete:", isComplete);
 
-        // ... (protección de rutas se mantiene igual)
+        // Protección de rutas: Redirigir si el usuario intenta entrar en un dashboard que no le toca
+        const path = window.location.pathname;
+        if (path.includes('admin.html') && role !== 'admin') window.location.href = 'index.html';
+        if (path.includes('composer.html') && role !== 'composer') window.location.href = 'index.html';
+        if (path.includes('musician.html') && role !== 'musician') window.location.href = 'index.html';
         
         actualizarInterfaz(session.user, role, isComplete);
     }

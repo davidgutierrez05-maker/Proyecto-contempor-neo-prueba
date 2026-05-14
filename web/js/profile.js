@@ -29,6 +29,17 @@ async function loadProfile() {
     document.getElementById('profile-role-badge').textContent = profile.role || 'User';
     document.getElementById('profile-initials').textContent = (firstName[0] !== '-' ? firstName[0] : '?') + (lastName[0] !== '-' ? lastName[0] : '?');
 
+    // Cargar Avatar si existe
+    if (profile.avatar_url) {
+        const preview = document.getElementById('profile-avatar-preview');
+        const initials = document.getElementById('profile-initials');
+        if (preview && initials) {
+            preview.src = profile.avatar_url;
+            preview.classList.remove('hidden');
+            initials.classList.add('hidden');
+        }
+    }
+
     // Rellenar todos los campos del formulario
     const textFields = [
         'first_name', 'last_name', 'username', 'bio', 'nationality', 'gender', 'country_of_birth', 'place_of_birth', 'website',
@@ -146,5 +157,56 @@ async function saveProfile() {
     }
 }
 
+async function uploadAvatar(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) return;
+
+    const userId = session.user.id;
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${userId}-${Math.random()}.${fileExt}`;
+    const filePath = `${fileName}`; 
+
+    console.log("📤 Uploading avatar to Avatar bucket:", filePath);
+
+    // 1. Subir al storage (Bucket: Avatar)
+    const { error: uploadError } = await supabase.storage
+        .from('Avatar')
+        .upload(filePath, file);
+
+    if (uploadError) {
+        console.error("Upload error details:", uploadError);
+        alert("Supabase Error: " + uploadError.message + " (Check if bucket name 'Avatar' is exactly the same and Public)");
+        return;
+    }
+
+    // 2. Obtener URL pública
+    const { data: { publicUrl } } = supabase.storage
+        .from('Avatar')
+        .getPublicUrl(filePath);
+
+    // 3. Actualizar tabla profiles
+    const { error: updateError } = await supabase
+        .from('profiles')
+        .update({ avatar_url: publicUrl })
+        .eq('id', userId);
+
+    if (updateError) {
+        alert("Error updating profile URL: " + updateError.message);
+    } else {
+        // 4. Actualizar UI
+        const preview = document.getElementById('profile-avatar-preview');
+        const initials = document.getElementById('profile-initials');
+        if (preview && initials) {
+            preview.src = publicUrl;
+            preview.classList.remove('hidden');
+            initials.classList.add('hidden');
+        }
+    }
+}
+
 window.saveProfile = saveProfile;
+window.uploadAvatar = uploadAvatar;
 document.addEventListener('DOMContentLoaded', loadProfile);

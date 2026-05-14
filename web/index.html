@@ -48,6 +48,56 @@
         .bg-salmon { background-color: #E57373; }
         .border-salmon { border-color: #E57373; }
         
+        /* Estilos para el Menú en Cascada */
+        .cascade-wrapper {
+            position: relative;
+        }
+        .cascade-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 9999;
+            min-width: 240px;
+            background: #0d1c2d;
+            border: 1px solid rgba(229, 115, 115, 0.4);
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            padding: 8px 0;
+            backdrop-filter: blur(25px);
+        }
+        .cascade-item {
+            padding: 12px 16px;
+            color: #d4e4fa;
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .cascade-item:hover {
+            background: rgba(229, 115, 115, 0.15);
+            color: #E57373;
+        }
+        .cascade-submenu {
+            display: none;
+            position: absolute;
+            top: -8px;
+            left: 100%;
+            margin-left: 2px;
+            min-width: 240px;
+            background: #0d1c2d;
+            border: 1px solid rgba(229, 115, 115, 0.4);
+            border-radius: 12px;
+            padding: 8px 0;
+            box-shadow: 20px 20px 50px rgba(0,0,0,0.8);
+            z-index: 10000;
+        }
+        .cascade-item:hover > .cascade-submenu {
+            display: block;
+        }
         .tag-enter {
             animation: fadeIn 0.3s ease-out;
         }
@@ -59,14 +109,17 @@
 </head>
 <body class="bg-surface-container-lowest text-on-surface font-body-md selection:bg-salmon selection:text-white">
 
-<nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-8 h-20 max-w-[1440px] mx-auto bg-slate-950/80 backdrop-blur-xl border-b border-white/10 shadow-2xl shadow-black/40">
-    <div class="text-2xl font-bold tracking-tighter text-white">Contemporánica</div>
-    <div class="hidden md:flex items-center space-x-8 font-sans font-medium tracking-tight text-white">
-        <a class="text-rose-400 border-b-2 border-rose-400 pb-1 transition-all duration-300" href="#">Composers</a>
-        <a class="text-slate-400 hover:text-white transition-all duration-300" href="#">Ensembles</a>
-        <a class="text-slate-400 hover:text-white transition-all duration-300" href="#">Search</a>
+<nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-8 h-20 bg-slate-950/80 backdrop-blur-xl border-b border-white/10">
+    <div class="flex items-center gap-12">
+        <a href="index.html" class="text-2xl font-bold tracking-tighter text-white">Contemporánica</a>
+        <div class="hidden md:flex items-center gap-8 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
+            <a class="hover:text-salmon transition-colors" href="#">Archive</a>
+            <a class="hover:text-salmon transition-colors" href="#">Composers</a>
+            <a class="hover:text-salmon transition-colors" href="#">Ensembles</a>
+            <a class="hover:text-salmon transition-colors" href="#">About</a>
+        </div>
     </div>
-    <div class="flex items-center gap-4">
+    <div class="flex items-center gap-6" id="auth-header">
         <button class="text-slate-400 hover:text-white transition-all duration-300 active:scale-95">
             <span class="material-symbols-outlined">search</span>
         </button>
@@ -87,22 +140,26 @@
     </header>
 
     <!-- Search Section -->
-    <section class="glass-panel rounded-3xl p-8 mb-20 relative overflow-hidden group">
+    <section class="glass-panel rounded-3xl p-8 mb-20 relative group">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 items-end relative z-10">
             
-            <!-- Tags Input -->
+            <!-- Instrumentation Selector (Cascading) -->
             <div class="space-y-2 col-span-1 md:col-span-2">
-                <label class="font-label-sm text-xs text-tertiary-container uppercase font-semibold">Instrumentation (Search & Add Tags)</label>
-                <div class="bg-surface-container-low border border-white/10 rounded-xl p-2 min-h-[50px] flex flex-wrap gap-2 items-center" id="tags-container">
-                    <div class="tag-item bg-salmon/20 text-salmon border border-salmon/30 px-3 py-1 rounded-full text-xs flex items-center gap-2 tag-enter">
-                        Flute <span class="material-symbols-outlined text-[14px] cursor-pointer hover:text-white" onclick="this.parentElement.remove(); filterWorks();">close</span>
+                <label class="font-label-sm text-xs text-tertiary-container uppercase font-semibold">Instrumentation (Select Hierarchy)</label>
+                <div class="cascade-wrapper">
+                    <button id="instrument-btn" onclick="toggleMainList()" class="w-full bg-surface-container-low border border-white/10 rounded-xl px-4 py-3 text-white flex justify-between items-center focus:border-salmon transition-all">
+                        <span id="selected-instrument-text">Browse Instruments...</span>
+                        <span class="material-symbols-outlined text-slate-500">list</span>
+                    </button>
+                    
+                    <div id="main-list" class="cascade-menu" style="z-index: 9999;">
+                        <!-- Generado dinámicamente -->
                     </div>
-                    <div class="tag-item bg-salmon/20 text-salmon border border-salmon/30 px-3 py-1 rounded-full text-xs flex items-center gap-2 tag-enter">
-                        Piano <span class="material-symbols-outlined text-[14px] cursor-pointer hover:text-white" onclick="this.parentElement.remove(); filterWorks();">close</span>
-                    </div>
-                    <input id="tag-input" class="bg-transparent border-none focus:ring-0 text-white text-xs min-w-[120px] placeholder:text-slate-500 outline-none" placeholder="Type to add instruments..." type="text" onkeypress="handleTagInput(event)"/>
                 </div>
-                <p class="text-[10px] text-slate-500 italic">E.g., search for "Flute", "Violin", "Electronics"... Press Enter to add.</p>
+
+                <div class="flex flex-wrap gap-2 mt-2" id="tags-container">
+                    <!-- Las etiquetas seleccionadas aparecerán aquí -->
+                </div>
             </div>
 
             <div class="space-y-2">
@@ -145,7 +202,7 @@
                 Explore
             </button>
         </div>
-        <div class="absolute -top-24 -right-24 w-64 h-64 bg-salmon/10 blur-[100px] rounded-full pointer-events-none"></div>
+        <div class="absolute -top-24 -right-24 w-64 h-64 bg-salmon/10 blur-[100px] rounded-full pointer-events-none z-0"></div>
     </section>
 
     <!-- Results Section -->
@@ -159,59 +216,13 @@
         </div>
         
         <div id="works-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Work Card 1 -->
-            <div class="work-card glass-panel p-4 rounded-2xl group cursor-pointer hover:bg-white/5 transition-all duration-500" data-year="2021" data-country="Spain" data-gender="Female" data-tags="Flute,Piano">
-                <div class="relative mb-4 overflow-hidden rounded-xl aspect-[4/3]">
-                    <img alt="Contemporary score" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzJMXqvewHEl7m9F_T7zT1CVlRRzRd_33xvnUshsXyX5JYfx1VxIuMAwvbrF-RDS05gXuk4ruqwbv3baQWe50UOfBGIySLWCDiXQm9HkLlVDBkYFxgkaSsBmUydt_Eu87V7UdfzHSBjuQ-3aKOZxd4WEMTd9geS0dKzM7j0jQ7LRedT6ql2rMln8kTOJPKHFt7hbQhEHvep17f305ZcFlzb5iTS_T8MNnI5nztngeq58LTlI8WxqL_xE4JkwLjfuHMg_agakYGFCg"/>
-                    <div class="absolute top-3 left-3 bg-slate-950/80 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1 border border-white/10">
-                        <span class="material-symbols-outlined text-rose-400 text-[14px]" style="font-variation-settings: 'FILL' 1;">verified</span>
-                        <span class="text-[10px] font-semibold text-white">VALIDATED</span>
-                    </div>
-                </div>
-                <div class="space-y-1">
-                    <h3 class="text-xl font-medium text-white group-hover:text-salmon transition-colors">Fragmentos del Olvido</h3>
-                    <p class="text-slate-300">Elena Mendizábal</p>
-                    <p class="text-slate-500 text-xs uppercase tracking-wider pt-2">Ensemble Intercontemporain • 2021</p>
-                </div>
-            </div>
-
-            <!-- Work Card 2 -->
-            <div class="work-card glass-panel p-4 rounded-2xl group cursor-pointer hover:bg-white/5 transition-all duration-500" data-year="2022" data-country="Spain" data-gender="Male" data-tags="Cello,Electronics">
-                <div class="relative mb-4 overflow-hidden rounded-xl aspect-[4/3]">
-                    <img alt="Experimental concert" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuABNGIhGNfv44uOcrf5sVDR0hWzg4q_BMZheVvLJcbXem0-MfLpPbAWbUxE7aqKQLkztb72bEBiqU-917aW7FlnA4J-XHyXbwSh-7-S_yCN_wwUpK6NAcc-kYX5ienpgXNnAcUKsY9LnOyNRaSnCKeLDD0eDkha5UVDwL9Jd_6uQXyRe2G92aQbUIJiTSl9Yk0AQRBhHShTTfwGrKq4Atn7yM22Ux8bp0ccq2l7ggFZYfdCV5j-wipX94jj0aPQIxhZQAPraXbkMY0"/>
-                    <div class="absolute top-3 left-3 bg-slate-950/80 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1 border border-white/10">
-                        <span class="material-symbols-outlined text-rose-400 text-[14px]" style="font-variation-settings: 'FILL' 1;">verified</span>
-                        <span class="text-[10px] font-semibold text-white">VALIDATED</span>
-                    </div>
-                </div>
-                <div class="space-y-1">
-                    <h3 class="text-xl font-medium text-white group-hover:text-salmon transition-colors">Ecos del Silicio</h3>
-                    <p class="text-slate-300">Marc Ferrés</p>
-                    <p class="text-slate-500 text-xs uppercase tracking-wider pt-2">Barcelona Modern Ensemble • 2022</p>
-                </div>
-            </div>
-
-            <!-- Work Card 3 -->
-            <div class="work-card glass-panel p-4 rounded-2xl group cursor-pointer hover:bg-white/5 transition-all duration-500" data-year="2023" data-country="France" data-gender="Female" data-tags="Electronics,Synthesizer">
-                <div class="relative mb-4 overflow-hidden rounded-xl aspect-[4/3]">
-                    <img alt="Modular synthesizer" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBYQx78HMAHhAwvsJC_Z3XFkz4Lw4OQgwm0xROivmklKPgG9BtJP6bDek1_N1kfKZCGUiz9j4WBv6au9amiam1f8MFlp8x3KFUbm2u6MyfseWiCyxXckNOQwo8EGzEdPrQPtyB33lC-4GipgG7cP0eFBkAshJR9sIqMf1awCPPLRF0g177UfrGsM8fEICJ3C3oRObvjDBb-P83AnhNX91FzRcnw4mJetxLBlVH3PWMMfZKhK9AhxsESr0l88I6P0XWjl9VkFmlfhk"/>
-                    <div class="absolute top-3 left-3 bg-slate-950/80 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1 border border-white/10">
-                        <span class="material-symbols-outlined text-rose-400 text-[14px]" style="font-variation-settings: 'FILL' 1;">verified</span>
-                        <span class="text-[10px] font-semibold text-white">VALIDATED</span>
-                    </div>
-                </div>
-                <div class="space-y-1">
-                    <h3 class="text-xl font-medium text-white group-hover:text-salmon transition-colors">Simbiosis Binaria</h3>
-                    <p class="text-slate-300">Clara Janés</p>
-                    <p class="text-slate-500 text-xs uppercase tracking-wider pt-2">IRCAM Soloists • 2023</p>
-                </div>
-            </div>
+            <!-- Los resultados de Supabase aparecerán aquí dinámicamente -->
         </div>
         
-        <div id="no-results" class="hidden text-center py-12">
+        <div id="no-results" class="hidden text-center py-20 bg-white/5 rounded-3xl border border-white/10">
             <span class="material-symbols-outlined text-6xl text-slate-600 mb-4">music_off</span>
-            <h3 class="text-xl text-white font-medium">No works found</h3>
-            <p class="text-slate-400">Try adjusting your filters to see more results.</p>
+            <h3 class="text-xl text-white font-medium">No results found for this search</h3>
+            <p class="text-slate-400">Try adjusting your filters or selecting different instruments.</p>
         </div>
     </section>
 
@@ -229,77 +240,208 @@
     </div>
 </footer>
 
-<script>
-    // --- Tags System and Filtering Logic ---
-    
-    function handleTagInput(event) {
-        if (event.key === 'Enter' && event.target.value.trim() !== '') {
-            const tagName = event.target.value.trim();
-            addTag(tagName);
-            event.target.value = '';
-            filterWorks();
+<script type="module">
+    // --- Cascading Instrument System (Supabase Dynamic) ---
+    import supabase from './js/supabase.js';
+
+    let instrumentData = {};
+
+    async function loadInstrumentsFromSupabase() {
+        console.log("📡 Fetching instruments from Supabase...");
+        try {
+            const { data, error } = await supabase
+                .from('instruments')
+                .select('family, name, variant')
+                .order('family', { ascending: true });
+
+            if (error) throw error;
+
+            const hierarchy = {};
+            data.forEach(item => {
+                if (!item.family) return;
+                if (!hierarchy[item.family]) hierarchy[item.family] = {};
+                if (!item.name) return;
+                if (!hierarchy[item.family][item.name]) hierarchy[item.family][item.name] = [];
+                if (item.variant && !hierarchy[item.family][item.name].includes(item.variant)) {
+                    hierarchy[item.family][item.name].push(item.variant);
+                }
+            });
+
+            instrumentData = hierarchy;
+            renderInstrumentMenu();
+        } catch (error) {
+            console.error("❌ Error loading instruments:", error);
         }
     }
 
+    function renderInstrumentMenu() {
+        const mainList = document.getElementById('main-list');
+        if (!mainList) return;
+        
+        let html = '';
+        for (const family in instrumentData) {
+            const hasGroups = Object.keys(instrumentData[family]).length > 0;
+            
+            html += `
+                <div class="cascade-item group/family relative" onclick="event.stopPropagation()">
+                    <div class="flex justify-between items-center w-full">
+                        ${family}
+                        ${hasGroups ? '<span class="material-symbols-outlined text-sm">chevron_right</span>' : ''}
+                    </div>
+                    ${hasGroups ? `
+                    <div class="cascade-submenu">
+                        ${Object.keys(instrumentData[family]).map(group => {
+                            const hasVariants = instrumentData[family][group].length > 0;
+                            return `
+                            <div class="cascade-item group/group relative" onclick="event.stopPropagation()">
+                                <div class="flex justify-between items-center w-full">
+                                    ${group}
+                                    ${hasVariants ? '<span class="material-symbols-outlined text-sm">chevron_right</span>' : ''}
+                                </div>
+                                ${hasVariants ? `
+                                <div class="cascade-submenu">
+                                    ${instrumentData[family][group].map(inst => `
+                                        <div class="cascade-item" onclick="selectInstrument('${inst.replace(/'/g, "\\'")}')">
+                                            ${inst}
+                                        </div>
+                                    `).join('')}
+                                </div>
+                                ` : `
+                                <div class="cascade-item" onclick="selectInstrument('${group.replace(/'/g, "\\'")}')">
+                                    Select ${group}
+                                </div>
+                                `}
+                            </div>
+                            `;
+                        }).join('')}
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+        mainList.innerHTML = html;
+    }
+
+    // Exponer funciones al botón (onclick)
+    window.toggleMainList = function() {
+        const list = document.getElementById('main-list');
+        const isVisible = list.style.display === 'block';
+        list.style.display = isVisible ? 'none' : 'block';
+    }
+
+    window.selectInstrument = function(name) {
+        addTag(name);
+        document.getElementById('main-list').style.display = 'none';
+        filterWorks();
+    }
+
+    // Cerrar menú si se hace clic fuera
+    window.addEventListener('click', function(e) {
+        const wrapper = document.querySelector('.cascade-wrapper');
+        if (wrapper && !wrapper.contains(e.target)) {
+            document.getElementById('main-list').style.display = 'none';
+        }
+    });
+
+    // --- Tags System and Filtering Logic ---
+    
     function addTag(name) {
         const container = document.getElementById('tags-container');
-        const input = document.getElementById('tag-input');
-        
+        const existing = Array.from(container.querySelectorAll('.tag-item')).map(el => el.textContent.replace('close', '').trim());
+        if (existing.includes(name)) return;
+
         const tagHTML = `
-            <div class="tag-item bg-salmon/20 text-salmon border border-salmon/30 px-3 py-1 rounded-full text-xs flex items-center gap-2 tag-enter">
+            <div class="tag-item bg-salmon/20 text-salmon border border-salmon/30 px-3 py-1 rounded-full text-[11px] flex items-center gap-2 tag-enter">
                 ${name} <span class="material-symbols-outlined text-[14px] cursor-pointer hover:text-white" onclick="this.parentElement.remove(); filterWorks();">close</span>
             </div>
         `;
-        
-        input.insertAdjacentHTML('beforebegin', tagHTML);
+        container.insertAdjacentHTML('beforeend', tagHTML);
     }
 
-    function filterWorks() {
-        // Get filter values
+    /**
+     * Función de filtrado avanzada: cruza Obras con Perfiles y Etiquetas
+     */
+    async function filterWorks() {
+        console.log("🔍 Filtering works...");
+        
         const yearFrom = parseInt(document.getElementById('year-from').value) || 0;
         const yearTo = parseInt(document.getElementById('year-to').value) || 9999;
         const country = document.getElementById('country-select').value;
         const gender = document.getElementById('gender-select').value;
         
-        // Get active tags
         const tagElements = document.querySelectorAll('.tag-item');
-        const activeTags = Array.from(tagElements).map(el => el.textContent.replace('close', '').trim().toLowerCase());
-        
-        let visibleCount = 0;
-        
-        // Filter cards
-        document.querySelectorAll('.work-card').forEach(card => {
-            const cardYear = parseInt(card.dataset.year);
-            const cardCountry = card.dataset.country;
-            const cardGender = card.dataset.gender;
-            const cardTags = card.dataset.tags.toLowerCase().split(',');
-            
-            // Check conditions
-            const matchYear = cardYear >= yearFrom && cardYear <= yearTo;
-            const matchCountry = country === '' || cardCountry === country;
-            const matchGender = gender === '' || cardGender === gender;
-            
-            // Check if card has AT LEAST ONE of the active tags (or if no tags are active)
-            const matchTags = activeTags.length === 0 || activeTags.some(tag => 
-                cardTags.some(cardTag => cardTag.includes(tag))
-            );
-            
-            if (matchYear && matchCountry && matchGender && matchTags) {
-                card.style.display = 'block';
-                visibleCount++;
-            } else {
-                card.style.display = 'none';
-            }
-        });
-        
-        // Show/hide no results message
-        const noResults = document.getElementById('no-results');
-        if (visibleCount === 0) {
-            noResults.classList.remove('hidden');
-        } else {
-            noResults.classList.add('hidden');
+        const activeTags = Array.from(tagElements).map(el => el.textContent.replace('close', '').trim());
+
+        // 1. Consulta base a Supabase (Joins para traer datos del autor)
+        let query = supabase
+            .from('works')
+            .select(`
+                *,
+                profiles:composer_id (gender, residence_country, first_name, last_name),
+                work_instruments (instruments (variant))
+            `)
+            .eq('status', 'validated')
+            .gte('year', yearFrom)
+            .lte('year', yearTo);
+
+        // 2. Aplicar filtros de perfil si existen
+        if (country) query = query.filter('profiles.residence_country', 'eq', country);
+        if (gender) query = query.filter('profiles.gender', 'eq', gender.toLowerCase());
+
+        const { data: works, error } = await query;
+
+        if (error) {
+            console.error("❌ Error filtering works:", error);
+            return;
         }
+
+        // 3. Filtrado por etiquetas (en el cliente por simplicidad con JSON anidado)
+        const filteredWorks = works.filter(work => {
+            if (activeTags.length === 0) return true;
+            const workInsts = work.work_instruments.map(wi => wi.instruments.variant);
+            return activeTags.every(tag => workInsts.includes(tag));
+        });
+
+        renderWorks(filteredWorks);
     }
+
+    function renderWorks(works) {
+        const grid = document.getElementById('works-grid');
+        const noResults = document.getElementById('no-results');
+        
+        if (works.length === 0) {
+            grid.innerHTML = '';
+            noResults.classList.remove('hidden');
+            return;
+        }
+
+        noResults.classList.add('hidden');
+        grid.innerHTML = works.map(work => `
+            <div class="work-card glass-panel p-4 rounded-2xl group cursor-pointer hover:bg-white/5 transition-all duration-500">
+                <div class="relative mb-4 overflow-hidden rounded-xl aspect-[4/3]">
+                    <img alt="${work.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://source.unsplash.com/random/800x600?music,abstract&sig=${work.id}"/>
+                    <div class="absolute top-3 left-3 bg-slate-950/80 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1 border border-white/10">
+                        <span class="material-symbols-outlined text-rose-400 text-[14px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+                        <span class="text-[10px] font-semibold text-white uppercase">${work.status}</span>
+                    </div>
+                </div>
+                <div class="space-y-1">
+                    <h3 class="text-xl font-medium text-white group-hover:text-salmon transition-colors">${work.title}</h3>
+                    <p class="text-slate-300">${work.profiles.first_name} ${work.profiles.last_name}</p>
+                    <p class="text-slate-500 text-xs uppercase tracking-wider pt-2">${work.profiles.residence_country} • ${work.year}</p>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        loadInstrumentsFromSupabase();
+        
+        // Carga inicial de obras (esto ya debería estar funcionando con tus datos)
+        if (typeof filterWorks === 'function') {
+            filterWorks();
+        }
+    });
 </script>
 
 </body>
