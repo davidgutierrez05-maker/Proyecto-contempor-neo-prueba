@@ -17,12 +17,32 @@ async function init() {
         return;
     }
 
+    await loadUserProfile();
     await loadStats();
     await loadUsers();
     await loadInstruments();
     
     const hash = window.location.hash.substring(1) || 'analytics';
     showSection(hash);
+}
+
+async function loadUserProfile() {
+    const { data: profile } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', currentUser.id)
+        .single();
+    
+    if (profile) {
+        const name = `${profile.first_name || ''} ${profile.last_name || ''}`.trim() || 'Admin';
+        document.getElementById('user-display-name').textContent = name;
+        
+        if (profile.avatar_url) {
+            document.getElementById('user-avatar').src = profile.avatar_url;
+        } else {
+            document.getElementById('user-avatar').src = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=E57373&color=fff`;
+        }
+    }
 }
 
 async function loadStats() {

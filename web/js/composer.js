@@ -28,9 +28,13 @@ async function loadUserProfile() {
         .single();
     
     if (profile) {
-        document.getElementById('user-name').textContent = `${profile.first_name || ''} ${profile.last_name || ''}`.trim() || 'Composer';
+        const name = `${profile.first_name || ''} ${profile.last_name || ''}`.trim() || 'Composer';
+        document.getElementById('user-name').textContent = name;
+        
         if (profile.avatar_url) {
             document.getElementById('user-avatar').src = profile.avatar_url;
+        } else {
+            document.getElementById('user-avatar').src = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=E57373&color=fff`;
         }
     }
 }
