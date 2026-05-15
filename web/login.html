@@ -4,7 +4,6 @@
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>Login - Contemporánica</title>
-    
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -34,80 +33,70 @@
       }
     </script>
     <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-            vertical-align: middle;
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+        .glass-panel { background: rgba(39, 54, 71, 0.4); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        
+        /* AQUÍ ESTÁ EL TRUCO: Forzamos fondo oscuro y texto claro */
+        .input-field { 
+            background: rgba(13, 28, 45, 0.6) !important; /* Fondo oscuro semi-transparente */
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            color: #ffffff !important; /* Texto siempre blanco al escribir */
+            transition: all 0.3s ease; 
         }
-        .glass-panel {
-            background: rgba(39, 54, 71, 0.4);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        
+        .input-field:focus { 
+            background: rgba(13, 28, 45, 0.9) !important; 
+            border-color: #E57373; 
+            box-shadow: 0 0 0 2px rgba(229, 115, 115, 0.2); 
         }
-        .input-field {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
+
+        /* Esto arregla que el navegador no te ponga el fondo blanco al autocompletar */
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover, 
+        input:-webkit-autofill:focus {
+            -webkit-text-fill-color: white !important;
+            -webkit-box-shadow: 0 0 0px 1000px #0d1c2d inset !important;
+            transition: background-color 5000s ease-in-out 0s;
         }
-        .input-field:focus {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: #E57373;
-            box-shadow: 0 0 0 2px rgba(229, 115, 115, 0.2);
-        }
-        .fade-in {
-            animation: fadeIn 0.5s ease-out forwards;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+
+        .fade-in { animation: fadeIn 0.5s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body class="bg-surface-container-lowest text-on-surface font-body-md h-screen flex overflow-hidden selection:bg-salmon selection:text-white">
 
-    <!-- Left side: Background Image and Branding -->
     <div class="hidden lg:flex lg:w-1/2 relative flex-col justify-between p-12">
         <div class="absolute inset-0 z-0">
-            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBYQx78HMAHhAwvsJC_Z3XFkz4Lw4OQgwm0xROivmklKPgG9BtJP6bDek1_N1kfKZCGUiz9j4WBv6au9amiam1f8MFlp8x3KFUbm2u6MyfseWiCyxXckNOQwo8EGzEdPrQPtyB33lC-4GipgG7cP0eFBkAshJR9sIqMf1awCPPLRF0g177UfrGsM8fEICJ3C3oRObvjDBb-P83AnhNX91FzRcnw4mJetxLBlVH3PWMMfZKhK9AhxsESr0l88I6P0XWjl9VkFmlfhk" alt="Contemporary Music Background" class="w-full h-full object-cover opacity-40 mix-blend-overlay">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBYQx78HMAHhAwvsJC_Z3XFkz4Lw4OQgwm0xROivmklKPgG9BtJP6bDek1_N1kfKZCGUiz9j4WBv6au9amiam1f8MFlp8x3KFUbm2u6MyfseWiCyxXckNOQwo8EGzEdPrQPtyB33lC-4GipgG7cP0eFBkAshJR9sIqMf1awCPPLRF0g177UfrGsM8fEICJ3C3oRObvjDBb-P83AnhNX91FzRcnw4mJetxLBlVH3PWMMfZKhK9AhxsESr0l88I6P0XWjl9VkFmlfhk" alt="Background" class="w-full h-full object-cover opacity-40 mix-blend-overlay">
             <div class="absolute inset-0 bg-gradient-to-t from-[#010f1f] via-transparent to-transparent"></div>
         </div>
-        
         <div class="relative z-10">
             <a href="index.html" class="text-3xl font-bold tracking-tighter text-white flex items-center gap-2 hover:text-salmon transition-colors w-fit">
-                <span class="material-symbols-outlined text-4xl">graphic_eq</span>
-                Contemporánica
+                <span class="material-symbols-outlined text-4xl">graphic_eq</span> Contemporánica
             </a>
         </div>
-        
         <div class="relative z-10 max-w-lg fade-in" style="animation-delay: 0.2s;">
             <h1 class="text-4xl font-semibold text-white mb-4 leading-tight">Welcome to the future of sound.</h1>
             <p class="text-tertiary-container text-lg">Join our exclusive network of vanguard composers and world-class ensembles.</p>
         </div>
     </div>
 
-    <!-- Right side: Form -->
     <div class="w-full lg:w-1/2 flex items-center justify-center p-8 relative">
-        <!-- Glow effect -->
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-salmon/10 blur-[120px] rounded-full pointer-events-none"></div>
-        
         <div class="glass-panel w-full max-w-md p-10 rounded-3xl relative z-10 fade-in">
-            <!-- Tabs -->
             <div class="flex gap-4 mb-8 border-b border-white/10 pb-4">
                 <button id="tab-login" class="text-white font-semibold border-b-2 border-salmon pb-1 transition-all" onclick="switchTab('login')">Sign In</button>
                 <button id="tab-register" class="text-slate-400 hover:text-white transition-all pb-1 border-b-2 border-transparent" onclick="switchTab('register')">Create Account</button>
             </div>
 
-            <!-- Error Message (Global) -->
-            <div id="login-error" class="text-rose-400 text-xs hidden text-center font-medium bg-rose-400/10 py-2 rounded-lg mb-6">
-                Error message.
-            </div>
+            <div id="login-error" class="text-rose-400 text-xs hidden text-center font-medium bg-rose-400/10 py-2 rounded-lg mb-6">Error message.</div>
 
-            <!-- Login Form -->
             <form id="form-login" class="space-y-5">
                 <div>
                     <label class="block text-xs font-semibold text-tertiary-container uppercase tracking-wider mb-2">Email Address</label>
                     <div class="relative">
                         <span class="material-symbols-outlined absolute left-3 top-3 text-slate-400">mail</span>
-                        <input type="email" id="login-email" class="w-full input-field rounded-xl py-3 pl-10 pr-4 text-white focus:outline-none placeholder:text-slate-500" placeholder="you@example.com" required>
+                        <input type="email" id="login-email" class="w-full input-field rounded-xl py-3 pl-10 pr-4 focus:outline-none placeholder:text-slate-500" placeholder="you@example.com" required>
                     </div>
                 </div>
                 <div>
@@ -117,7 +106,7 @@
                     </div>
                     <div class="relative">
                         <span class="material-symbols-outlined absolute left-3 top-3 text-slate-400">lock</span>
-                        <input type="password" id="login-password" class="w-full input-field rounded-xl py-3 pl-10 pr-4 text-white focus:outline-none placeholder:text-slate-500" placeholder="••••••••" required>
+                        <input type="password" id="login-password" class="w-full input-field rounded-xl py-3 pl-10 pr-4 focus:outline-none placeholder:text-slate-500" placeholder="••••••••" required>
                     </div>
                 </div>
                 <button type="button" onclick="intentarLogin()" class="w-full bg-salmon hover:bg-rose-400 text-white font-medium py-3 rounded-xl transition-all duration-300 active:scale-95 flex justify-center items-center gap-2 mt-4">
@@ -125,52 +114,42 @@
                 </button>
             </form>
 
-            <!-- Register Form (Hidden by default) -->
-            <form id="form-register" class="space-y-4 hidden">
+            <form id="form-register" class="space-y-4 hidden" autocomplete="off">
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block text-[10px] font-semibold text-tertiary-container uppercase tracking-wider mb-1">First Name</label>
-                        <input type="text" id="reg-firstname" class="w-full input-field rounded-xl py-2.5 px-4 text-white focus:outline-none placeholder:text-slate-500 text-sm" placeholder="John" required>
+                        <input type="text" id="reg-firstname" name="given-name" autocomplete="given-name" class="w-full input-field rounded-xl py-2.5 px-4 focus:outline-none text-sm" placeholder="John" required>
                     </div>
                     <div>
                         <label class="block text-[10px] font-semibold text-tertiary-container uppercase tracking-wider mb-1">Last Name</label>
-                        <input type="text" id="reg-lastname" class="w-full input-field rounded-xl py-2.5 px-4 text-white focus:outline-none placeholder:text-slate-500 text-sm" placeholder="Doe" required>
+                        <input type="text" id="reg-lastname" name="family-name" autocomplete="family-name" class="w-full input-field rounded-xl py-2.5 px-4 focus:outline-none text-sm" placeholder="Doe" required>
                     </div>
                 </div>
-
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block text-[10px] font-semibold text-tertiary-container uppercase tracking-wider mb-1">Username</label>
-                        <input type="text" id="reg-username" class="w-full input-field rounded-xl py-2.5 px-4 text-white focus:outline-none placeholder:text-slate-500 text-sm" placeholder="johndoe88" required>
+                        <input type="text" id="reg-username" name="new-username" autocomplete="off" class="w-full input-field rounded-xl py-2.5 px-4 focus:outline-none text-sm" placeholder="johndoe88" required>
                     </div>
                     <div>
                         <label class="block text-[10px] font-semibold text-tertiary-container uppercase tracking-wider mb-1">Email Address</label>
-                        <input type="email" id="reg-email" class="w-full input-field rounded-xl py-2.5 px-4 text-white focus:outline-none placeholder:text-slate-500 text-sm" placeholder="you@example.com" required>
+                        <input type="email" id="reg-email" name="email" autocomplete="email" class="w-full input-field rounded-xl py-2.5 px-4 focus:outline-none text-sm" placeholder="you@example.com" required>
                     </div>
                 </div>
-
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block text-[10px] font-semibold text-tertiary-container uppercase tracking-wider mb-1">Date of Birth</label>
-                        <input type="date" id="reg-dob" class="w-full input-field rounded-xl py-2.5 px-4 text-white focus:outline-none placeholder:text-slate-500 text-sm" required>
+                        <input type="date" id="reg-dob" name="bday" autocomplete="bday" class="w-full input-field rounded-xl py-2.5 px-4 focus:outline-none text-sm" required>
                     </div>
                     <div>
-                        <label class="block text-[10px] font-semibold text-tertiary-container uppercase tracking-wider mb-1">Country of Residence</label>
-                        <select id="reg-country" class="w-full input-field rounded-xl py-2.5 px-4 text-white focus:outline-none placeholder:text-slate-500 text-sm bg-surface-container-low">
-                            <option value="Spain">Spain</option>
-                            <option value="France">France</option>
-                            <option value="Germany">Germany</option>
-                            <option value="USA">USA</option>
-                            <option value="Other">Other</option>
+                        <label class="block text-[10px] font-semibold text-tertiary-container uppercase tracking-wider mb-1">Country</label>
+                        <select id="reg-country" name="country" autocomplete="country-name" class="w-full input-field rounded-xl py-2.5 px-4 focus:outline-none text-sm cursor-pointer">
                         </select>
                     </div>
                 </div>
-
                 <div>
                     <label class="block text-[10px] font-semibold text-tertiary-container uppercase tracking-wider mb-1">Password</label>
-                    <input type="password" id="reg-password" class="w-full input-field rounded-xl py-2.5 px-4 text-white focus:outline-none placeholder:text-slate-500 text-sm" placeholder="••••••••" required>
+                    <input type="password" id="reg-password" name="new-password" autocomplete="new-password" class="w-full input-field rounded-xl py-2.5 px-4 focus:outline-none text-sm" placeholder="••••••••" required>
                 </div>
-
                 <div>
                     <label class="block text-[10px] font-semibold text-tertiary-container uppercase tracking-wider mb-1">I am a...</label>
                     <div class="grid grid-cols-2 gap-4">
@@ -184,54 +163,45 @@
                         </label>
                     </div>
                 </div>
-                
                 <div class="flex items-start gap-3 p-3 bg-white/5 rounded-xl border border-white/5">
                     <input type="checkbox" id="reg-privacy" class="mt-1 w-4 h-4 rounded text-salmon focus:ring-salmon bg-slate-900 border-white/20">
                     <label for="reg-privacy" class="text-[10px] text-slate-400 leading-tight">
                         I have read and agree to the <button type="button" onclick="openPrivacy()" class="text-salmon hover:underline font-bold">Privacy Policy</button> and terms of use.
                     </label>
                 </div>
-
                 <button type="button" onclick="intentarRegistro()" class="w-full bg-salmon hover:bg-rose-400 text-white font-medium py-3 rounded-xl transition-all duration-300 active:scale-95 flex justify-center items-center gap-2 mt-2">
                     Create Account <span class="material-symbols-outlined text-[20px]">person_add</span>
                 </button>
             </form>
-            
-            <!-- Return home mobile -->
-            <div class="mt-8 text-center lg:hidden">
-                <a href="index.html" class="text-slate-400 hover:text-white text-sm flex items-center justify-center gap-1 transition-colors">
-                    <span class="material-symbols-outlined text-[16px]">arrow_back</span>
-                    Return to home
-                </a>
-            </div>
         </div>
     </div>
 
-    <script>
-        function switchTab(tab) {
+    <script type="module">
+        const countries = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Argentina", "Australia", "Austria", "Belgium", "Brazil", "Canada", "Chile", "China", "Colombia", "Denmark", "Egypt", "France", "Germany", "India", "Italy", "Japan", "Mexico", "Netherlands", "Norway", "Portugal", "Russia", "South Africa", "South Korea", "Spain", "Sweden", "Switzerland", "Turkey", "United Kingdom", "United States"];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const select = document.getElementById('reg-country');
+            countries.forEach(c => {
+                const op = document.createElement('option');
+                op.value = c; op.textContent = c;
+                if(c === "Spain") op.selected = true;
+                select.appendChild(op);
+            });
+        });
+
+        window.switchTab = (tab) => {
             const loginForm = document.getElementById('form-login');
             const registerForm = document.getElementById('form-register');
             const loginTab = document.getElementById('tab-login');
             const registerTab = document.getElementById('tab-register');
-
             if (tab === 'login') {
-                loginForm.classList.remove('hidden');
-                registerForm.classList.add('hidden');
-                
-                loginTab.classList.add('text-white', 'border-salmon');
-                loginTab.classList.remove('text-slate-400', 'border-transparent');
-                
-                registerTab.classList.add('text-slate-400', 'border-transparent');
-                registerTab.classList.remove('text-white', 'border-salmon');
+                loginForm.classList.remove('hidden'); registerForm.classList.add('hidden');
+                loginTab.classList.add('text-white', 'border-salmon'); loginTab.classList.remove('text-slate-400', 'border-transparent');
+                registerTab.classList.add('text-slate-400', 'border-transparent'); registerTab.classList.remove('text-white', 'border-salmon');
             } else {
-                loginForm.classList.add('hidden');
-                registerForm.classList.remove('hidden');
-                
-                registerTab.classList.add('text-white', 'border-salmon');
-                registerTab.classList.remove('text-slate-400', 'border-transparent');
-                
-                loginTab.classList.add('text-slate-400', 'border-transparent');
-                loginTab.classList.remove('text-white', 'border-salmon');
+                loginForm.classList.add('hidden'); registerForm.classList.remove('hidden');
+                registerTab.classList.add('text-white', 'border-salmon'); registerTab.classList.remove('text-slate-400', 'border-transparent');
+                loginTab.classList.add('text-slate-400', 'border-transparent'); loginTab.classList.remove('text-white', 'border-salmon');
             }
         }
 
