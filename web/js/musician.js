@@ -26,7 +26,7 @@ async function loadUserProfile() {
         .single();
 
     if (profile) {
-        const name = `${profile.first_name || ''} ${profile.last_name || ''}`.trim() || 'Ensemble';
+        const name = `${profile.first_name || ''} ${profile.last_name || ''}`.trim() || 'Performer';
         document.getElementById('user-name').textContent = name;
         document.getElementById('welcome-name').textContent = name;
 

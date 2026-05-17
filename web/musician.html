@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Ensemble Dashboard - Contemporánica</title>
+    <title>Performer Dashboard - Contemporánica</title>
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet" />
@@ -65,7 +65,7 @@
         <div class="p-8">
             <a href="index.html" class="text-xl font-bold text-white tracking-tighter flex items-center gap-2 hover:text-salmon transition-colors">
                 <span class="material-symbols-outlined text-salmon">orchestra</span>
-                Ensemble Studio
+                Performer Studio
             </a>
             <p class="text-[10px] text-slate-500 uppercase tracking-widest mt-1">Performer Hub</p>
         </div>
@@ -83,7 +83,7 @@
                 <span class="material-symbols-outlined">forum</span>
                 Community Feed
             </a>
-            <a href="profile.html" class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+            <a href="profile-musician.html" class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-all">
                 <span class="material-symbols-outlined">person</span>
                 Group Profile
             </a>
@@ -116,7 +116,7 @@
             <div class="flex items-center gap-6">
                 <div class="flex flex-col items-end">
                     <p id="user-name" class="text-sm font-bold text-white">---</p>
-                    <p class="text-[10px] text-salmon uppercase font-bold tracking-widest">Ensemble</p>
+                    <p class="text-[10px] text-salmon uppercase font-bold tracking-widest">Performer</p>
                 </div>
                 <div class="w-10 h-10 rounded-full bg-slate-800 border border-white/10 overflow-hidden">
                     <img id="user-avatar" src="https://ui-avatars.com/api/?name=E&background=E57373&color=fff" alt="Profile" class="w-full h-full object-cover">
@@ -131,7 +131,7 @@
             <section id="section-overview" class="space-y-8">
                 <div class="flex justify-between items-start">
                     <div>
-                        <h2 class="text-3xl font-bold text-white">Welcome, <span id="welcome-name" class="text-salmon">Ensemble</span></h2>
+                        <h2 class="text-3xl font-bold text-white">Welcome, <span id="welcome-name" class="text-salmon">Performer</span></h2>
                         <p class="text-slate-400 mt-2">Manage your performances and claim new interpretations.</p>
                     </div>
                     <button onclick="openSubmissionModal()" class="bg-salmon text-white px-8 py-4 rounded-2xl font-bold shadow-xl shadow-salmon/20 flex items-center gap-3 hover:brightness-110 active:scale-95 transition-all">
@@ -184,11 +184,11 @@
 
             <!-- SECTION: FEED -->
             <section id="section-feed" class="hidden space-y-6">
-                <h2 class="text-2xl font-bold text-white">Ensemble Community</h2>
+                <h2 class="text-2xl font-bold text-white">Performer Community</h2>
                 <div class="space-y-6">
                     <div class="glass-panel p-6 rounded-3xl space-y-4 bg-salmon/5 border-salmon/20">
                         <h4 class="font-bold text-white">📢 Call for Collaborations</h4>
-                        <p class="text-sm text-slate-300">Are you an ensemble looking for new pieces? Check the global archive and request interpretations from our validated composers.</p>
+                        <p class="text-sm text-slate-300">Are you a performer looking for new pieces? Check the global archive and request interpretations from our validated composers.</p>
                     </div>
                     <div id="social-feed" class="space-y-4">
                         <!-- Feed posts -->
@@ -220,7 +220,7 @@
                 </div>
                 <div class="space-y-1">
                     <label class="text-[10px] font-bold text-slate-500 uppercase ml-1">Performance Link (YouTube/Spotify)</label>
-                    <input type="url" id="performance-link" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-salmon" placeholder="https://...">
+                    <input type="url" id="performance-link" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-salmon" >
                 </div>
             </div>
 

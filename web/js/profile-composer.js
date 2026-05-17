@@ -72,9 +72,7 @@ async function loadProfile() {
 
 function calculateProgress(data) {
     const fieldsToTrack = [
-        'bio', 'nationality', 'gender', 'country_of_birth', 'place_of_birth', 'website',
-        'main_aesthetic', 'education', 'awards', 'copyright_society',
-        'soundcloud_url', 'spotify_url', 'youtube_url'
+        'first_name', 'last_name', 'username', 'bio', 'nationality', 'gender', 'country_of_birth', 'place_of_birth'
     ];
 
     let completed = 0;
@@ -132,7 +130,7 @@ async function saveProfile() {
     };
 
     const progress = calculateProgress(updates);
-    updates.is_complete = (progress >= 80);
+    updates.is_complete = (progress === 100);
 
     const { data, error } = await supabase
         .from('profiles')

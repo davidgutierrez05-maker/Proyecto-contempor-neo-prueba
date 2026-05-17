@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script type="module" src="js/auth.js"></script>
-    <script type="module" src="js/profile.js"></script>
+    <script type="module" src="js/profile-composer.js"></script>
     
     <script id="tailwind-config">
       tailwind.config = {
@@ -106,56 +106,57 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="space-y-2">
-                        <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">First Name</label>
+                        <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">First Name <span class="text-salmon">*</span></label>
                         <input type="text" id="first_name" placeholder="Your first name" class="w-full bg-slate-900/50 border border-white/10 rounded-xl p-3 text-white focus:border-salmon/50 focus:outline-none text-sm transition-all">
                     </div>
                     <div class="space-y-2">
-                        <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Last Name</label>
+                        <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Last Name <span class="text-salmon">*</span></label>
                         <input type="text" id="last_name" placeholder="Your last name" class="w-full bg-slate-900/50 border border-white/10 rounded-xl p-3 text-white focus:border-salmon/50 focus:outline-none text-sm transition-all">
                     </div>
                 </div>
 
                 <div class="space-y-2">
-                    <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Public Username (Nickname)</label>
+                    <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Public Username (Nickname) <span class="text-salmon">*</span></label>
                     <div class="relative">
-                        <input type="text" id="username" placeholder="e.g. MasterComposer" class="w-full bg-slate-900/50 border border-white/10 rounded-xl p-3 text-white focus:border-salmon/50 focus:outline-none text-sm transition-all">
+                        <input type="text" id="username"  class="w-full bg-slate-900/50 border border-white/10 rounded-xl p-3 text-white focus:border-salmon/50 focus:outline-none text-sm transition-all">
                     </div>
                     <p class="text-[10px] text-slate-500 ml-1">This is your visible nickname on the platform.</p>
                 </div>
 
             <div class="space-y-2">
-                <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Short Bio (150-200 words)</label>
+                <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Short Bio (150-200 words) <span class="text-salmon">*</span></label>
                 <textarea id="bio" rows="4" placeholder="Tell the world about your artistic journey..." class="w-full bg-slate-900/50 border border-white/10 rounded-xl p-3 text-white focus:border-salmon/50 focus:outline-none text-sm transition-all resize-none"></textarea>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="space-y-2">
-                    <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Nationality</label>
-                    <input type="text" id="nationality" placeholder="e.g. Spanish" class="w-full bg-slate-900/50 border border-white/10 rounded-xl p-3 text-white focus:border-salmon/50 focus:outline-none text-sm transition-all">
+                    <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Nationality <span class="text-salmon">*</span></label>
+                    <input type="text" id="nationality"  class="w-full bg-slate-900/50 border border-white/10 rounded-xl p-3 text-white focus:border-salmon/50 focus:outline-none text-sm transition-all">
                 </div>
                 <div class="space-y-2">
-                    <label class="block text-xs font-bold text-slate-400 uppercase ml-1">Gender</label>
+                    <label class="block text-xs font-bold text-slate-400 uppercase ml-1">Gender <span class="text-salmon">*</span></label>
                     <select id="gender" class="w-full bg-slate-900/50 border border-white/10 rounded-xl p-3 text-white focus:border-salmon/50 focus:outline-none text-sm">
                         <option value="">Select...</option>
                         <option value="female">Female</option>
                         <option value="male">Male</option>
                         <option value="other">Other</option>
+                        <option value="prefer_not_to_say">Prefer not to say</option>
                     </select>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 col-span-2">
                     <div class="space-y-2">
-                        <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Country of Birth</label>
-                        <input type="text" id="country_of_birth" placeholder="e.g. Spain" class="w-full bg-slate-900/50 border border-white/10 rounded-xl p-3 text-white focus:border-salmon/50 focus:outline-none text-sm transition-all">
+                        <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Country of Birth <span class="text-salmon">*</span></label>
+                        <input type="text" id="country_of_birth"  class="w-full bg-slate-900/50 border border-white/10 rounded-xl p-3 text-white focus:border-salmon/50 focus:outline-none text-sm transition-all">
                     </div>
                     <div class="space-y-2">
-                        <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Place of Birth</label>
-                        <input type="text" id="place_of_birth" placeholder="e.g. Madrid" class="w-full bg-slate-900/50 border border-white/10 rounded-xl p-3 text-white focus:border-salmon/50 focus:outline-none text-sm transition-all">
+                        <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Place of Birth <span class="text-salmon">*</span></label>
+                        <input type="text" id="place_of_birth"  class="w-full bg-slate-900/50 border border-white/10 rounded-xl p-3 text-white focus:border-salmon/50 focus:outline-none text-sm transition-all">
                     </div>
                 </div>
 
                 <div class="space-y-2 col-span-2">
                     <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Personal Website</label>
-                    <input type="url" id="website" placeholder="https://www.yourdomain.com" class="w-full bg-slate-900/50 border border-white/10 rounded-xl p-3 text-white focus:border-salmon/50 focus:outline-none text-sm transition-all">
+                    <input type="url" id="website"  class="w-full bg-slate-900/50 border border-white/10 rounded-xl p-3 text-white focus:border-salmon/50 focus:outline-none text-sm transition-all">
                 </div>
             </div>
         </div>
@@ -171,7 +172,7 @@
 
             <div class="space-y-2">
                 <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Main Aesthetic / Style</label>
-                <input type="text" id="main_aesthetic" placeholder="e.g. Minimalist, Spectralism, New Complexity..." class="w-full bg-slate-900/50 border border-white/10 rounded-xl p-3 text-white focus:border-salmon/50 focus:outline-none text-sm transition-all">
+                <input type="text" id="main_aesthetic"  class="w-full bg-slate-900/50 border border-white/10 rounded-xl p-3 text-white focus:border-salmon/50 focus:outline-none text-sm transition-all">
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -203,21 +204,21 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="space-y-2">
                     <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">SoundCloud URL</label>
-                    <input type="url" id="soundcloud_url" placeholder="https://soundcloud.com/..." class="w-full bg-slate-900/50 border border-white/10 rounded-xl p-3 text-white focus:border-salmon/50 focus:outline-none text-sm transition-all">
+                    <input type="url" id="soundcloud_url"  class="w-full bg-slate-900/50 border border-white/10 rounded-xl p-3 text-white focus:border-salmon/50 focus:outline-none text-sm transition-all">
                 </div>
                 <div class="space-y-2">
                     <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Spotify URL</label>
-                    <input type="url" id="spotify_url" placeholder="https://open.spotify.com/..." class="w-full bg-slate-900/50 border border-white/10 rounded-xl p-3 text-white focus:border-salmon/50 focus:outline-none text-sm transition-all">
+                    <input type="url" id="spotify_url"  class="w-full bg-slate-900/50 border border-white/10 rounded-xl p-3 text-white focus:border-salmon/50 focus:outline-none text-sm transition-all">
                 </div>
                 <div class="space-y-2">
                     <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">YouTube URL</label>
-                    <input type="url" id="youtube_url" placeholder="https://youtube.com/..." class="w-full bg-slate-900/50 border border-white/10 rounded-xl p-3 text-white focus:border-salmon/50 focus:outline-none text-sm transition-all">
+                    <input type="url" id="youtube_url"  class="w-full bg-slate-900/50 border border-white/10 rounded-xl p-3 text-white focus:border-salmon/50 focus:outline-none text-sm transition-all">
                 </div>
             </div>
 
             <div class="space-y-2">
                 <label class="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Public Contact Email</label>
-                <input type="email" id="public_contact_email" placeholder="email@example.com" class="w-full bg-slate-900/50 border border-white/10 rounded-xl p-3 text-white focus:border-salmon/50 focus:outline-none text-sm transition-all">
+                <input type="email" id="public_contact_email"  class="w-full bg-slate-900/50 border border-white/10 rounded-xl p-3 text-white focus:border-salmon/50 focus:outline-none text-sm transition-all">
             </div>
         </div>
 
@@ -247,7 +248,7 @@
                 <label class="flex items-center justify-between p-4 rounded-2xl bg-white/5 border border-white/5 cursor-pointer hover:bg-white/10 transition-all group/toggle">
                     <div class="flex flex-col">
                         <span class="text-sm font-bold text-white uppercase tracking-wider">Open to Collaboration</span>
-                        <span class="text-xs text-slate-400">Willing to work with other ensembles</span>
+                        <span class="text-xs text-slate-400">Willing to work with other performers</span>
                     </div>
                     <div class="relative inline-flex items-center">
                         <input type="checkbox" id="open_to_collaboration" class="sr-only peer">

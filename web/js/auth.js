@@ -9,7 +9,7 @@ async function checkAuth() {
     console.log("🔍 Checking auth for path:", path);
     
     const isLoginPage = path.includes('login.html');
-    const isProfilePage = path.includes('profile.html');
+    const isProfilePage = path.includes('profile');
     const isPublicPage = path.includes('index.html') || path === '/' || path.endsWith('web/');
     
     if (!session && !isLoginPage && !isPublicPage) {
@@ -40,7 +40,7 @@ async function checkAuth() {
 
             if (!isPublicPage && !isLoginPage) {
                 alert("Your profile was not found. Please go to your profile settings to complete it.");
-                window.location.href = 'profile.html'; // Redirigimos a la zona segura en lugar de la home
+                window.location.href = 'index.html'; // Default safe zone
             }
             actualizarInterfaz(session.user, 'user', false);
             return;
@@ -99,10 +99,11 @@ function actualizarInterfaz(user, role, isComplete) {
     if (loginBtn) {
         const normRole = role.toLowerCase().trim();
         let dashboardUrl = 'index.html';
+        let profileUrl = 'profile-composer.html';
         
         if (normRole === 'admin') dashboardUrl = 'admin.html';
-        else if (normRole === 'composer') dashboardUrl = 'composer.html';
-        else if (normRole === 'musician') dashboardUrl = 'musician.html';
+        else if (normRole === 'composer') { dashboardUrl = 'composer.html'; profileUrl = 'profile-composer.html'; }
+        else if (normRole === 'musician') { dashboardUrl = 'musician.html'; profileUrl = 'profile-musician.html'; }
 
         const statusColor = isComplete ? 'text-emerald-400' : 'text-amber-400';
         const statusIcon = isComplete ? 'check_circle' : 'warning';
@@ -110,7 +111,7 @@ function actualizarInterfaz(user, role, isComplete) {
 
         loginBtn.outerHTML = `
             <div class="flex items-center gap-4">
-                <a href="profile.html" class="flex flex-col items-end hidden md:flex hover:opacity-80 transition-all group">
+                <a href="${profileUrl}" class="flex flex-col items-end hidden md:flex hover:opacity-80 transition-all group">
                     <div class="flex items-center gap-1">
                         <span class="material-symbols-outlined text-[14px] ${statusColor}">${statusIcon}</span>
                         <span class="text-[10px] font-bold text-salmon uppercase tracking-widest group-hover:text-white transition-colors">${role}</span>
